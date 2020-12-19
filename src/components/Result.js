@@ -2,7 +2,7 @@ import React from "react";
 
 
 const Result = ({todos, setAllScores, allScores, amountOfScores, setAmountOfScores}) => {
-  setAmountOfScores(Object.keys(todos).length);
+
   return (
     <div>
     <h2>all scores combined:</h2>

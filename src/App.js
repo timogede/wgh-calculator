@@ -16,6 +16,7 @@ function App() {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
+    setAmountOfScores(Object.keys(todos).length);
 
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null){
