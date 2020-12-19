@@ -2,42 +2,44 @@ import React from "react";
 
 
 
-const Form = ({ inputText, setInputText, todos, setTodos, setStatus }) => {
+const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos }) => {
 
   const inputTextHandler = (e) => {
     console.log(e.target.value);
         setInputText(e.target.value);
   };
 
+  const inputSlopeHandler = (e) => {
+    console.log(e.target.value);
+        setInputSlope(e.target.value);
+  };
+
+  const inputCourseRatingHandler = (e) => {
+    console.log(e.target.value);
+        setInputCourseRating(e.target.value);
+  };
+
   const submitTodoHandler = (e) => {
     e.preventDefault();
     setTodos([
       ...todos,
-      { text: inputText, completed: false, id: Math.random() * 1000}
+      { text: inputText, slope: inputSlope, courseRating: inputCourseRating, completed: false, id: Math.random() * 1000}
     ]);
       setInputText("");
+      setInputSlope("");
+      setInputCourseRating("");
   };
-
-const statusHandler = (e) => {
-  setStatus(e.target.value);
-}
-
-
 
 
   return(
     <form>
-      <input onChange={ inputTextHandler } value={ inputText } type="text" className="todo-input" />
+      <input onChange={ inputTextHandler } value={ inputText } type="number" className="todo-input" placeholder="Score" required />
+      <input onChange={ inputCourseRatingHandler } value={ inputCourseRating } type="number" className="todo-input" placeholder="Course Rating" required />
+      <input onChange={ inputSlopeHandler } value={ inputSlope } type="number" className="todo-input" placeholder="Slope" required />
       <button className="todo-button" onClick={ submitTodoHandler } type="submit">
-        <i className="fas fa-plus-square"></i>
+        <i className="fas fa-plus"></i>
       </button>
-      <div className="select">
-        <select onChange={statusHandler} name="todos" className="filter-todo">
-          <option value="all">All</option>
-          <option value="completed">Completed</option>
-          <option value="uncompleted">Uncompleted</option>
-        </select>
-      </div>
+
     </form>
   );
 };

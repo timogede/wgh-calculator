@@ -26,12 +26,22 @@ form button {
   font-size: 2rem;
   border: none;
   background: white;
+  height: 53px;
 }
+
+form input {
+  margin: 0.5rem;
+  flex:3;
+  width: 100%;
+  font-size: 1.5rem;
+}
+
 form button {
   color: #ff6f47;
   background: #f7fffe;
   cursor: pointer;
   transition: all 0.3s ease;
+flex:1;
 }
 form button:hover {
   background: #ff6f47;
@@ -44,7 +54,7 @@ form button:hover {
 }
 
 .todo-list {
-  min-width: 30%;
+width: 100%;
   list-style: none;
 }
 
@@ -77,6 +87,18 @@ form button:hover {
 .complete-btn {
   background: rgb(11, 212, 162);
 }
+
+.last-todo{
+  width: 50px;
+  height: 50px;
+}
+
+.heading-list button{
+  background-color: transparent;
+  border: none;
+  pointer-events: none;
+}
+
 .todo-item {
   padding: 0rem 0.5rem;
 }
