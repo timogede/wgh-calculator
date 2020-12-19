@@ -8,6 +8,8 @@ function App() {
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
   const [todos, setTodos] = useState([]);
+  const [allScores, setAllScores] = useState("");
+  const [amountOfScores, setAmountOfScores] = useState("");
 
 
   const saveLocalTodos = () => {
@@ -39,7 +41,7 @@ function App() {
     </header>
     <Form inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList todos={ todos } setTodos={setTodos} />
-    <Result />
+    <Result todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );
 }

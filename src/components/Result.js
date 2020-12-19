@@ -1,9 +1,13 @@
 import React from "react";
 
 
-const Result = () => {
+const Result = ({todos, setAllScores, allScores, amountOfScores, setAmountOfScores}) => {
+  setAmountOfScores(Object.keys(todos).length);
   return (
-    <h2>im the result</h2>
+    <div>
+    <h2>all scores combined:</h2>
+    <h1>{amountOfScores}</h1>
+      </div>
   );
 };
 
