@@ -8,9 +8,6 @@ const calcScoreDifferential = (give) =>{
   let courseRating = give.courseRating;
   let standardSlope = 113;
   let scoreDifferential = (((text - courseRating)* standardSlope ) / slope).toFixed(1);
-  console.log("score is " + text + " courseRating is " + courseRating);
-  console.log(text - courseRating);
-  console.log("slope is " + slope);
 
   return scoreDifferential;
 };

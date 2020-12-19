@@ -10,13 +10,25 @@ function App() {
   const [todos, setTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
   const [amountOfScores, setAmountOfScores] = useState("");
+  const scoreCounter = () =>{
+  if(Object.keys(todos).length !== 0){
+    console.log("first item score is " + todos[0].text);
+  todos.map((item, currentScore)=>{
+      currentScore = item.text;
+      return currentScore;
+  });
+}
+else{
+  return 0;
+}
 
+};
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-    setAmountOfScores(Object.keys(todos).length);
+
 
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null){
@@ -35,12 +47,19 @@ function App() {
     saveLocalTodos();
   }, [todos, inputText]);
 
+  useEffect(() =>{
+  setAmountOfScores(Object.keys(todos).length);
+  setAllScores(scoreCounter);
+
+  }, [todos]
+);
+
   return (
     <div className="App">
     <header>
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
-    <Form inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
+    <Form setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList todos={ todos } setTodos={setTodos} />
     <Result todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>

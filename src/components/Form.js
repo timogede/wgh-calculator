@@ -2,20 +2,20 @@ import React from "react";
 
 
 
-const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos }) => {
+const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos, setAmountOfScores }) => {
 
   const inputTextHandler = (e) => {
-    console.log(e.target.value);
+
         setInputText(e.target.value);
   };
 
   const inputSlopeHandler = (e) => {
-    console.log(e.target.value);
+
         setInputSlope(e.target.value);
   };
 
   const inputCourseRatingHandler = (e) => {
-    console.log(e.target.value);
+
         setInputCourseRating(e.target.value);
   };
 
@@ -25,6 +25,7 @@ const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCour
       ...todos,
       { text: inputText, slope: inputSlope, courseRating: inputCourseRating, completed: false, id: Math.random() * 1000}
     ]);
+
       setInputText("");
       setInputSlope("");
       setInputCourseRating("");

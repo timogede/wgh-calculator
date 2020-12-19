@@ -5,8 +5,10 @@ const Result = ({todos, setAllScores, allScores, amountOfScores, setAmountOfScor
 
   return (
     <div>
-    <h2>all scores combined:</h2>
+    <h2>how many scores:</h2>
     <h1>{amountOfScores}</h1>
+    <h2>all scores combined:</h2>
+    <h1>{allScores}</h1>
       </div>
   );
 };
