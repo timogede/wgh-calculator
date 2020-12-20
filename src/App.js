@@ -9,7 +9,7 @@ function App() {
   const [inputCourseRating, setInputCourseRating] = useState("");
   const [todos, setTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
-  const [allScoreDifferentials, setAllScoreDifferentials] = useState("");
+  const [allScoreDifferentials, setAllScoreDifferentials] = useState();
   const [amountOfScores, setAmountOfScores] = useState("");
   const [averageScore, setAverageScore] = useState("");
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
@@ -23,7 +23,9 @@ const scoreCounter = todos.reduce((counter, obj) => {
 }, 0); // 6
 
 const scoreDifferentialCounter = todos.reduce((counter, obj) => {
-  if (obj.scoreDifferential) counter += parseInt(obj.scoreDifferential);
+  if (obj.scoreDifferential) counter = counter + parseFloat(obj.scoreDifferential);
+    console.log("scoreDifferentialCounter function returns " + obj.scoreDifferential);
+    console.log("which is a " + typeof scoreDifferential);
   return counter;
 }, 0); // 6
 
@@ -55,7 +57,7 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   useEffect(() =>{
   setAmountOfScores(Object.keys(todos).length);
   setAllScores(scoreCounter);
-  setAllScoreDifferentials(scoreDifferentialCounter);
+  setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
   }, [todos]
 );
 
@@ -64,7 +66,7 @@ useEffect(()=>{
     setAverageScoreDifferential((allScoreDifferentials / amountOfScores).toFixed(1));
   }, [amountOfScores]
 );
-
+console.log(allScoreDifferentials);
   return (
     <div className="App">
     <header>
@@ -72,7 +74,7 @@ useEffect(()=>{
     </header>
     <Form setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList todos={ todos } setTodos={setTodos} />
-    <Result allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
+    <Result averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );
 }

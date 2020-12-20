@@ -2,15 +2,7 @@ import React from "react";
 import Todo from "./Todo.js";
 
 const TodoList = ({todos, setTodos}) => {
-const calcScoreDifferential = (give) =>{
-  let text = give.text;
-  let slope = give.slope;
-  let courseRating = give.courseRating;
-  let standardSlope = 113;
-  let scoreDifferential = (((text - courseRating)* standardSlope ) / slope).toFixed(1);
 
-  return scoreDifferential;
-};
 return(
   <div>
 <ul className="todo-container">
@@ -29,7 +21,7 @@ return(
   <div className="todo-container">
     <ul className="todo-list">
      {todos.map((todo, i) => (
-       <Todo scoreDifferential={calcScoreDifferential(todo)} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} todos={todos} setTodos={setTodos} todo={todo} />
+       <Todo scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} todos={todos} setTodos={setTodos} todo={todo} />
      ))}
     </ul>
   </div>
