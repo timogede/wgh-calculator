@@ -8,8 +8,9 @@ function App() {
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
   const [todos, setTodos] = useState([]);
+  const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
-  const [allScoreDifferentials, setAllScoreDifferentials] = useState();
+  const [allScoreDifferentials, setAllScoreDifferentials] = useState("");
   const [amountOfScores, setAmountOfScores] = useState("");
   const [averageScore, setAverageScore] = useState("");
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
@@ -24,8 +25,6 @@ const scoreCounter = todos.reduce((counter, obj) => {
 
 const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   if (obj.scoreDifferential) counter = counter + parseFloat(obj.scoreDifferential);
-    console.log("scoreDifferentialCounter function returns " + obj.scoreDifferential);
-    console.log("which is a " + typeof scoreDifferential);
   return counter;
 }, 0); // 6
 
@@ -46,6 +45,27 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
     }
   };
 
+  const sortFunction = (a, b) => {
+    if (a["scoreDifferential"] === b["scoreDifferential"]) {
+        return 0;
+    }
+    else {
+        return (parseFloat(a["scoreDifferential"]) < parseFloat(b["scoreDifferential"])) ? -1 : 1;
+    }
+  }
+
+  const sortTodos = (sortthisarray) => {
+    const sortedArray = [...sortthisarray];
+    sortedArray.sort(sortFunction);
+    const cuttedSortedArray = sortedArray.slice(0, 8);
+    console.log(cuttedSortedArray);
+    setSortedTodos(cuttedSortedArray);
+  };
+
+  const matchBestresults = () => {
+    
+  };
+
   useEffect(() => {
     getLocalTodos();
   },[]);
@@ -58,15 +78,17 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   setAmountOfScores(Object.keys(todos).length);
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
+  sortTodos(todos);
   }, [todos]
 );
 
 useEffect(()=>{
     setAverageScore((allScores / amountOfScores).toFixed(1));
     setAverageScoreDifferential((allScoreDifferentials / amountOfScores).toFixed(1));
+
   }, [amountOfScores]
 );
-console.log(allScoreDifferentials);
+
   return (
     <div className="App">
     <header>

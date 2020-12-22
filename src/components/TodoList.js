@@ -21,6 +21,7 @@ return(
   <div className="todo-container">
     <ul className="todo-list">
      {todos.map((todo, i) => (
+
        <Todo scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} todos={todos} setTodos={setTodos} todo={todo} />
      ))}
     </ul>

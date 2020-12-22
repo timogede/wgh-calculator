@@ -23,7 +23,6 @@ const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCour
     // let sc = give.text;
     // let sl = give.slope;
     // let cr = give.courseRating;
-    console.log(sc, sl, cr);
     let standardSlope = 113;
     let scoreDifferential = (((sc - cr)* standardSlope ) / sl).toFixed(1);
 
