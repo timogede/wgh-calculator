@@ -63,7 +63,10 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   };
 
   const matchBestresults = () => {
-    
+      setTodos([
+        ...todos,
+          {thisisdumb: "yes my friend"}
+      ])
   };
 
   useEffect(() => {
@@ -79,6 +82,7 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
   sortTodos(todos);
+
   }, [todos]
 );
 
@@ -95,7 +99,7 @@ useEffect(()=>{
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
     <Form setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
-    <TodoList todos={ todos } setTodos={setTodos} />
+    <TodoList todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
     <Result averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );

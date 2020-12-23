@@ -1,9 +1,11 @@
 import React from "react";
 
-const Todo = ({text, slope, courseRating, id, todos, setTodos, todo, order, scoreDifferential}) => {
+const Todo = ({text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
   const deleteHandler = () => {
     setTodos(todos.filter(lol => lol.id !== todo.id));
   }
+
+
 
 return(
   <div className="todo" id={id}>
