@@ -81,7 +81,8 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   setAmountOfScores(Object.keys(todos).length);
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
-  sortTodos(todos);
+
+
 
   }, [todos]
 );
@@ -89,6 +90,7 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
 useEffect(()=>{
     setAverageScore((allScores / amountOfScores).toFixed(1));
     setAverageScoreDifferential((allScoreDifferentials / amountOfScores).toFixed(1));
+      sortTodos(todos);
 
   }, [amountOfScores]
 );
