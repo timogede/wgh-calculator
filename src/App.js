@@ -14,6 +14,8 @@ function App() {
   const [amountOfScores, setAmountOfScores] = useState("");
   const [averageScore, setAverageScore] = useState("");
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
+  const [fullScores, setFullScores] = useState([]);
+  const [theHandicap, setTheHandicap] = useState("");
 
 
 
@@ -58,16 +60,47 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
     const sortedArray = [...sortthisarray];
     sortedArray.sort(sortFunction);
     const cuttedSortedArray = sortedArray.slice(0, 8);
-    console.log(cuttedSortedArray);
+
     setSortedTodos(cuttedSortedArray);
+const fullScoresArray = (sortthisarray);
+
+    for (let y = 0; y < fullScoresArray.length; y++) {
+        fullScoresArray[y]["iamgood"] = false;
+        fullScoresArray[y]["myrankis"] = 999;
+  }
+
+
+    for (let x = 0; x < cuttedSortedArray.length; x++) {
+      let searchId = cuttedSortedArray[x]["id"];
+
+    for (let i = 0; i < fullScoresArray.length; i++) {
+      if (fullScoresArray[i]["id"] == searchId) {
+        fullScoresArray[i]["iamgood"] = true;
+        fullScoresArray[i]["myrankis"] = x+1;
+        console.log(fullScoresArray[i]["id"] + "is the matching id, right?");
+        console.log(fullScoresArray[i]["scoreDifferential"] + "is the SD, right?");
+    }
+
+  }
+}
+    setFullScores(fullScoresArray);
+
   };
 
-  const matchBestresults = () => {
-      setTodos([
-        ...todos,
-          {thisisdumb: "yes my friend"}
-      ])
-  };
+  const calculateHandicap = () =>{
+    let theHandicap = 0;
+    for (let i = 0; i < sortedTodos.length; i++) {
+
+    theHandicap = theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
+      console.log("the Handicap is " + theHandicap);
+  }
+  theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
+  console.log("divide that trough " + sortedTodos.length + " and you get:");
+    console.log("the Handicap completely " + theHandicap);
+  setTheHandicap(theHandicap);
+  }
+
+
 
   useEffect(() => {
     getLocalTodos();
@@ -89,6 +122,7 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
 useEffect(()=>{
     setAverageScore((allScores / amountOfScores).toFixed(1));
     setAverageScoreDifferential((allScoreDifferentials / amountOfScores).toFixed(1));
+    calculateHandicap();
 
   }, [amountOfScores]
 );
@@ -99,8 +133,8 @@ useEffect(()=>{
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
     <Form setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
-    <TodoList todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
-    <Result averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
+    <TodoList fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
+    <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );
 }
