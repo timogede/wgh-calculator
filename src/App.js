@@ -8,6 +8,7 @@ function App() {
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
   const [todos, setTodos] = useState([]);
+  const [status, setStatus] = useState("all");
   const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
   const [allScoreDifferentials, setAllScoreDifferentials] = useState("");
@@ -100,6 +101,20 @@ const fullScoresArray = (sortthisarray);
   setTheHandicap(theHandicap);
   }
 
+  const filterHandler = () =>{
+    switch(status){
+      case "best":
+      setFullScores(todos.filter((todo) => todo.iamgood === true));
+      break;
+      case "worst":
+      setFullScores(todos.filter((todo) => todo.iamgood === false));
+      break;
+      default:
+      setFullScores(todos);
+      break;
+    }
+  }
+
 
 
   useEffect(() => {
@@ -109,6 +124,12 @@ const fullScoresArray = (sortthisarray);
   useEffect(() => {
     saveLocalTodos();
   }, [todos, inputText]);
+
+
+  useEffect(() => {
+    filterHandler();
+  }, [status, todos, amountOfScores]);
+
 
   useEffect(() =>{
   setAmountOfScores(Object.keys(todos).length);
@@ -132,7 +153,7 @@ useEffect(()=>{
     <header>
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
-    <Form setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
+    <Form setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
     <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>

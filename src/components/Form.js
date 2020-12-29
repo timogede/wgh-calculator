@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos, setAmountOfScores, scoreDifferential }) => {
+const Form = ({ setStatus, inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos, setAmountOfScores, scoreDifferential }) => {
 
   const inputTextHandler = (e) => {
 
@@ -34,7 +34,7 @@ const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCour
     let scoreDifferential = calcScoreDifferential(inputText, inputSlope, inputCourseRating);
     setTodos([
       ...todos,
-      { scoreDifferential: scoreDifferential, text: inputText, slope: inputSlope, courseRating: inputCourseRating, scoreDifferential: scoreDifferential, completed: false, id: Math.random() * 1000}
+      { scoreDifferential: scoreDifferential, text: inputText, slope: inputSlope, courseRating: inputCourseRating, scoreDifferential: scoreDifferential, completed: false, id: "key_" + (Math.random() * 100000).toFixed(0)}
     ]);
 
       setInputText("");
@@ -42,6 +42,10 @@ const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCour
       setInputCourseRating("");
   };
 
+
+  const statusHandler = (e) =>{
+    setStatus(e.target.value);
+  }
 
   return(
     <form>
@@ -51,6 +55,13 @@ const Form = ({ inputText, setInputText, inputSlope, setInputSlope, setInputCour
       <button className="todo-button" onClick={ submitTodoHandler } type="submit">
         <i className="fas fa-plus"></i>
       </button>
+      <div className="select">
+      <select onChange={statusHandler} name="todos" className="filter-todo">
+      <option value="all">All</option>
+      <option value="best">Best</option>
+      <option value="worst">Worst</option>
+      </select>
+      </div>
 
     </form>
   );
