@@ -168,3 +168,15 @@ select {
   transform: scale(1.5);
 }
 */
+.todo input{
+  display: none;
+}
+
+
+.edit_mode.todo .todo-text, .edit_mode.todo .todo-courserating, .edit_mode.todo .todo-slope{
+  display: none;
+}
+
+.edit_mode.todo input{
+  display: block!important;
+}
