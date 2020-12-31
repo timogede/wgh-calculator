@@ -2,7 +2,7 @@ import React from "react";
 
 
 
-const Form = ({ setStatus, inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos, setAmountOfScores, scoreDifferential }) => {
+const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputSlope, setInputSlope, setInputCourseRating, inputCourseRating, todos, setTodos, setAmountOfScores, scoreDifferential }) => {
 
   const inputTextHandler = (e) => {
 
@@ -19,15 +19,7 @@ const Form = ({ setStatus, inputText, setInputText, inputSlope, setInputSlope, s
         setInputCourseRating(e.target.value);
   };
 
-  const calcScoreDifferential = (sc, sl, cr) =>{
-    // let sc = give.text;
-    // let sl = give.slope;
-    // let cr = give.courseRating;
-    let standardSlope = 113;
-    let scoreDifferential = (((sc - cr)* standardSlope ) / sl).toFixed(1);
 
-    return scoreDifferential;
-  };
 
   const submitTodoHandler = (e) => {
     e.preventDefault();

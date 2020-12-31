@@ -32,6 +32,16 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
 }, 0); // 6
 
 
+const calcScoreDifferential = (sc, sl, cr) =>{
+  // let sc = give.text;
+  // let sl = give.slope;
+  // let cr = give.courseRating;
+  let standardSlope = 113;
+  let scoreDifferential = (((sc - cr)* standardSlope ) / sl).toFixed(1);
+
+  return scoreDifferential;
+};
+
 
   const saveLocalTodos = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
@@ -63,7 +73,7 @@ const scoreDifferentialCounter = todos.reduce((counter, obj) => {
     const cuttedSortedArray = sortedArray.slice(0, 8);
 
     setSortedTodos(cuttedSortedArray);
-const fullScoresArray = (sortthisarray);
+    const fullScoresArray = (sortthisarray);
 
     for (let y = 0; y < fullScoresArray.length; y++) {
         fullScoresArray[y]["iamgood"] = false;
@@ -153,8 +163,8 @@ useEffect(()=>{
     <header>
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
-    <Form setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
-    <TodoList fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
+    <Form calcScoreDifferential={this.calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
+    <TodoList calcScoreDifferential={this.calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
     <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );

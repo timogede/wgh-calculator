@@ -180,3 +180,7 @@ select {
 .edit_mode.todo input{
   display: block!important;
 }
+
+.edit_mode.todo i.fa-pen:before{
+  content:"\f00c";
+}
