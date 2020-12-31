@@ -1,13 +1,19 @@
 import React from "react";
 
-const Todo = ({calcScoreDifferential, iAmGood, myRank, text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
+const Todo = ({ iAmGood, myRank, text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
   const deleteHandler = () => {
     setTodos(todos.filter(lol => lol.id !== todo.id));
   }
 
-  const calcScoreDifferentialFunction = () =>{
-    calcScoreDifferential();
-  }
+  const calcScoreDifferential = (sc, sl, cr) =>{
+    // let sc = give.text;
+    // let sl = give.slope;
+    // let cr = give.courseRating;
+    let standardSlope = 113;
+    let scoreDifferential = (((sc - cr)* standardSlope ) / sl).toFixed(1);
+
+    return scoreDifferential;
+  };
 
   const editHandler = (e) => {
     const clickedKey = e.target.parentNode.id;
@@ -25,14 +31,19 @@ const Todo = ({calcScoreDifferential, iAmGood, myRank, text, slope, courseRating
               outputArray[x]["text"] = textInputValue;
               outputArray[x]["courseRating"] = crInputValue;
               outputArray[x]["slope"] = slopeInputValue;
-             let newScoreDifferential = calcScoreDifferential(textInputValue, crInputValue, slopeInputValue);
+             let newScoreDifferential = calcScoreDifferential(textInputValue, slopeInputValue, crInputValue);
+             outputArray[x]["scoreDifferential"] = newScoreDifferential;
+             console.log("textInputValue: " + textInputValue);
+             console.log("crInputValue: " + crInputValue);
+             console.log("slopeInputValue: " + slopeInputValue);
+             console.log("new score differential is " + newScoreDifferential);
         }
       }
 
       console.log(outputArray);
       setTodos(outputArray);
-        console.log(textInputValue);
-        console.log("edit_mode removed and value added via setTodos");
+  
+
 
     }else{
         clickedElement.classList.add("edit_mode");

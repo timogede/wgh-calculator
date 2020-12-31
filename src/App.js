@@ -88,8 +88,8 @@ const calcScoreDifferential = (sc, sl, cr) =>{
       if (fullScoresArray[i]["id"] == searchId) {
         fullScoresArray[i]["iamgood"] = true;
         fullScoresArray[i]["myrankis"] = x+1;
-        console.log(fullScoresArray[i]["id"] + "is the matching id, right?");
-        console.log(fullScoresArray[i]["scoreDifferential"] + "is the SD, right?");
+        // console.log(fullScoresArray[i]["id"] + "is the matching id, right?");
+        // console.log(fullScoresArray[i]["scoreDifferential"] + "is the SD, right?");
     }
 
   }
@@ -103,11 +103,11 @@ const calcScoreDifferential = (sc, sl, cr) =>{
     for (let i = 0; i < sortedTodos.length; i++) {
 
     theHandicap = theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
-      console.log("the Handicap is " + theHandicap);
+      // console.log("the Handicap is " + theHandicap);
   }
   theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
-  console.log("divide that trough " + sortedTodos.length + " and you get:");
-    console.log("the Handicap completely " + theHandicap);
+  // console.log("divide that trough " + sortedTodos.length + " and you get:");
+  //   console.log("the Handicap completely " + theHandicap);
   setTheHandicap(theHandicap);
   }
 
@@ -146,6 +146,7 @@ const calcScoreDifferential = (sc, sl, cr) =>{
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
   sortTodos(todos);
+  console.log("i was triggered todo");
 
   }, [todos]
 );
@@ -163,8 +164,8 @@ useEffect(()=>{
     <header>
       <h1>Timo's World Golf<br />Handicap Rechner</h1>
     </header>
-    <Form calcScoreDifferential={this.calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
-    <TodoList calcScoreDifferential={this.calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
+    <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
+    <TodoList setAmountOfScores={setAmountOfScores} calcScoreDifferential={calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
     <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
     </div>
   );

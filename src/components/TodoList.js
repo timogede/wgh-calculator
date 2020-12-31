@@ -1,7 +1,7 @@
 import React from "react";
 import Todo from "./Todo.js";
 
-const TodoList = ({todos, setTodos, sortedTodos, fullScores, calcScoreDifferential}) => {
+const TodoList = ({setAmountOfScores, todos, setTodos, sortedTodos, fullScores, calcScoreDifferential}) => {
 const testFunction = () =>{
   return "ok";
 }
@@ -25,7 +25,7 @@ return(
   <div className="todo-container">
     <ul className="todo-list">
      {fullScores.map((todo, i) => (
-       <Todo calcScoreDifferential={todo.calcScoreDifferential} iAmGood={todo.iamgood} myRank={ todo.myrankis } test={testFunction} scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} id={todo.id} todos={todos} setTodos={setTodos} todo={todo} sortedTodos={sortedTodos} />
+       <Todo setAmountOfScores={setAmountOfScores} calcScoreDifferential={todo.calcScoreDifferential} iAmGood={todo.iamgood} myRank={ todo.myrankis } test={testFunction} scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} id={todo.id} todos={todos} setTodos={setTodos} todo={todo} sortedTodos={sortedTodos} />
      ))}
     </ul>
   </div>
