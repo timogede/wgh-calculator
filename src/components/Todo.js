@@ -1,6 +1,6 @@
 import React from "react";
 
-const Todo = ({ iAmGood, myRank, text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
+const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
   const deleteHandler = () => {
     setTodos(todos.filter(lol => lol.id !== todo.id));
   }
@@ -41,8 +41,9 @@ const Todo = ({ iAmGood, myRank, text, slope, courseRating, id, todos, sortedTod
       }
 
       console.log(outputArray);
+      setAmountOfScores(amountOfScores);
       setTodos(outputArray);
-  
+
 
 
     }else{

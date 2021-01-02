@@ -71,7 +71,7 @@ const calcScoreDifferential = (sc, sl, cr) =>{
     const sortedArray = [...sortthisarray];
     sortedArray.sort(sortFunction);
     const cuttedSortedArray = sortedArray.slice(0, 8);
-
+    
     setSortedTodos(cuttedSortedArray);
     const fullScoresArray = (sortthisarray);
 
@@ -142,11 +142,13 @@ const calcScoreDifferential = (sc, sl, cr) =>{
 
 
   useEffect(() =>{
+    console.log(todos);
   setAmountOfScores(Object.keys(todos).length);
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
   sortTodos(todos);
   console.log("i was triggered todo");
+  console.log(todos);
 
   }, [todos]
 );
