@@ -1,0 +1,42 @@
+header.header{
+  margin:  0;
+  padding: 20px 0 20px 0;
+  background-color: var(--white);
+  z-index: 100;
+  height: 70px;
+  box-shadow: var(--shadow);
+  position: fixed;
+  @include viewport-9{
+      padding: 10px 0 14px 0;
+      height: inherit;
+  }
+
+}
+
+.header__inside{
+  display: flex;
+  flex-direction: row;
+  align-items: initial;
+  justify-content: space-between;
+
+}
+
+
+.header__branding{
+
+
+}
+
+
+.header__navigation{
+
+
+}
+
+
+.header__navigation-toggle{
+
+
+
+
+}

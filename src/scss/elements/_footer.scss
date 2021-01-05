@@ -1,0 +1,137 @@
+footer{
+  *{
+    font-family: var(--font-family);
+  }
+  background:var(--brand-gradient);
+  padding: 70px 0 50px 0;
+  p{
+    color: white;
+    line-height: 1.4;
+  }
+
+  .footer__wrap{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+      @include viewport-7{
+        flex-direction: row;
+      }
+      .left{
+          flex: 2;
+          flex-shrink: 1;
+          width: 100%;
+          @include viewport-9{
+              flex: 1;
+          }
+
+          img{
+          width: 100%;
+max-width: 400px;
+          height: auto;
+          margin-bottom: 50px;
+            @include viewport-9{
+                width: 100%;
+            }
+
+        }
+        p{
+          color: white;
+        }
+      }
+
+      .right{
+          width: 100%;
+        text-align: left;
+          flex: 2;
+          @include viewport-7{
+
+                text-align: right;
+          }
+          & > p{
+            margin-bottom: 0;
+          }
+
+          svg{
+            fill:white;
+            width: 40px;
+            height: 40px;
+            margin-left: 15px;
+          }
+
+      }
+  }
+
+
+
+  a.footer__phone-button, a.footer__mail-button{
+    background-color: white;
+    padding: 20px 10px;
+    margin-bottom: 20px;
+    display: block;
+    color: var(--brand-primary);
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: var(--font-weight-black);
+    font-style: italic;
+    max-width: 350px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+        border: none;
+        position: relative;
+
+  }
+
+  a.footer__mail-button{
+    padding-left: 40px;
+
+
+svg{
+  fill: var(--brand-primary);
+  font-family: var(--font-family);
+font-weight: 900;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+left:15px;
+width: 18px;
+    height: 18px;
+}
+  }
+
+
+
+
+  ul{
+    display: flex;
+    flex-direction: column;
+    align-items:flex-start;
+    justify-content: flex-end;
+    list-style-type: none;
+    @include viewport-7{
+        flex-direction: column;
+          align-items:flex-end;
+
+    }
+    li{
+          margin: 0 0 15px 0;
+          @include viewport-9{
+              margin: 10px 0 10px 35px;
+
+          }
+          a{
+            color: var(--black);
+            font-family: var(--font-family-headline);
+            font-weight: var(--font-weight-bold);
+            text-transform: uppercase;
+              color: white;
+              white-space: nowrap;
+
+          }
+    }
+
+}
+}

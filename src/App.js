@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import './App.css';
+import MyHeader from "./components/MyHeader.js";
 import Form from "./components/Form.js";
 import TodoList from "./components/TodoList.js";
 import Result from "./components/Result.js";
@@ -71,7 +71,7 @@ const calcScoreDifferential = (sc, sl, cr) =>{
     const sortedArray = [...sortthisarray];
     sortedArray.sort(sortFunction);
     const cuttedSortedArray = sortedArray.slice(0, 8);
-    
+
     setSortedTodos(cuttedSortedArray);
     const fullScoresArray = (sortthisarray);
 
@@ -163,12 +163,12 @@ useEffect(()=>{
 
   return (
     <div className="App">
-    <header>
-      <h1>Timo's World Golf<br />Handicap Rechner</h1>
-    </header>
+  <MyHeader language="de"/>
+  {/*
     <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList setAmountOfScores={setAmountOfScores} calcScoreDifferential={calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
     <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
+*/}
     </div>
   );
 }

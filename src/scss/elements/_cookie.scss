@@ -1,0 +1,224 @@
+.cookie-advice{
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999998;
+  height: 100%;
+  width: 100%;
+      background: rgba(0,0,0,0.7);
+      font-family: var(--font-family);
+
+    }
+
+
+.cookie-advice__wrap{
+  width: 100vw;
+  max-width: 400px;
+  display: block;
+}
+
+// COOKIE CHOICE
+.cookie-advice__choice{
+  background: white;
+  padding: 15px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.cookie-advice__choice__headline{
+  p{
+    font-weight: var(--font-weight-bold);
+    font-size: 20px;
+
+  }
+}
+
+.cookie-advice__choice__description{
+p{
+  font-size: 16px;
+  margin: 0;
+}
+}
+
+.cookie-advice__choice__checkboxes{
+
+ul{
+    display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    list-style-type: none;
+    margin-bottom: 10px;
+
+
+}
+
+li{
+    margin: 0 20px 20px 0;
+}
+
+label{
+    font-size: 16px;
+    color: var(--brand-primary);
+cursor: pointer;
+display: block;
+padding-left: 25px;
+position: relative;
+letter-spacing: -0.5px;
+}
+
+input{
+  position: absolute;
+  opacity: 0;
+  width: auto;
+  z-index: -1;
+}
+
+.checkbox-indicator{
+  background-color: #fff;
+  border-color: #a72828;
+      border-style: solid;
+border-width: 2px;
+padding: 0 !important;
+position: absolute;
+left: 0;
+top: 0;
+height: 20px;
+width: 20px;
+transition: .25s;
+}
+
+
+.checkbox-indicator::after{
+      content: "";
+      display: none;
+      border-style: solid;
+      border-width: 0 2px 2px 0;
+      border-radius: 1px;
+      position: absolute;
+      left: 5px;
+      top: 0px;
+      height: 11px;
+      width: 5px;
+      transform: rotate(45deg);
+}
+
+input:checked ~ .checkbox-indicator::after{
+    display: block;
+    border-color: #fff;
+}
+
+
+input:checked ~ .checkbox-indicator{
+  background-color: #28a745;
+      border-color: #28a745;
+}
+
+
+input:disabled ~ .checkbox-indicator{
+  background-color: #e6e6e6;
+border-color: #e6e6e6;
+}
+
+input:disabled ~ .checkbox-indicator::after{
+    border-color: #999;
+}
+
+}
+
+.cookie-advice__choice__accept-all button, .cookie-advice__choice__accept-selected button{
+  width: 100%;
+  display: inline-block;
+  font-family: inherit;
+  font-size: 20px;
+  padding: 0.75em 2em;
+  text-decoration: none;
+  transition: background-color 125ms linear;
+  margin: 5px 0 10px 0;
+}
+.cookie-advice__choice__accept-all{
+button{
+  background: #28a745;
+
+color: #fff;
+
+}
+}
+
+.cookie-advice__choice__accept-selected{
+  button{
+    background: #e7e7e7;
+  color: #555;
+  }
+}
+
+.cookie-advice__footer{
+  ul{
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style-type: none;
+    li{
+      a{
+        font-size: 12px;
+        color: var(--brand-primary);
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+// COOKIE INFO
+
+.cookie-advice__info{
+  background: white;
+  padding: 15px 20px;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 500px;
+    overflow: scroll;
+}
+
+.cookie-advice__info__back-top span{
+  font-size: 14px;
+  color: var(--brand-primary);
+}
+
+
+.cookie-advice__info__headline{
+  p{
+    font-size: 20px;
+
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.cookie-advice__info__description{
+  p{
+    font-size: 16px;
+    margin: 0;
+  }
+}
+
+
+.cookie-advice__info__cookie-types{
+
+  p{
+    font-size: 16px;
+
+    b{
+    font-size: 20px;
+    }
+  }
+
+}
+
+.cookie-advice__info__footer{
+
+}

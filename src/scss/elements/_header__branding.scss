@@ -1,0 +1,15 @@
+.header__branding{
+
+  img{
+      width: 100%;
+        max-width: 150px;
+        height: auto;
+        // fill:red;
+    @include viewport-4{
+      max-width: 200px;
+    }
+
+
+
+  }
+}

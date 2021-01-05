@@ -1,11 +1,18 @@
+@import "scss/_normalize.scss";
+@import "scss/_variables.scss";
+@import 'scss/elements/_header.scss';
+@import 'scss/elements/_header__branding.scss';
+@import 'scss/elements/_header__navigation.scss';
+@import 'scss/elements/_header__navigation-toggle.scss';
+@import 'scss/elements/_header__navigation__mobile.scss';
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  color: white;
+  color: var(--black);
   font-family: "Poppins", sans-serif;
   min-height: 100vh;
   text-align: center;
