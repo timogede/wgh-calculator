@@ -1,0 +1,44 @@
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.container__inside {
+  display: block;
+  position: relative;
+  max-width: 950px;
+  margin: 0 25px;
+  @include viewport-9 {
+    margin: 0 auto;
+  }
+}
+
+.container__inside-wide {
+  display: block;
+  position: relative;
+  max-width: 100%;
+  margin: 0 25px;
+  @include viewport-7 {
+    margin: 0 40px;
+  }
+}
+
+.anchor-element{
+  position: relative;
+  top: -70px;
+  @include viewport-9 {
+    top: -85px;
+  }
+}
+
+
+// .container{
+//   .container{
+//     .container__inside{
+//       max-width: initial;
+//       margin: initial;
+//     }
+//   }
+//
+//
+// }

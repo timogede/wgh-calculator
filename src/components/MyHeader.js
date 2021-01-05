@@ -3,6 +3,16 @@ import logo from "../images/logo.svg";
 
 const MyHeader = ({language}) => {
 
+const toggleFunction = (e) => {
+  const myBody = document.getElementsByTagName("body")[0];
+if(myBody.classList.contains("toggle")){
+  myBody.classList.remove("toggle");
+}else{
+    myBody.classList.add("toggle");
+}
+
+}
+
   return (
     <header id="masthead" class="header container">
       <div class="header__inside container__inside">
@@ -19,8 +29,7 @@ const MyHeader = ({language}) => {
 
 
     </div>
-      <button class="header__navigation-toggle">
-          <span class="header__navigation-toggle__bar"></span>
+      <button onClick={toggleFunction} class="header__navigation-toggle">
           <span class="header__navigation-toggle__bar"></span>
           <span class="header__navigation-toggle__bar"></span>
       </button>
