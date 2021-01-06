@@ -39,7 +39,6 @@ flex-basis:31%;
     &::placeholder{
       opacity: 0.45;
     }
-
 }
 
 .myform button{
@@ -52,4 +51,20 @@ flex-basis:31%;
     font-size: var(--big);
     color: white;
     background-color: var(--black);
+}
+
+.myform__filter{
+  margin-top: 10px;
+  display: flex;
+  align-items:center;
+  justify-content: flex-end;
+}
+
+.myform__filter select{
+  border: none;
+  font-size: var(--small);
+  font-weight: var(--font-weight-black);
+  padding: 2px 8px;
+  margin-top: 4px;
+  color: var(--black);
 }

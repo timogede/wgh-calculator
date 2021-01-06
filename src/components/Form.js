@@ -62,15 +62,15 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
         <i className="fas fa-plus"></i>
       </button>
       </div>
-      {/*
-      <div className="select">
+
+      <div className="myform__filter">
       <select onChange={statusHandler} name="todos" className="filter-todo">
-      <option value="all">All</option>
-      <option value="best">Best</option>
-      <option value="worst">Worst</option>
+      <option value="all">Alle Scores</option>
+      <option value="best">Die Besten</option>
+      <option value="worst">Nicht gewertet</option>
       </select>
       </div>
-        */}
+
 
     </form>
 
