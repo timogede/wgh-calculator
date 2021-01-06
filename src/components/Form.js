@@ -40,13 +40,29 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
   }
 
   return(
+    <div className="myform container">
+    <div className="myform__inside container__inside">
     <form>
-      <input onChange={ inputTextHandler } value={ inputText } type="number" className="todo-input" placeholder="Score" required />
-      <input onChange={ inputCourseRatingHandler } value={ inputCourseRating } type="number" className="todo-input" placeholder="Course Rating" required />
-      <input onChange={ inputSlopeHandler } value={ inputSlope } type="number" className="todo-input" placeholder="Slope" required />
+    <div className="myform__input-wrap">
+      <div className="myform__input-box">
+      <span>Score<i className="fas fa-info-circle" id="myform__score-trigger"></i></span>
+      <input onChange={ inputTextHandler } value={ inputText } type="number" className="todo-input" placeholder="89" required />
+      </div>
+      <div className="myform__input-box">
+      <span>C. Rating<i className="fas fa-info-circle" id="myform__courserating-trigger"></i></span>
+      <input onChange={ inputCourseRatingHandler } value={ inputCourseRating } type="number" className="todo-input" placeholder="71.9" required />
+      </div>
+      <div className="myform__input-box">
+      <span>Slope<i className="fas fa-info-circle" id="myform__slope-trigger"></i></span>
+      <input onChange={ inputSlopeHandler } value={ inputSlope } type="number" className="todo-input" placeholder="127" required />
+    </div>
+    </div>
+    <div className="myform__button-wrap">
       <button className="todo-button" onClick={ submitTodoHandler } type="submit">
         <i className="fas fa-plus"></i>
       </button>
+      </div>
+      {/*
       <div className="select">
       <select onChange={statusHandler} name="todos" className="filter-todo">
       <option value="all">All</option>
@@ -54,8 +70,12 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
       <option value="worst">Worst</option>
       </select>
       </div>
+        */}
 
     </form>
+
+    </div>
+    </div>
   );
 };
 

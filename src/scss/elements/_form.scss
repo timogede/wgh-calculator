@@ -1,0 +1,55 @@
+.myform{
+
+}
+
+.myform__input-wrap{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.myform__input-box{
+flex-basis:31%;
+  text-align: left;
+
+}
+
+.myform__input-box span{
+  padding-left:2px;
+  letter-spacing: -0.5px;
+  font-weight: var(--font-weight-black);
+  font-size: var(--normal);
+}
+
+.myform__input-box i{
+  font-size: var(--small);
+  margin-left: 3px;
+  opacity: 0.45;
+}
+
+.myform input{
+  width: 100%;
+  min-width:0;
+  border: 2px solid var(--black);
+  font-size: var(--huge);
+  font-weight: var(--font-weight-black);
+  padding: 2px 8px;
+  margin-top: 4px;
+  color: var(--black);
+    &::placeholder{
+      opacity: 0.45;
+    }
+
+}
+
+.myform button{
+    margin-top: 10px;
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    width: 100%;
+    padding: 14px 0;
+    font-size: var(--big);
+    color: white;
+    background-color: var(--black);
+}

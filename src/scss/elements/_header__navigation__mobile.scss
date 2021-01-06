@@ -1,7 +1,7 @@
 .header__navigation__mobile {
   font-family: var(--font-family);
   color: var(--black);
-  font-weight: var(--font-weight-headline-bold);
+  font-weight: var(--font-weight-black);
   width: 100%;
   position: fixed;
   left: 0;
@@ -22,7 +22,7 @@
 .header__bg{
     height: 100%;
     width: 100%;
-    background: var(--brand-gradient);
+    background: var(--black);
     opacity: 0;
     position: fixed;
     left: 0;
@@ -30,10 +30,7 @@
     transition: opacity 200ms;
       visibility: hidden;
       z-index: 100;
-        @include viewport-9{
-                visibility: hidden;
-                display: none;
-        }
+
 }
 
 .header__navigation__mobile-toggle--open .header__navigation__mobile {
@@ -71,7 +68,7 @@ position: fixed;
 
   >li {
       margin: 18px 0;
-      font-size: 24px;
+      font-size: var(--big);
       text-transform:uppercase;
       position: relative;
 i{
@@ -79,7 +76,7 @@ i{
 }
 
     a,span {
-      color:var(--white);
+      color:white;
       white-space: nowrap;
       font-weight: var(--font-weight-black);
 
