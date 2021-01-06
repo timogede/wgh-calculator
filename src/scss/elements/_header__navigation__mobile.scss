@@ -6,7 +6,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  background-color: var(--brand-primary);
+  background-color: var(--black);
   height: 100%;
   background-size: contain;
   visibility: hidden;
@@ -15,8 +15,7 @@
     opacity: 0;
 
   @include viewport-9 {
-display: none!important;
-visibility: none!important;
+
   }
 }
 
@@ -75,13 +74,15 @@ position: fixed;
       font-size: 24px;
       text-transform:uppercase;
       position: relative;
-
+i{
+      margin-right: 6px;
+}
 
     a,span {
       color:var(--white);
       white-space: nowrap;
-      font-weight: var(--font-weight-bold);
-      font-style:italic;
+      font-weight: var(--font-weight-black);
+
 
   }
 

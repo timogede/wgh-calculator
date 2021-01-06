@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MyHeader from "./components/MyHeader.js";
+import MyIntro from "./components/MyIntro.js";
 import Form from "./components/Form.js";
 import TodoList from "./components/TodoList.js";
 import Result from "./components/Result.js";
@@ -164,6 +165,7 @@ useEffect(()=>{
   return (
     <div className="App">
   <MyHeader language="de"/>
+  <MyIntro />
   {/*
     <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <TodoList setAmountOfScores={setAmountOfScores} calcScoreDifferential={calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
