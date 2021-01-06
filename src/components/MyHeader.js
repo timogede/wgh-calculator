@@ -2,6 +2,10 @@ import React from "react";
 import logo from "../images/logo.svg";
 import tee from "../images/tee.svg";
 import { ReactComponent as TeeSvg } from "../images/tee.svg";
+import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
+import Home from "../Pages/Home";
+import Impressum from "../Pages/Impressum";
+import Datenschutz from "../Pages/Datenschutz";
 const MyHeader = ({language}) => {
 
 const toggleFunction = (e) => {
@@ -14,39 +18,48 @@ if(myBody.classList.contains("header__navigation__mobile-toggle--open")){
 
 }
 
+const closeFunction = (e) => {
+  const myBody = document.getElementsByTagName("body")[0];
+
+  myBody.classList.remove("header__navigation__mobile-toggle--open");
+
+
+}
+
   return (
+    <Router>
     <React.Fragment>
-    <header id="masthead" class="header container">
-      <div class="header__inside container__inside">
-      <div class="header__branding">
-        <a href="/"><img src={logo} alt="handicap.report Logo" /></a>
+    <header id="masthead" className="header container">
+      <div className="header__inside container__inside">
+      <div className="header__branding">
+        <Link to="/"><img src={logo} alt="handicap.report Logo" /></Link>
       </div>
 
-      <div class="header__navigation__wrap">
+      <div className="header__navigation__wrap">
 
-      <div class="header__bg"></div>
-      <div class="header__navigation__mobile">
-        <div class="menu-mobile-container">
-        <ul class="menu" id="menu-mobile">
-        <li class="menu-item"><a href="/#handicap"><i class="fas fa-chart-line"></i>Handicap</a></li>
-        <li class="menu-item"><a href="/#faq"><i class="fas fa-question"></i>FAQ</a></li>
-        <li class="menu-item"><a href="/#support"><i class="fas fa-hands-helping"></i>Unterstützen</a></li>
-        <li class="menu-item"><a href="/impressum"><i class="fas fa-stamp"></i>Impressum</a></li>
-        <li class="menu-item"><a href="/datenschutz"><i class="fas fa-cookie"></i>Datenschutz</a></li>
+      <div className="header__bg"></div>
+      <div className="header__navigation__mobile">
+        <div className="menu-mobile-container">
+        <ul onClick={ closeFunction } className="menu" id="menu-mobile">
+        <li className="menu-item"><Link to="/#handicap"><i className="fas fa-chart-line"></i>Handicap</Link></li>
+        <li className="menu-item"><Link to="/#faq"><i className="fas fa-question"></i>FAQ</Link></li>
+        <li className="menu-item"><Link to="/#support"><i className="fas fa-hands-helping"></i>Unterstützen</Link></li>
+        <li className="menu-item"><Link to="/impressum"><i className="fas fa-stamp"></i>Impressum</Link></li>
+        <li className="menu-item"><Link href="/datenschutz"><i className="fas fa-cookie"></i>Datenschutz</Link></li>
         </ul>
         </div>
       </div>
 
 
     </div>
-      <button onClick={toggleFunction} class="header__navigation-toggle">
+      <button onClick={toggleFunction} className="header__navigation-toggle">
   {/*
-           <span class="header__navigation-toggle__bar"></span>
-           <span class="header__navigation-toggle__bar"></span>
+           <span className="header__navigation-toggle__bar"></span>
+           <span className="header__navigation-toggle__bar"></span>
            */}
 
-           <span class="header__navigation-toggle__bar"><TeeSvg/></span>
-                <span class="header__navigation-toggle__bar"><TeeSvg/></span>
+           <span className="header__navigation-toggle__bar"><TeeSvg/></span>
+                <span className="header__navigation-toggle__bar"><TeeSvg/></span>
 
       </button>
 
@@ -59,6 +72,12 @@ if(myBody.classList.contains("header__navigation__mobile-toggle--open")){
     &nbsp;
 </div>
     </React.Fragment>
+    <Switch>
+    <Route path="/" exact component={Home}/>
+    <Route path="/impressum" component={Impressum}/>
+    <Route path="/datenschutz" component={Datenschutz}/>
+    </Switch>
+    </Router>
   );
 };
 
