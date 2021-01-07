@@ -21,19 +21,3 @@ body {
   min-height: 100vh;
   text-align: center;
 }
-
-.todo input{
-  display: none;
-}
-
-.edit_mode.todo .todo-text, .edit_mode.todo .todo-courserating, .edit_mode.todo .todo-slope{
-  display: none;
-}
-
-.edit_mode.todo input{
-  display: block!important;
-}
-
-.edit_mode.todo i.fa-pen:before{
-  content:"\f00c";
-}

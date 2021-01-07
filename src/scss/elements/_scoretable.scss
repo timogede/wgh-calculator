@@ -27,7 +27,7 @@
 }
 
 .scoretable__row td{
-  padding: 10px 0;
+  padding: 12px 0 10px 0;
   position: relative;
 }
 
@@ -65,17 +65,46 @@
   width: 10%;
 }
 
-.scoretable__headline-score{
+.scoretable__headline-score, .scoretable-text-input{
 
   width: 20%;
 }
 
-.scoretable__headline-courserating{
+.scoretable__headline-courserating, .scoretable-courserating-input{
 
   width: 18%;
 }
 
-.scoretable__headline-slope{
+.scoretable__headline-slope, .scoretable-slope-input{
 
   width: 18%;
+}
+
+.scoretable-text-input, .scoretable-courserating-input, .scoretable-slope-input{
+    display: none;
+  }
+
+
+.edit_mode{
+  .scoretable__headline-score, .scoretable__headline-courserating, .scoretable__headline-slope{
+    display: none;
+  }
+}
+
+.edit_mode{
+  .scoretable-text-input, .scoretable-courserating-input, .scoretable-slope-input{
+    display: table-cell;
+  }
+}
+
+.edit_mode.scoretable__row input{
+  width: 100%;
+  max-width: 50px;
+  text-align: right;
+  border: 1px solid var(--black);
+  padding-right: 3px;
+}
+
+.edit_mode.scoretable__row i.fa-pen:before{
+  content:"\f00c";
 }

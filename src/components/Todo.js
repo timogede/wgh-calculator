@@ -1,9 +1,13 @@
 import React from "react";
 
 const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, courseRating, id, todos, sortedTodos, setTodos, todo, order, scoreDifferential}) => {
+
+
   const deleteHandler = () => {
     setTodos(todos.filter(lol => lol.id !== todo.id));
   }
+
+
 
   const calcScoreDifferential = (sc, sl, cr) =>{
     // let sc = give.text;
@@ -15,13 +19,17 @@ const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, 
     return scoreDifferential;
   };
 
-  const editHandler = (e) => {
-    const clickedKey = e.target.parentNode.id;
-    const clickedElement = document.getElementById(clickedKey);
-    let textInputValue = clickedElement.getElementsByClassName( 'todo-text-input' )[0].value;
-    let crInputValue = clickedElement.getElementsByClassName( 'todo-courserating-input' )[0].value;
-    let slopeInputValue = clickedElement.getElementsByClassName( 'todo-slope-input' )[0].value;
 
+
+  const editHandler = (id) => {
+
+    const clickedKey = id;
+        console.log("clickedKey " + id);
+    const clickedElement = document.getElementById(clickedKey);
+    let textInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-text-input' )[0].getElementsByTagName( 'input' )[0].value;
+    let crInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-courserating-input' )[0].getElementsByTagName( 'input' )[0].value;
+    let slopeInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-slope-input' )[0].getElementsByTagName( 'input' )[0].value;
+    console.log("textInputValue " + textInputValue);
     const outputArray = [...todos];
 
     if(clickedElement.classList.contains("edit_mode")){
@@ -56,32 +64,22 @@ const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, 
   }
 
 
+
 return(
 <React.Fragment>
-{/*
-  <div className={`todo ${iAmGood ? "isgood " : "isbad "}iamrank_`+myRank} id={id}>
-    <li className="todo-item todo-order">#{order + 1}</li>
-    <li className="todo-item todo-text">{text}</li>
-    <input className="todo-item todo-text todo-text-input" placeholder={text} />
-    <li className="todo-item todo-courserating">{courseRating}</li>
-    <input className="todo-item todo-courserating todo-courserating-input" placeholder={courseRating}/>
-    <li className="todo-item todo-slope">{slope}</li>
-    <input className="todo-item todo-slope todo-slope-input" placeholder={slope}/>
-    <li className="todo-item todo-scoredifferential">{scoreDifferential}</li>
-    <button onClick={editHandler} className="complete-btn edit-btn"><i className="fas fa-pen"></i></button>
-    <button onClick={deleteHandler} className="trash-btn last-todo"><i className="fas fa-trash"></i></button>
-  </div>
-  */}
-  <tr className={`scoretable__row todo ${iAmGood ? "isgood " : "isbad "}iamrank_`+myRank} id={id}>
-  <td className="todo-item todo-scoredifferential scoretable__headline-scoredifferential">{scoreDifferential}</td>
-  <td className="scoretable__headline-edit"><button onClick={editHandler} className="complete-btn edit-btn"><i className="far fa-pen"></i></button></td>
-  <td className="scoretable__headline-delete"><button onClick={deleteHandler} className="trash-btn last-todo"><i className="far fa-trash-alt"></i></button></td>
-  <td className="todo-item todo-order scoretable__headline-order">{order + 1}</td>
-  <td className="todo-item todo-text scoretable__headline-score">{text} <input className="todo-item todo-text todo-text-input" placeholder={text} /></td>
-  <td className="todo-item todo-courserating scoretable__headline-courserating">{courseRating} <input className="todo-item todo-courserating todo-courserating-input" placeholder={courseRating}/></td>
-  <td className="todo-item todo-slope scoretable__headline-slope">{slope} <input className="todo-item todo-slope todo-slope-input" placeholder={slope}/></td>
+  <tr className={`scoretable__row  ${iAmGood ? "isgood " : "isbad "}iamrank_`+myRank} id={id}>
+    <td className="scoretable__headline-scoredifferential">{scoreDifferential}</td>
+    <td className="scoretable__headline-edit"><button onClick={() => editHandler(id)} className="complete-btn edit-btn"><i className="far fa-pen"></i></button></td>
+    <td className="scoretable__headline-delete"><button onClick={deleteHandler} className="trash-btn last-todo"><i className="far fa-trash-alt"></i></button></td>
+    <td className="scoretable__headline-order">{order + 1}</td>
+    <td className="scoretable__headline-score">{text}</td>
+    <td className="scoretable-text-input"><input type="number" placeholder={text} /></td>
+    <td className="scoretable__headline-courserating">{courseRating}</td>
+    <td className="scoretable-courserating-input"><input type="number" placeholder={courseRating}/></td>
+    <td className="scoretable__headline-slope">{slope}</td>
+    <td className="scoretable-slope-input"><input type="number" placeholder={slope}/></td>
   </tr>
-  </React.Fragment>
+</React.Fragment>
 );
 };
 
