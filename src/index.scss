@@ -7,12 +7,14 @@
 @import 'scss/elements/_header__navigation__mobile.scss';
 @import 'scss/elements/_intro.scss';
 @import 'scss/elements/_form.scss';
+@import 'scss/elements/_scoretable.scss';
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   color: var(--black);
   font-family: "Poppins", sans-serif;
@@ -23,7 +25,6 @@ body {
 .todo input{
   display: none;
 }
-
 
 .edit_mode.todo .todo-text, .edit_mode.todo .todo-courserating, .edit_mode.todo .todo-slope{
   display: none;

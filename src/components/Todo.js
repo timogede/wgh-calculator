@@ -57,7 +57,8 @@ const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, 
 
 
 return(
-
+<React.Fragment>
+{/*
   <div className={`todo ${iAmGood ? "isgood " : "isbad "}iamrank_`+myRank} id={id}>
     <li className="todo-item todo-order">#{order + 1}</li>
     <li className="todo-item todo-text">{text}</li>
@@ -70,6 +71,17 @@ return(
     <button onClick={editHandler} className="complete-btn edit-btn"><i className="fas fa-pen"></i></button>
     <button onClick={deleteHandler} className="trash-btn last-todo"><i className="fas fa-trash"></i></button>
   </div>
+  */}
+  <tr className={`scoretable__row todo ${iAmGood ? "isgood " : "isbad "}iamrank_`+myRank} id={id}>
+  <td className="todo-item todo-scoredifferential scoretable__headline-scoredifferential">{scoreDifferential}</td>
+  <td className="scoretable__headline-edit"><button onClick={editHandler} className="complete-btn edit-btn"><i className="far fa-pen"></i></button></td>
+  <td className="scoretable__headline-delete"><button onClick={deleteHandler} className="trash-btn last-todo"><i className="far fa-trash-alt"></i></button></td>
+  <td className="todo-item todo-order scoretable__headline-order">{order + 1}</td>
+  <td className="todo-item todo-text scoretable__headline-score">{text} <input className="todo-item todo-text todo-text-input" placeholder={text} /></td>
+  <td className="todo-item todo-courserating scoretable__headline-courserating">{courseRating} <input className="todo-item todo-courserating todo-courserating-input" placeholder={courseRating}/></td>
+  <td className="todo-item todo-slope scoretable__headline-slope">{slope} <input className="todo-item todo-slope todo-slope-input" placeholder={slope}/></td>
+  </tr>
+  </React.Fragment>
 );
 };
 

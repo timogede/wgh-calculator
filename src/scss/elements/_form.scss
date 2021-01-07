@@ -51,10 +51,11 @@ flex-basis:31%;
     font-size: var(--big);
     color: white;
     background-color: var(--black);
+    margin-bottom: 30px;
 }
 
 .myform__filter{
-  margin-top: 10px;
+  margin-bottom: 15px;
   display: flex;
   align-items:center;
   justify-content: flex-end;
@@ -67,4 +68,5 @@ flex-basis:31%;
   padding: 2px 8px;
   margin-top: 4px;
   color: var(--black);
+  background-color: white;
 }

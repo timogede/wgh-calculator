@@ -8,28 +8,34 @@ const testFunction = () =>{
 
 
 return(
-  <div>
-<ul className="todo-container">
-<div className="todo-list heading-list">
-  <div className="todo">
-  <li className="todo-item">#</li>
-  <li className="todo-item">Score</li>
-  <li className="todo-item">CR</li>
-  <li className="todo-item">Slope</li>
-  <li className="todo-item">SD</li>
-  <button className="todo-item last-todo"></button>
+  <React.Fragment>
+  <div className="scoretable__container container">
+    <div className="scoretable__inside container__inside">
+  <table className="scoretable__table">
+  <thead className="scoretable__head">
+  <tr className="">
+  <th className="scoretable__headline-scoredifferential">SD</th>
+  <th className="scoretable__headline-edit"></th>
+  <th className="scoretable__headline-delete"></th>
+  <th className="scoretable__headline-order">#</th>
+  <th className="scoretable__headline-score">Score</th>
+  <th className="scoretable__headline-courserating">CR</th>
+  <th className="scoretable__headline-slope">Slope</th>
+  </tr>
+  </thead>
+  <tbody>
+  {fullScores.map((todo, i) => (
+    <Todo setAmountOfScores={setAmountOfScores} calcScoreDifferential={todo.calcScoreDifferential} iAmGood={todo.iamgood} myRank={ todo.myrankis } test={testFunction} scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} id={todo.id} todos={todos} setTodos={setTodos} todo={todo} sortedTodos={sortedTodos} />
+  ))}
+  </tbody>
+  </table>
+  </div>
+  </div>
 
-  </div>
-</div>
-</ul>
-  <div className="todo-container">
-    <ul className="todo-list">
-     {fullScores.map((todo, i) => (
-       <Todo setAmountOfScores={setAmountOfScores} calcScoreDifferential={todo.calcScoreDifferential} iAmGood={todo.iamgood} myRank={ todo.myrankis } test={testFunction} scoreDifferential={todo.scoreDifferential} order={i++} text={todo.text} slope={todo.slope} courseRating={todo.courseRating} key={todo.id} id={todo.id} todos={todos} setTodos={setTodos} todo={todo} sortedTodos={sortedTodos} />
-     ))}
-    </ul>
-  </div>
-  </div>
+
+
+
+    </React.Fragment>
 
 
 
