@@ -84,6 +84,10 @@
     display: none;
   }
 
+  td.scoretable__headline-score, td.scoretable__headline-courserating, td.scoretable__headline-slope{
+    padding-right: 4px;
+  }
+
 
 .edit_mode{
   .scoretable__headline-score, .scoretable__headline-courserating, .scoretable__headline-slope{
@@ -107,4 +111,9 @@
 
 .edit_mode.scoretable__row i.fa-pen:before{
   content:"\f00c";
+}
+
+.edit_mode.scoretable__row td{
+  padding: 11px 0 9px 0;
+  position: relative;
 }

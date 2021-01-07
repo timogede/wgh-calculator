@@ -22,16 +22,26 @@ const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, 
 
 
   const editHandler = (id) => {
-
+    //get id from clicked row
     const clickedKey = id;
-        console.log("clickedKey " + id);
     const clickedElement = document.getElementById(clickedKey);
-    let textInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-text-input' )[0].getElementsByTagName( 'input' )[0].value;
-    let crInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-courserating-input' )[0].getElementsByTagName( 'input' )[0].value;
-    let slopeInputValue = document.getElementById(id).getElementsByClassName( 'scoretable-slope-input' )[0].getElementsByTagName( 'input' )[0].value;
-    console.log("textInputValue " + textInputValue);
+
+    //get the clicked elements and input values
+    let textInput = document.getElementById(id).getElementsByClassName( 'scoretable-text-input' )[0].getElementsByTagName( 'input' )[0];
+    let textInputValue = textInput.value;
+    let crInput = document.getElementById(id).getElementsByClassName( 'scoretable-courserating-input' )[0].getElementsByTagName( 'input' )[0];
+    let crInputValue = crInput.value;
+    let slopeInput = document.getElementById(id).getElementsByClassName( 'scoretable-slope-input' )[0].getElementsByTagName( 'input' )[0];
+    let slopeInputValue = slopeInput.value;
+
+    //get the clicked elements current values so you can put them as kind of a placeholder to the inputs
+    let currentTextInputValue = todo.text;
+    let currentCrInputValue = todo.crInput;
+    let currentSlopeInputValue = todo.slope;
     const outputArray = [...todos];
 
+
+    //edit_mode toggle off
     if(clickedElement.classList.contains("edit_mode")){
         clickedElement.classList.remove("edit_mode");
         for (let x = 0; x < outputArray.length; x++) {
@@ -53,12 +63,15 @@ const Todo = ({setAmountOfScores, amountOfScores, iAmGood, myRank, text, slope, 
       setTodos(outputArray);
 
 
-
+//edit_mode toggle on
+//put current values into inputs which are now shown cause of edit_mode class via css
     }else{
         clickedElement.classList.add("edit_mode");
-
+        console.log(todo.text);
         console.log("edit_mode added");
-
+        textInput.value = (todo.text);
+        crInput.value = (todo.courseRating);
+        slopeInput.value = (todo.slope);
   }
 
   }

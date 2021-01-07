@@ -45,7 +45,7 @@ const closeFunction = (e) => {
         <li className="menu-item"><Link to="/#faq"><i className="fas fa-question"></i>FAQ</Link></li>
         <li className="menu-item"><Link to="/#support"><i className="fas fa-hands-helping"></i>Unterstützen</Link></li>
         <li className="menu-item"><Link to="/impressum"><i className="fas fa-stamp"></i>Impressum</Link></li>
-        <li className="menu-item"><Link href="/datenschutz"><i className="fas fa-cookie"></i>Datenschutz</Link></li>
+        <li className="menu-item"><Link to="/datenschutz"><i className="fas fa-cookie"></i>Datenschutz</Link></li>
         </ul>
         </div>
       </div>
@@ -53,11 +53,6 @@ const closeFunction = (e) => {
 
     </div>
       <button onClick={toggleFunction} className="header__navigation-toggle">
-  {/*
-           <span className="header__navigation-toggle__bar"></span>
-           <span className="header__navigation-toggle__bar"></span>
-           */}
-
            <span className="header__navigation-toggle__bar"><TeeSvg/></span>
                 <span className="header__navigation-toggle__bar"><TeeSvg/></span>
 
