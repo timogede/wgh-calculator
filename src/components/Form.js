@@ -35,9 +35,7 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
   };
 
 
-  const statusHandler = (e) =>{
-    setStatus(e.target.value);
-  }
+
 
   return(
     <div className="myform container">
@@ -63,13 +61,7 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
       </button>
       </div>
 
-      <div className="myform__filter">
-      <select onChange={statusHandler} name="todos" className="filter-todo">
-      <option value="all">Alle Scores</option>
-      <option value="best">Die Besten</option>
-      <option value="worst">Nicht gewertet</option>
-      </select>
-      </div>
+
 
 
     </form>

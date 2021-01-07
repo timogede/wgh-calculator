@@ -1,16 +1,25 @@
 import React from "react";
 import Todo from "./Todo.js";
 
-const TodoList = ({setAmountOfScores, todos, setTodos, sortedTodos, fullScores, calcScoreDifferential}) => {
+const TodoList = ({setStatus, setAmountOfScores, todos, setTodos, sortedTodos, fullScores, calcScoreDifferential}) => {
 const testFunction = () =>{
   return "ok";
 }
-
+const statusHandler = (e) =>{
+  setStatus(e.target.value);
+}
 
 return(
   <React.Fragment>
   <div className="scoretable__container container">
     <div className="scoretable__inside container__inside">
+    <div className="myform__filter">
+    <select onChange={statusHandler} name="todos" className="filter-todo">
+    <option value="all">Alle Scores</option>
+    <option value="best">Die Besten</option>
+    <option value="worst">Nicht gewertet</option>
+    </select>
+    </div>
   <table className="scoretable__table">
   <thead className="scoretable__head">
   <tr className="">
