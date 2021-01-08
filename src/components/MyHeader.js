@@ -27,7 +27,7 @@ const closeFunction = (e) => {
 }
 
   return (
-    <Router>
+
     <React.Fragment>
     <header id="masthead" className="header container">
       <div className="header__inside container__inside">
@@ -67,12 +67,7 @@ const closeFunction = (e) => {
     &nbsp;
 </div>
     </React.Fragment>
-    <Switch>
-    <Route path="/" exact component={Home}/>
-    <Route path="/impressum" component={Impressum}/>
-    <Route path="/datenschutz" component={Datenschutz}/>
-    </Switch>
-    </Router>
+
   );
 };
 

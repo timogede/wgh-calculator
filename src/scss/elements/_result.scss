@@ -1,3 +1,47 @@
 .result{
+  color: var(--black);
+  text-align: left;
+}
 
+.result h2{
+  font-size: var(--normal);
+  margin-bottom: 10px;
+}
+
+.result__handicap{
+  font-size: var(--huge);
+  font-weight: var(--font-weight-black);
+  margin-bottom: 20px;
+}
+
+.result__more-box button{
+  margin-bottom: 12px;
+  background-color: transparent;
+  font-size: var(--normal);
+  font-weight: var(--font-weight-black);
+
+}
+
+.result__more-box i{
+  background-color: transparent;
+  margin-right: 2px;
+  font-size: var(--small);
+}
+
+.result__averages__wrap{
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.toggle-open .result__averages__wrap{
+  display: flex;
+}
+
+.result__averages__box{
+  font-size: var(--normal);
+  p{
+    margin-bottom: 4px;
+  }
 }

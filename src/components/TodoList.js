@@ -11,7 +11,7 @@ const statusHandler = (e) =>{
 
 return(
   <React.Fragment>
-  <div className="scoretable__container container">
+  <div className="scoretable container">
     <div className="scoretable__inside container__inside">
     <div className="myform__filter">
     <select onChange={statusHandler} name="todos" className="filter-todo">
