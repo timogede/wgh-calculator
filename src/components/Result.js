@@ -1,7 +1,7 @@
 import React from "react";
 
 
-const Result = ({theHandicap, averageScoreDifferential, allScoreDifferentials, averageScore, todos, setAllScores, allScores, amountOfScores, setAmountOfScores}) => {
+const Result = ({averageSlope, averageCr, theHandicap, averageScoreDifferential, allScoreDifferentials, averageScore, todos, setAllScores, allScores, amountOfScores, setAmountOfScores}) => {
 
 const boxToggler = () =>{
   const toggleElement = document.getElementById("result__more-box");
@@ -36,11 +36,11 @@ const boxToggler = () =>{
               </div>
               <div className="result__averages__box">
                 <p>Ø CR</p>
-                <h3>oO</h3>
+                <h3>{averageCr}</h3>
               </div>
               <div className="result__averages__box">
                 <p>Ø Slope</p>
-                <h3>oO</h3>
+                <h3>{averageSlope}</h3>
               </div>
             </div>
           </div>

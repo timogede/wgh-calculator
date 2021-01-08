@@ -25,10 +25,18 @@ const Form = ({calcScoreDifferential, setStatus, inputText, setInputText, inputS
   const submitTodoHandler = (e) => {
     e.preventDefault();
     let scoreDifferential = calcScoreDifferential(inputText, inputSlope, inputCourseRating);
+          const xArray = todos;
+    if(todos.length >= 20){
+
+      xArray.shift();
+    }
+
     setTodos([
-      ...todos,
+      ...xArray,
       { scoreDifferential: scoreDifferential, text: inputText, slope: inputSlope, courseRating: inputCourseRating, scoreDifferential: scoreDifferential, completed: false, id: "key_" + (Math.random() * 100000).toFixed(0)}
     ]);
+
+
 
       setInputText("");
       setInputSlope("");

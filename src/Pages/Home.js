@@ -14,9 +14,13 @@ const Home = () => {
   const [status, setStatus] = useState("all");
   const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
+  const [allCr, setAllCr] = useState("");
+  const [allSlope, setAllSlope] = useState("");
   const [allScoreDifferentials, setAllScoreDifferentials] = useState("");
   const [amountOfScores, setAmountOfScores] = useState("");
   const [averageScore, setAverageScore] = useState("");
+  const [averageSlope, setAverageSlope] = useState("");
+  const [averageCr, setAverageCr] = useState("");
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
@@ -31,6 +35,16 @@ const scoreCounter = todos.reduce((counter, obj) => {
 
 const scoreDifferentialCounter = todos.reduce((counter, obj) => {
   if (obj.scoreDifferential) counter = counter + parseFloat(obj.scoreDifferential);
+  return counter;
+}, 0); // 6
+
+const crCounter = todos.reduce((counter, obj) => {
+  if (obj.courseRating) counter = counter + parseFloat(obj.courseRating);
+  return counter;
+}, 0); // 6
+
+const slopeCounter = todos.reduce((counter, obj) => {
+  if (obj.slope) counter = counter + parseFloat(obj.slope);
   return counter;
 }, 0); // 6
 
@@ -149,6 +163,8 @@ const calcScoreDifferential = (sc, sl, cr) =>{
   setAmountOfScores(Object.keys(todos).length);
   setAllScores(scoreCounter);
   setAllScoreDifferentials((scoreDifferentialCounter).toFixed(1));
+  setAllCr((crCounter).toFixed(1));
+  setAllSlope((slopeCounter).toFixed(1));
   sortTodos(todos);
   console.log("i was triggered todo");
   console.log(todos);
@@ -159,11 +175,13 @@ const calcScoreDifferential = (sc, sl, cr) =>{
 useEffect(()=>{
     setAverageScore((allScores / amountOfScores).toFixed(1));
     setAverageScoreDifferential((allScoreDifferentials / amountOfScores).toFixed(1));
+    setAverageCr((allCr / amountOfScores).toFixed(1));
+    setAverageSlope((allSlope / amountOfScores).toFixed(1));
     calculateHandicap();
 
   }, [amountOfScores]
 );
-const x = "yes";
+
 
 if(Object.keys(todos).length === 0){
 return (
@@ -183,7 +201,7 @@ return (
       <MyIntro />
       <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
       <TodoList setStatus={setStatus} setAmountOfScores={setAmountOfScores} calcScoreDifferential={calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
-      <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
+      <Result averageSlope={averageSlope} averageCr={averageCr} theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
 <Faq />
     </React.Fragment>
 
