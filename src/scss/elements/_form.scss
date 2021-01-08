@@ -24,7 +24,12 @@ flex-basis:31%;
 .myform__input-box i{
   font-size: var(--small);
   margin-left: 3px;
-  opacity: 0.45;
+  opacity: 0.35;
+  color: var(--black);
+  &:hover{
+    color: var(--brand-primary);
+    opacity: 1;
+  }
 }
 
 .myform input{
@@ -37,7 +42,7 @@ flex-basis:31%;
   margin-top: 4px;
   color: var(--black);
     &::placeholder{
-      opacity: 0.45;
+      opacity: 0.35;
     }
 }
 

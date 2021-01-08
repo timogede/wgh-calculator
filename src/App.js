@@ -8,18 +8,17 @@ import Datenschutz from "./Pages/Datenschutz";
 const App = () => {
 
 
+
   return (
     <Router>
-<React.Fragment>
-  <MyHeader />
-  <Route path="/" exact component={Home}/>
-  <Route path="/impressum" component={Impressum}/>
-  <Route path="/datenschutz" component={Datenschutz}/>
-  <MyFooter />
-
-
-</React.Fragment>
-</Router>
+      <React.Fragment>
+        <MyHeader />
+        <Route path="/" exact component={Home}/>
+        <Route path="/impressum" component={Impressum}/>
+        <Route path="/datenschutz" component={Datenschutz}/>
+        <MyFooter />
+      </React.Fragment>
+    </Router>
 
   );
 }

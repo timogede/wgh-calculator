@@ -5,6 +5,7 @@ import Form from "../components/Form.js";
 import TodoList from "../components/TodoList.js";
 import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
+import Faq from "../components/Faq.js";
 const Home = () => {
   const [inputText, setInputText] = useState("");
   const [inputSlope, setInputSlope] = useState("");
@@ -170,6 +171,7 @@ return (
     <MyIntro />
     <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
     <EmptyState />
+    <Faq />
   </React.Fragment>
 );
 
@@ -182,6 +184,7 @@ return (
       <Form calcScoreDifferential={calcScoreDifferential} setStatus={setStatus} setAmountOfScores={setAmountOfScores} inputSlope={inputSlope} inputCourseRating={inputCourseRating} setInputCourseRating={setInputCourseRating} setInputSlope={setInputSlope} inputText={ inputText } setInputText={ setInputText } todos={ todos } setTodos={ setTodos } />
       <TodoList setStatus={setStatus} setAmountOfScores={setAmountOfScores} calcScoreDifferential={calcScoreDifferential} fullScores={ fullScores } todos={ todos } setTodos={setTodos} sortedTodos={sortedTodos} />
       <Result theHandicap={theHandicap} averageScoreDifferential={averageScoreDifferential} allScoreDifferentials={allScoreDifferentials} averageScore={averageScore} todos={ todos } setAllScores={setAllScores} allScores={allScores} amountOfScores={amountOfScores} setAmountOfScores={setAmountOfScores} />
+<Faq />
     </React.Fragment>
 
     );
