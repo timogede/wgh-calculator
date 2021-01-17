@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MyHeader from "./components/MyHeader.js";
 import MyFooter from "./components/MyFooter.js";
+import Signup from "./components/Signup.js";
 import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
 import Home from "./Pages/Home";
 import Impressum from "./Pages/Impressum";
@@ -12,6 +13,7 @@ const App = () => {
   return (
     <Router>
       <React.Fragment>
+        <Signup />
         <MyHeader />
         <Route path="/" exact component={Home}/>
         <Route path="/impressum" component={Impressum}/>
