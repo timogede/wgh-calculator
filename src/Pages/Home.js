@@ -182,6 +182,8 @@ useEffect(()=>{
   }, [amountOfScores]
 );
 
+console.log(process.env);
+
 
 if(Object.keys(todos).length === 0){
 return (
