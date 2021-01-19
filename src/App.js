@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import MyHeader from "./components/MyHeader.js";
 import MyFooter from "./components/MyFooter.js";
 import Signup from "./components/Signup.js";
+import Dashboard from "./components/Dashboard.js";
+import Login from "./components/Login.js";
+import ForgotPassword from "./components/ForgotPassword.js";
+import UpdateProfile from "./components/UpdateProfile.js";
+import PrivateRoute from "./components/PrivateRoute.js";
 import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
 import {AuthProvider} from "./contexts/AuthContext";
 import Home from "./Pages/Home";
@@ -15,11 +20,17 @@ const App = () => {
     <Router>
     <AuthProvider>
       <React.Fragment>
-        <Signup />
         <MyHeader />
+        <Switch>
         <Route path="/" exact component={Home}/>
         <Route path="/impressum" component={Impressum}/>
         <Route path="/datenschutz" component={Datenschutz}/>
+        <Route path="/signup" component={Signup}/>
+        <PrivateRoute path="/dashboard" component={Dashboard}/>
+        <Route path="/login" component={Login}/>
+        <Route path="/forgot-password" component={ForgotPassword}/>
+        <Route path="/update-profile" component={UpdateProfile}/>
+        </Switch>
         <MyFooter />
       </React.Fragment>
       </AuthProvider>
