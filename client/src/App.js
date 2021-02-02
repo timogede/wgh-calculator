@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getPosts } from "./actions/posts";
 import MyHeader from "./components/MyHeader.js";
 import MyFooter from "./components/MyFooter.js";
 import Signup from "./components/Signup.js";
@@ -14,6 +16,11 @@ import Impressum from "./Pages/Impressum";
 import Datenschutz from "./Pages/Datenschutz";
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPosts);
+  }, [dispatch]);
   return (
     <Router>
       <AuthProvider>

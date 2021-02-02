@@ -14,7 +14,7 @@ app.use(cors());
 app.use("/subscribers", subRoutes);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.BACKENDPORT || 3333;
 
 mongoose
   .connect(CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
