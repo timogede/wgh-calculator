@@ -7,10 +7,8 @@ import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
 import allData from "../util.js";
-import { useSelector, useDispatch } from "react-redux";
-import { createPost } from "../actions/posts";
 
-const Home = (testState, setTestState) => {
+const Home = () => {
   const [inputText, setInputText] = useState("");
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
@@ -28,11 +26,6 @@ const Home = (testState, setTestState) => {
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
-  const subscribers = useSelector((state) => state.subscribers);
-  const dispatch = useDispatch();
-  const [postData, setPostData] = useState({});
-
-  console.log(subscribers);
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -67,7 +60,6 @@ const Home = (testState, setTestState) => {
 
   const saveLocalTodos = () => {
     // localStorage.setItem("todos", JSON.stringify(todos));
-    dispatch(createPost(postData));
   };
 
   const getLocalTodos = () => {
