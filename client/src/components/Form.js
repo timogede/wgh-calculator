@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
+// import { reRender } from "../Pages/Home";
 
 const Form = ({
   calcScoreDifferential,

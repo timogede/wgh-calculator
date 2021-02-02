@@ -7,12 +7,13 @@ import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
 import allData from "../util.js";
+import axios from "axios";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([""]);
   const [status, setStatus] = useState("all");
   const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
@@ -26,6 +27,8 @@ const Home = () => {
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
+  const [rerender, setRerender] = useState();
+  const renderNew = () => setRerender(Math.random());
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -57,9 +60,35 @@ const Home = () => {
 
     return scoreDifferential;
   };
-
+  const createHandler = () => {
+    setTimeout(() => {
+      console.log(todos[0]["scoreDifferential"]);
+      const newScore = {
+        scoreDifferential: todos[0]["scoreDifferential"],
+        text: todos[0]["text"],
+        slope: todos[0]["slope"],
+        courseRating: todos[0]["courseRating"],
+        completed: todos[0]["completed"],
+        id: todos[0]["id"],
+        iamgood: todos[0]["iamgood"],
+        myrankis: todos[0]["myrankis"],
+      };
+      axios.post("http://localhost:3333/create", newScore);
+    }, 5000);
+  };
   const saveLocalTodos = () => {
-    // localStorage.setItem("todos", JSON.stringify(todos));
+    console.log("whaaaat" + todos[0]["scoreDifferential"]);
+    const newScore = {
+      scoreDifferential: todos[0]["scoreDifferential"],
+      text: todos[0]["text"],
+      slope: todos[0]["slope"],
+      courseRating: todos[0]["courseRating"],
+      completed: todos[0]["completed"],
+      id: todos[0]["id"],
+      iamgood: todos[0]["iamgood"],
+      myrankis: todos[0]["myrankis"],
+    };
+    axios.post("http://localhost:3333/create", newScore);
   };
 
   const getLocalTodos = () => {
@@ -102,8 +131,6 @@ const Home = () => {
         if (fullScoresArray[i]["id"] == searchId) {
           fullScoresArray[i]["iamgood"] = true;
           fullScoresArray[i]["myrankis"] = x + 1;
-          // console.log(fullScoresArray[i]["id"] + "is the matching id, right?");
-          // console.log(fullScoresArray[i]["scoreDifferential"] + "is the SD, right?");
         }
       }
     }
@@ -115,11 +142,9 @@ const Home = () => {
     for (let i = 0; i < sortedTodos.length; i++) {
       theHandicap =
         theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
-      // console.log("the Handicap is " + theHandicap);
     }
     theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
-    // console.log("divide that trough " + sortedTodos.length + " and you get:");
-    //   console.log("the Handicap completely " + theHandicap);
+
     setTheHandicap(theHandicap);
   };
 
@@ -137,29 +162,26 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    // getLocalTodos();
-    setTodos(allData());
-  }, []);
+  // useEffect(() => {
+  //   // getLocalTodos();
+  //   setTodos(allData());
+  // }, []);
 
   useEffect(() => {
     saveLocalTodos();
-  }, [todos, inputText]);
+  }, [rerender]);
 
   useEffect(() => {
     filterHandler();
   }, [status, todos, amountOfScores]);
 
   useEffect(() => {
-    console.log(todos);
     setAmountOfScores(Object.keys(todos).length);
     setAllScores(scoreCounter);
     setAllScoreDifferentials(scoreDifferentialCounter.toFixed(1));
     setAllCr(crCounter.toFixed(1));
     setAllSlope(slopeCounter.toFixed(1));
     sortTodos(todos);
-    console.log("i was triggered todo");
-    console.log(todos);
   }, [todos]);
 
   useEffect(() => {
@@ -171,8 +193,6 @@ const Home = () => {
     setAverageSlope((allSlope / amountOfScores).toFixed(1));
     calculateHandicap();
   }, [amountOfScores]);
-
-  console.log(process.env);
 
   if (Object.keys(todos).length === 0) {
     return (
@@ -212,6 +232,9 @@ const Home = () => {
           todos={todos}
           setTodos={setTodos}
         />
+        <button className="todo-button" onClick={createHandler} type="submit">
+          <i className="fas fa-plus">Create</i>
+        </button>
         <TodoList
           setStatus={setStatus}
           setAmountOfScores={setAmountOfScores}
