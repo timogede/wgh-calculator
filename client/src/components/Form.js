@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
-// import { reRender } from "../Pages/Home";
 
 const Form = ({
+  rerender,
+  setRerender,
   calcScoreDifferential,
   setStatus,
   inputText,
@@ -57,6 +58,7 @@ const Form = ({
     setInputText("");
     setInputSlope("");
     setInputCourseRating("");
+    setRerender(rerender + 1);
   };
 
   const openElement = (e) => {

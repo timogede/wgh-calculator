@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import MyHeader from "../components/MyHeader.js";
 import MyIntro from "../components/MyIntro.js";
 import Form from "../components/Form.js";
@@ -6,14 +6,14 @@ import TodoList from "../components/TodoList.js";
 import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
-import allData from "../util.js";
+// import allData from "../util.js";
 import axios from "axios";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
-  const [todos, setTodos] = useState([""]);
+  const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
@@ -27,8 +27,7 @@ const Home = () => {
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
-  const [rerender, setRerender] = useState();
-  const renderNew = () => setRerender(Math.random());
+  const [rerender, setRerender] = useState(0);
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -60,35 +59,20 @@ const Home = () => {
 
     return scoreDifferential;
   };
-  const createHandler = () => {
-    setTimeout(() => {
-      console.log(todos[0]["scoreDifferential"]);
-      const newScore = {
-        scoreDifferential: todos[0]["scoreDifferential"],
-        text: todos[0]["text"],
-        slope: todos[0]["slope"],
-        courseRating: todos[0]["courseRating"],
-        completed: todos[0]["completed"],
-        id: todos[0]["id"],
-        iamgood: todos[0]["iamgood"],
-        myrankis: todos[0]["myrankis"],
-      };
-      axios.post("http://localhost:3333/create", newScore);
-    }, 5000);
-  };
+
   const saveLocalTodos = () => {
-    console.log("whaaaat" + todos[0]["scoreDifferential"]);
-    const newScore = {
-      scoreDifferential: todos[0]["scoreDifferential"],
-      text: todos[0]["text"],
-      slope: todos[0]["slope"],
-      courseRating: todos[0]["courseRating"],
-      completed: todos[0]["completed"],
-      id: todos[0]["id"],
-      iamgood: todos[0]["iamgood"],
-      myrankis: todos[0]["myrankis"],
-    };
-    axios.post("http://localhost:3333/create", newScore);
+    if (Object.keys(todos).length == 0) {
+      const newFulldata = {};
+      console.log("todo is empty I think");
+      axios.post("http://localhost:3333/create", newFulldata);
+      console.log(newFulldata);
+    } else {
+      console.log("I pushed todos to MongoDB");
+      const newFulldata = [...todos];
+
+      axios.post("http://localhost:3333/create", newFulldata);
+      console.log(newFulldata);
+    }
   };
 
   const getLocalTodos = () => {
@@ -168,7 +152,9 @@ const Home = () => {
   // }, []);
 
   useEffect(() => {
-    saveLocalTodos();
+    if (rerender) {
+      saveLocalTodos();
+    }
   }, [rerender]);
 
   useEffect(() => {
@@ -199,6 +185,8 @@ const Home = () => {
       <React.Fragment>
         <MyIntro />
         <Form
+          setRerender={setRerender}
+          rerender={rerender}
           calcScoreDifferential={calcScoreDifferential}
           setStatus={setStatus}
           setAmountOfScores={setAmountOfScores}
@@ -220,6 +208,8 @@ const Home = () => {
       <React.Fragment>
         <MyIntro />
         <Form
+          setRerender={setRerender}
+          rerender={rerender}
           calcScoreDifferential={calcScoreDifferential}
           setStatus={setStatus}
           setAmountOfScores={setAmountOfScores}
@@ -232,10 +222,9 @@ const Home = () => {
           todos={todos}
           setTodos={setTodos}
         />
-        <button className="todo-button" onClick={createHandler} type="submit">
-          <i className="fas fa-plus">Create</i>
-        </button>
         <TodoList
+          setRerender={setRerender}
+          rerender={rerender}
           setStatus={setStatus}
           setAmountOfScores={setAmountOfScores}
           calcScoreDifferential={calcScoreDifferential}

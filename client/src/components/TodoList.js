@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import Todo from "./Todo.js";
 
 const TodoList = ({
+  setRerender,
+  rerender,
   setStatus,
   setAmountOfScores,
   todos,
@@ -47,6 +49,8 @@ const TodoList = ({
             <tbody>
               {fullScores.map((todo, i) => (
                 <Todo
+                  setRerender={setRerender}
+                  rerender={rerender}
                   setAmountOfScores={setAmountOfScores}
                   calcScoreDifferential={todo.calcScoreDifferential}
                   iAmGood={todo.iamgood}
