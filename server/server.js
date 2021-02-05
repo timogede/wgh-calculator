@@ -3,14 +3,15 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import scoreRoute from "./routes/scoreRoute.js";
+// import scoreRoute from "./routes/scoreRoute.js";
+import fulldataRoute from "./routes/fulldataRoute.js";
 
 const app = express();
 dotenv.config();
 app.use(cors());
 app.use(express.json());
 
-app.use("/", scoreRoute);
+app.use("/", fulldataRoute);
 
 const CONNECTION_URL = process.env.CONNECTION_URL;
 const PORT = process.env.BACKENDPORT || 3333;

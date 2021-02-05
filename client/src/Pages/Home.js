@@ -28,6 +28,8 @@ const Home = () => {
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
+  const [fulldata, setFulldata] = useState([]);
+  const currentUserId = 111;
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -62,13 +64,19 @@ const Home = () => {
 
   const saveLocalTodos = () => {
     if (Object.keys(todos).length == 0) {
-      const newFulldata = {};
+      const newFulldata = {
+        user_id: currentUserId,
+        everything: todos,
+      };
       console.log("todo is empty I think");
       axios.post("http://localhost:3333/create", newFulldata);
       console.log(newFulldata);
     } else {
       console.log("I pushed todos to MongoDB");
-      const newFulldata = [...todos];
+      const newFulldata = {
+        user_id: currentUserId,
+        everything: todos,
+      };
 
       axios.post("http://localhost:3333/create", newFulldata);
       console.log(newFulldata);
@@ -146,10 +154,21 @@ const Home = () => {
     }
   };
 
-  // useEffect(() => {
-  //   // getLocalTodos();
-  //   setTodos(allData());
-  // }, []);
+  useEffect(() => {
+    // getLocalTodos();
+    // setTodos(allData());
+    fetch("/fulldata")
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+      })
+      .then((jsonRes) => {
+        const objectLength = Object.keys(jsonRes).length - 1;
+        setTodos(jsonRes[objectLength]["everything"]);
+        console.log(jsonRes);
+      });
+  }, []);
 
   useEffect(() => {
     if (rerender) {
