@@ -29,7 +29,7 @@ const Home = () => {
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
   const [fulldata, setFulldata] = useState([]);
-  const currentUserId = 111;
+  const currentUserId = 222;
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -70,8 +70,16 @@ const Home = () => {
     };
 
     axios.post("http://localhost:3333/create", newFulldata);
-    axios.delete("http://localhost:3333/delete-data", newFulldata);
     console.log(newFulldata);
+  };
+
+  const deleteSomething = () => {
+    const newFulldata = {
+      user_id: 222,
+      everything: todos,
+    };
+    axios.post("http://localhost:3333/update", newFulldata);
+    console.log("update");
   };
 
   const getLocalTodos = () => {
@@ -151,13 +159,19 @@ const Home = () => {
     fetch("/fulldata")
       .then((res) => {
         if (res.ok) {
+          console.log("res is ok");
           return res.json();
         }
       })
       .then((jsonRes) => {
-        const objectLength = Object.keys(jsonRes).length - 1;
-        setTodos(jsonRes[objectLength]["everything"]);
-        console.log(jsonRes);
+        if (Object.keys(jsonRes).length == 0) {
+          console.log("i fetched empty");
+          setTodos([]);
+        } else {
+          const objectLength = Object.keys(jsonRes).length - 1;
+          setTodos(jsonRes[objectLength]["everything"]);
+          console.log("i fetched something");
+        }
       });
   }, []);
 
@@ -232,6 +246,9 @@ const Home = () => {
           todos={todos}
           setTodos={setTodos}
         />
+        <button onClick={deleteSomething} value={"delete something"}>
+          Delete
+        </button>
         <TodoList
           setRerender={setRerender}
           rerender={rerender}
