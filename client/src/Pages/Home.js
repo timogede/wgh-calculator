@@ -63,24 +63,15 @@ const Home = () => {
   };
 
   const saveLocalTodos = () => {
-    if (Object.keys(todos).length == 0) {
-      const newFulldata = {
-        user_id: currentUserId,
-        everything: todos,
-      };
-      console.log("todo is empty I think");
-      axios.post("http://localhost:3333/create", newFulldata);
-      console.log(newFulldata);
-    } else {
-      console.log("I pushed todos to MongoDB");
-      const newFulldata = {
-        user_id: currentUserId,
-        everything: todos,
-      };
+    console.log("I pushed todos to MongoDB");
+    const newFulldata = {
+      user_id: currentUserId,
+      everything: todos,
+    };
 
-      axios.post("http://localhost:3333/create", newFulldata);
-      console.log(newFulldata);
-    }
+    axios.post("http://localhost:3333/create", newFulldata);
+    axios.delete("http://localhost:3333/delete-data", newFulldata);
+    console.log(newFulldata);
   };
 
   const getLocalTodos = () => {
