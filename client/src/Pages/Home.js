@@ -8,6 +8,7 @@ import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
 // import allData from "../util.js";
 import axios from "axios";
+import { features } from "process";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
@@ -29,7 +30,10 @@ const Home = () => {
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
   const [fulldata, setFulldata] = useState([]);
-  const currentUserId = 222;
+
+  //This has to be changed
+  const currentlyLoggedIn = 333;
+  const url = "http://localhost:3333";
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -65,7 +69,7 @@ const Home = () => {
   const saveLocalTodos = () => {
     console.log("I pushed todos to MongoDB");
     const newFulldata = {
-      user_id: currentUserId,
+      user_id: 333,
       everything: todos,
     };
 
@@ -73,9 +77,9 @@ const Home = () => {
     console.log(newFulldata);
   };
 
-  const deleteSomething = () => {
+  const saveToCloud = () => {
     const newFulldata = {
-      user_id: 222,
+      user_id: currentlyLoggedIn,
       everything: todos,
     };
     axios.post("http://localhost:3333/update", newFulldata);
@@ -154,30 +158,24 @@ const Home = () => {
   };
 
   useEffect(() => {
-    // getLocalTodos();
-    // setTodos(allData());
-    fetch("/fulldata")
-      .then((res) => {
-        if (res.ok) {
-          console.log("res is ok");
-          return res.json();
-        }
-      })
-      .then((jsonRes) => {
-        if (Object.keys(jsonRes).length == 0) {
-          console.log("i fetched empty");
-          setTodos([]);
-        } else {
-          const objectLength = Object.keys(jsonRes).length - 1;
-          setTodos(jsonRes[objectLength]["everything"]);
-          console.log("i fetched something");
-        }
-      });
+    const fetchData = async () => {
+      const showMe = await axios.get(`${url}/fulldata/${currentlyLoggedIn}`);
+
+      console.log("fetchedData: " + showMe.data);
+      if (showMe.data == null) {
+        console.log("i asyncly fetched empty");
+        setTodos([]);
+      } else {
+        setTodos(showMe.data.everything);
+        console.log("i asyncly fetched something");
+      }
+    };
+    fetchData();
   }, []);
 
   useEffect(() => {
     if (rerender) {
-      saveLocalTodos();
+      saveToCloud();
     }
   }, [rerender]);
 
@@ -246,9 +244,6 @@ const Home = () => {
           todos={todos}
           setTodos={setTodos}
         />
-        <button onClick={deleteSomething} value={"delete something"}>
-          Delete
-        </button>
         <TodoList
           setRerender={setRerender}
           rerender={rerender}
