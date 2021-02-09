@@ -1,6 +1,7 @@
 import express from "express";
 const router = express.Router();
 import Fulldata from "../models/fulldataModel.js";
+import verify from "./verifyToken.js";
 
 // create
 router.route("/create").post((req, res) => {
@@ -59,6 +60,23 @@ router.route("/delete-data").delete((req, res) => {
 });
 
 //fetch new?
+// router.route("/fulldata/:id").get((req, res) => {
+//   const user_id = req.params.id;
+
+//   console.log(user_id);
+
+//   Fulldata.findOne({ user_id: user_id }, (error, foundFulldata) => {
+//     console.log(foundFulldata);
+//   })
+//     .then((foundFulldata) => res.json(foundFulldata))
+//     .catch((error) => {
+//       res.status(400).json({
+//         error: error,
+//       });
+//     });
+// });
+
+//fetch with auth
 router.route("/fulldata/:id").get((req, res) => {
   const user_id = req.params.id;
 
@@ -73,24 +91,6 @@ router.route("/fulldata/:id").get((req, res) => {
         error: error,
       });
     });
-
-  // Fulldata.findById(user_id)
-  //   .then((res) => {
-  //     if (res.ok) {
-  //       console.log("i will fetch");
-  //       return res.json();
-  //     }
-  //   })
-  //   .then((jsonRes) => {
-  //     if (Object.keys(jsonRes).length == 0) {
-  //       console.log("i fetched empty");
-  //       setTodos([]);
-  //     } else {
-  //       const objectLength = Object.keys(jsonRes).length - 1;
-  //       setTodos(jsonRes[objectLength]["everything"]);
-  //       console.log("i fetched something");
-  //     }
-  //   });
 });
 
 export default router;
