@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import Fulldata from "../models/fulldataModel.js";
-import verify from "./verifyToken.js";
+import { auth } from "./verifyToken.js";
 
 // create
 router.route("/create").post((req, res) => {
@@ -77,10 +77,11 @@ router.route("/delete-data").delete((req, res) => {
 // });
 
 //fetch with auth
-router.route("/fulldata/:id").get((req, res) => {
+router.route("/fulldata/:id").get(auth, (req, res) => {
   const user_id = req.params.id;
 
-  console.log(user_id);
+  console.log("user id is: " + user_id);
+  console.log("user with this auth token is: " + JSON.stringify(req.user));
 
   Fulldata.findOne({ user_id: user_id }, (error, foundFulldata) => {
     console.log(foundFulldata);
