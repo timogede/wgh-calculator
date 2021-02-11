@@ -24,8 +24,22 @@ const Registerlogin = () => {
       email: data.email,
       password: data.password,
     };
+    email: "timo@timo.timo"
+name: "timotimo"
+password: "timotimo"
+{
+  "name": "testname",
+  "email": "test@testtest.com",
+  "password": "1234567"
+}
+const newUser = new User({
+   name: data.username,
+      email: data.email,
+      password: data.password,
+});
+
     console.log(newUser);
-    axios.post("http://localhost:3333/user/register", data);
+    axios.post("http://localhost:3333/user/register", newUser);
   };
   const submitForm = (data) => {
     console.log("123");
