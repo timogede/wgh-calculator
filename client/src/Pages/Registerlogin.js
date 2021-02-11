@@ -1,34 +1,34 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { joiResolver } from "@hookform/resolvers/joi";
+import Joi from "joi";
+
+const registerSchema = Joi.object({
+  username: Joi.string().min(6).required(),
+  email: Joi.string()
+    .min(6)
+    .required()
+    .email({ tlds: { allow: false } }),
+  password: Joi.string().min(6).required(),
+});
 
 const Registerlogin = () => {
-  const schema = yup.object().shape({
-    name: yup
-      .string()
-      .min(6)
-      .max(255)
-      .required("Bitte gib einen Nutzernamen an!"),
-    email: yup
-      .string()
-      .min(6)
-      .max(255)
-      .email()
-      .required("Bitte gib eine E-Mail an!"),
-    password: yup
-      .string()
-      .min(6)
-      .max(30)
-      .required("Bitte gib ein Passwort an!"),
-    confirmPassword: yup.string().oneOf([yup.ref("password"), null]),
+  const { register, handleSubmit, watch, errors } = useForm({
+    resolver: joiResolver(registerSchema),
   });
-  const { register, handleSubmit, errors } = useForm({
-    resolver: yupResolver(schema),
-  });
-
+  const onSubmit = (data) => {
+    console.log(data);
+    const newUser = {
+      name: data.username,
+      email: data.email,
+      password: data.password,
+    };
+    console.log(newUser);
+    axios.post("http://localhost:3333/user/register", data);
+  };
   const submitForm = (data) => {
+    console.log("123");
     console.log(data);
   };
   const registerHandler = () => {
@@ -44,39 +44,28 @@ const Registerlogin = () => {
         <div className="registerlogin__inside container__inside">
           <div className="title">Anmelden</div>
           <div className="inputs">
-            <form onSubmit={handleSubmit(submitForm)}>
+            <form onSubmit={handleSubmit(onSubmit)}>
               <input
                 type="text"
-                name="name"
+                name="username"
                 ref={register}
                 placeholder="Nutzername"
               />
-              <p> {errors.name?.message} </p>
+              {errors.username && <span>my custom error</span>}
               <input
                 type="text"
                 name="email"
                 placeholder="E-Mail"
                 ref={register}
               />
-              <p> {errors.email?.message} </p>
+
               <input
                 type="password"
                 name="password"
                 placeholder="Passwort"
                 ref={register}
               />
-              <p> {errors.password?.message} </p>
-              <input
-                type="password"
-                name="confirmPassword"
-                placeholder="Passwort bestätigen"
-                ref={register}
-              />
-              <p>
-                {" "}
-                {errors.confirmPassword &&
-                  "Die Passwörter müssen übereinstimmen!"}{" "}
-              </p>
+
               <input type="submit" id="submit" />
             </form>
           </div>
