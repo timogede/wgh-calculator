@@ -1,29 +1,29 @@
 import express from "express";
 const router = express.Router();
 import Fulldata from "../models/fulldataModel.js";
+import User from "../models/userModel.js";
 import { auth } from "./verifyToken.js";
 
 // create
-router.route("/create").post((req, res) => {
-  const user_id = req.body.user_id;
-  const everything = req.body.everything;
-  const newFulldata = new Fulldata({
-    user_id,
-    everything,
-  });
-  newFulldata.save();
-});
+// router.route("/create").post((req, res) => {
+//   const user_id = req.body.user_id;
+//   const everything = req.body.everything;
+//   const newFulldata = new Fulldata({
+//     user_id,
+//     everything,
+//   });
+//   newFulldata.save();
+// });
 
 // update
-router.route("/update").post((req, res) => {
-  const user_id = req.body.user_id;
+router.route("/update").post(auth, (req, res) => {
   const everything = req.body.everything;
-  Fulldata.findOneAndUpdate(
+  console.log("everything is:" + JSON.stringify(everything));
+  User.findOneAndUpdate(
     {
-      user_id: user_id,
+      _id: req.user._id,
     },
     {
-      user_id: user_id,
       everything: everything,
     },
     {
@@ -37,11 +37,6 @@ router.route("/update").post((req, res) => {
       }
     }
   );
-});
-
-//fetch with api call .fetch()
-router.route("/fulldata").get((req, res) => {
-  Fulldata.find().then((foundFulldata) => res.json(foundFulldata));
 });
 
 //delete
@@ -59,31 +54,11 @@ router.route("/delete-data").delete((req, res) => {
     });
 });
 
-//fetch new?
-// router.route("/fulldata/:id").get((req, res) => {
-//   const user_id = req.params.id;
-
-//   console.log(user_id);
-
-//   Fulldata.findOne({ user_id: user_id }, (error, foundFulldata) => {
-//     console.log(foundFulldata);
-//   })
-//     .then((foundFulldata) => res.json(foundFulldata))
-//     .catch((error) => {
-//       res.status(400).json({
-//         error: error,
-//       });
-//     });
-// });
-
 //fetch with auth
-router.route("/fulldata/:id").get(auth, (req, res) => {
-  const user_id = req.params.id;
-
-  console.log("user id is: " + user_id);
+router.route("/fulldata").get(auth, (req, res) => {
   console.log("user with this auth token is: " + JSON.stringify(req.user));
 
-  Fulldata.findOne({ user_id: user_id }, (error, foundFulldata) => {
+  User.findOne({ _id: req.user._id }, (error, foundFulldata) => {
     console.log(foundFulldata);
   })
     .then((foundFulldata) => res.json(foundFulldata))

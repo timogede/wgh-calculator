@@ -9,6 +9,7 @@ import Faq from "../components/Faq.js";
 // import allData from "../util.js";
 import axios from "axios";
 import { features } from "process";
+import Registerlogin from "./Registerlogin.js";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
@@ -66,20 +67,19 @@ const Home = () => {
     return scoreDifferential;
   };
 
-  const saveLocalTodos = () => {
-    console.log("I pushed todos to MongoDB");
-    const newFulldata = {
-      user_id: 333,
-      everything: todos,
-    };
+  // const saveLocalTodos = () => {
+  //   console.log("I pushed todos to MongoDB");
+  //   const newFulldata = {
+  //     user_id: 333,
+  //     everything: todos,
+  //   };
 
-    axios.post("http://localhost:3333/create", newFulldata);
-    console.log(newFulldata);
-  };
+  //   axios.post("http://localhost:3333/create", newFulldata);
+  //   console.log(newFulldata);
+  // };
 
   const saveToCloud = () => {
     const newFulldata = {
-      user_id: currentlyLoggedIn,
       everything: todos,
     };
     axios.post("http://localhost:3333/update", newFulldata);
@@ -159,9 +159,9 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const showMe = await axios.get(`${url}/fulldata/${currentlyLoggedIn}`);
+      const showMe = await axios.get(`${url}/fulldata`);
 
-      console.log("fetchedData: " + showMe.data);
+      console.log("fetchedData: " + JSON.stringify(showMe.data));
       if (showMe.data == null) {
         console.log("i asyncly fetched empty");
         setTodos([]);
@@ -205,6 +205,7 @@ const Home = () => {
   if (Object.keys(todos).length === 0) {
     return (
       <React.Fragment>
+        <Registerlogin />
         <MyIntro />
         <Form
           setRerender={setRerender}
@@ -228,6 +229,7 @@ const Home = () => {
   } else {
     return (
       <React.Fragment>
+        <Registerlogin />
         <MyIntro />
         <Form
           setRerender={setRerender}

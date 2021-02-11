@@ -8,6 +8,8 @@ import {
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
+//register
+
 router.route("/register").post(async (req, res) => {
   //Validate before creating user
   const { error } = registerValidation(req.body);
@@ -51,7 +53,11 @@ router.route("/login").post(async (req, res) => {
   if (!validPass) return res.status(400).send("Invalid password");
 
   //Create and assign token
-  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+  const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
+    expiresIn: 300,
+  });
+  // const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
+
   res.header("auth-token", token).send();
 });
 
