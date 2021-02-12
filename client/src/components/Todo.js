@@ -12,7 +12,6 @@ const Todo = ({
   courseRating,
   id,
   todos,
-  sortedTodos,
   setTodos,
   todo,
   order,
@@ -24,9 +23,6 @@ const Todo = ({
   };
 
   const calcScoreDifferential = (sc, sl, cr) => {
-    // let sc = give.text;
-    // let sl = give.slope;
-    // let cr = give.courseRating;
     let standardSlope = 113;
     let scoreDifferential = (((sc - cr) * standardSlope) / sl).toFixed(1);
 
@@ -56,16 +52,13 @@ const Todo = ({
     let slopeInputValue = slopeInput.value;
 
     //get the clicked elements current values so you can put them as kind of a placeholder to the inputs
-    let currentTextInputValue = todo.text;
-    let currentCrInputValue = todo.crInput;
-    let currentSlopeInputValue = todo.slope;
     const outputArray = [...todos];
 
     //edit_mode toggle off
     if (clickedElement.classList.contains("edit_mode")) {
       clickedElement.classList.remove("edit_mode");
       for (let x = 0; x < outputArray.length; x++) {
-        if (outputArray[x]["id"] == clickedKey) {
+        if (outputArray[x]["id"] === clickedKey) {
           outputArray[x]["text"] = textInputValue;
           outputArray[x]["courseRating"] = crInputValue;
           outputArray[x]["slope"] = slopeInputValue;

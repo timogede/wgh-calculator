@@ -93,6 +93,7 @@ const Faq = () => {
               <b>
                 <a
                   target="_blank"
+                  rel="noreferrer"
                   href="https://www.paypal.com/paypalme/timogede/5"
                 >
                   virtuellen Kaffee{" "}
@@ -132,7 +133,11 @@ const Faq = () => {
             </p>
             <p>
               <b>
-                <a target="_blank" href={handicapRegelnDownload}>
+                <a
+                  target="_blank"
+                  rel="noreferrer"
+                  href={handicapRegelnDownload}
+                >
                   DGV Handicap Regeln 2021 PDF
                 </a>
               </b>

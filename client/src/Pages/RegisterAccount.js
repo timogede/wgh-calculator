@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
@@ -13,45 +13,37 @@ const registerSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-const Registerlogin = () => {
-  const { register, handleSubmit, watch, errors } = useForm({
+const RegisterAccount = () => {
+  const [duplicateError, setDuplicateError] = useState(false);
+  const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(registerSchema),
   });
   const onSubmit = (data) => {
-    console.log(data);
+    setDuplicateError(false);
     const newUser = {
       name: data.username,
       email: data.email,
       password: data.password,
     };
-    email: "timo@timo.timo"
-name: "timotimo"
-password: "timotimo"
-{
-  "name": "testname",
-  "email": "test@testtest.com",
-  "password": "1234567"
-}
-const newUser = new User({
-   name: data.username,
-      email: data.email,
-      password: data.password,
-});
 
-    console.log(newUser);
-    axios.post("http://localhost:3333/user/register", newUser);
+    axios
+      .post("http://localhost:3333/user/register", newUser)
+      .then(function (response) {
+        console.log("worked");
+      })
+      .catch(function (error) {
+        const errorMessage = error.response.data;
+        if (errorMessage === "duplicate_mail") {
+          setDuplicateError("Ein Account mit dieser E-Mail besteht bereits!");
+        }
+        if (errorMessage === "duplicate_username") {
+          setDuplicateError(
+            "Ein Account mit diesem Nutzernamen besteht bereits!"
+          );
+        }
+      });
   };
-  const submitForm = (data) => {
-    console.log("123");
-    console.log(data);
-  };
-  const registerHandler = () => {
-    const registerUser = {
-      name: "",
-    };
-    axios.get();
-  };
-  const loginHandler = () => {};
+
   return (
     <React.Fragment>
       <div className="registerlogin container">
@@ -80,7 +72,8 @@ const newUser = new User({
                 ref={register}
               />
 
-              <input type="submit" id="submit" />
+              <input type="submit" id="submit_account" value="Registrieren" />
+              {duplicateError && <span>{duplicateError}</span>}
             </form>
           </div>
         </div>
@@ -89,4 +82,4 @@ const newUser = new User({
   );
 };
 
-export default Registerlogin;
+export default RegisterAccount;

@@ -1,5 +1,4 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import { HashLink } from "react-router-hash-link";
 
 const Form = ({
@@ -15,8 +14,6 @@ const Form = ({
   inputCourseRating,
   todos,
   setTodos,
-  setAmountOfScores,
-  scoreDifferential,
 }) => {
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
@@ -49,7 +46,6 @@ const Form = ({
         text: inputText,
         slope: inputSlope,
         courseRating: inputCourseRating,
-        scoreDifferential: scoreDifferential,
         completed: false,
         id: "key_" + (Math.random() * 100000).toFixed(0),
       },
@@ -63,13 +59,13 @@ const Form = ({
 
   const openElement = (e) => {
     const clickedId = e.target.id;
-    if (clickedId == "faq-score-trigger") {
+    if (clickedId === "faq-score-trigger") {
       document.getElementById("faq-score").classList.add("active");
     }
-    if (clickedId == "faq-cr-trigger") {
+    if (clickedId === "faq-cr-trigger") {
       document.getElementById("faq-cr").classList.add("active");
     }
-    if (clickedId == "faq-slope-trigger") {
+    if (clickedId === "faq-slope-trigger") {
       document.getElementById("faq-slope").classList.add("active");
     }
   };

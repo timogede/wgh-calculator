@@ -765,6 +765,7 @@ const Datenschutz = () => {
             <a
               href="http://tools.google.com/dlpage/gaoptout?hl=de"
               target="_blank"
+              rel="noreferrer"
             >
               tools.google.com/dlpage/gaoptout
             </a>
@@ -788,6 +789,7 @@ const Datenschutz = () => {
             <a
               href="https://www.privacyshield.gov/EU-US-Framework"
               target="_blank"
+              rel="noreferrer"
             >
               www.privacyshield.gov/EU-US-Framework
             </a>
@@ -803,6 +805,7 @@ const Datenschutz = () => {
             <a
               href="http://www.google.com/analytics/terms/de.html"
               target="_blank"
+              rel="noreferrer"
             >
               www.google.com/analytics/terms/de.html
             </a>
@@ -810,6 +813,7 @@ const Datenschutz = () => {
             <a
               href="http://www.google.com/intl/de/analytics/learn/privacy.html"
               target="_blank"
+              rel="noreferrer"
             >
               www.google.com/intl/de/analytics/learn/privacy.html
             </a>
@@ -817,6 +821,7 @@ const Datenschutz = () => {
             <a
               href="http://www.google.de/intl/de/policies/privacy"
               target="_blank"
+              rel="noreferrer"
             >
               www.google.de/intl/de/policies/privacy
             </a>

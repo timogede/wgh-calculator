@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MyHeader from "./components/MyHeader.js";
 import MyFooter from "./components/MyFooter.js";
-import { Route, BrowserRouter as Router, Switch, Link } from "react-router-dom";
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./Pages/Home";
 import Impressum from "./Pages/Impressum";
 import Datenschutz from "./Pages/Datenschutz";

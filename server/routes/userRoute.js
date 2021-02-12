@@ -15,9 +15,13 @@ router.route("/register").post(async (req, res) => {
   const { error } = registerValidation(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
-  //Check if user already exists
+  //Check if mail already exists
   const emailExist = await User.findOne({ email: req.body.email });
-  if (emailExist) return res.status(400).send("Email already exists");
+  if (emailExist) return res.status(400).send("duplicate_mail");
+
+  //Check if username already exists
+  const usernameExist = await User.findOne({ name: req.body.name });
+  if (usernameExist) return res.status(400).send("duplicate_username");
 
   //Hash passwords
   const salt = await bcrypt.genSalt(10);
@@ -33,7 +37,9 @@ router.route("/register").post(async (req, res) => {
     const savedUser = await user.save();
     res.send({ user: user._id });
   } catch (error) {
-    res.status(400).send(error);
+    res
+      .status(400)
+      .send(error + "something didnt work with saving the received user data");
   }
 });
 

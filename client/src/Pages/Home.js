@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
-import MyHeader from "../components/MyHeader.js";
+import React, { useState, useEffect } from "react";
 import MyIntro from "../components/MyIntro.js";
 import Form from "../components/Form.js";
 import TodoList from "../components/TodoList.js";
 import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
-// import allData from "../util.js";
 import axios from "axios";
-import { features } from "process";
-import Registerlogin from "./Registerlogin.js";
+import RegisterAccount from "./RegisterAccount.js";
+import LoginAccount from "./LoginAccount.js";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
@@ -30,10 +28,10 @@ const Home = () => {
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
-  const [fulldata, setFulldata] = useState([]);
+  // const [fulldata, setFulldata] = useState([]);
 
   //This has to be changed
-  const currentlyLoggedIn = 333;
+  // const currentlyLoggedIn = 333;
   const url = "http://localhost:3333";
 
   const scoreCounter = todos.reduce((counter, obj) => {
@@ -78,14 +76,6 @@ const Home = () => {
   //   console.log(newFulldata);
   // };
 
-  const saveToCloud = () => {
-    const newFulldata = {
-      everything: todos,
-    };
-    axios.post("http://localhost:3333/update", newFulldata);
-    console.log("update");
-  };
-
   const getLocalTodos = () => {
     if (localStorage.getItem("todos") === null) {
       localStorage.setItem("todos", JSON.stringify(todos));
@@ -123,7 +113,7 @@ const Home = () => {
       let searchId = cuttedSortedArray[x]["id"];
 
       for (let i = 0; i < fullScoresArray.length; i++) {
-        if (fullScoresArray[i]["id"] == searchId) {
+        if (fullScoresArray[i]["id"] === searchId) {
           fullScoresArray[i]["iamgood"] = true;
           fullScoresArray[i]["myrankis"] = x + 1;
         }
@@ -174,6 +164,13 @@ const Home = () => {
   }, []);
 
   useEffect(() => {
+    const saveToCloud = () => {
+      const newFulldata = {
+        everything: todos,
+      };
+      axios.post("http://localhost:3333/update", newFulldata);
+      console.log("update");
+    };
     if (rerender) {
       saveToCloud();
     }
@@ -205,7 +202,8 @@ const Home = () => {
   if (Object.keys(todos).length === 0) {
     return (
       <React.Fragment>
-        <Registerlogin />
+        <RegisterAccount />
+        <LoginAccount />
         <MyIntro />
         <Form
           setRerender={setRerender}
@@ -229,7 +227,8 @@ const Home = () => {
   } else {
     return (
       <React.Fragment>
-        <Registerlogin />
+        <RegisterAccount />
+        <LoginAccount />
         <MyIntro />
         <Form
           setRerender={setRerender}
