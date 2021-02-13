@@ -4,25 +4,29 @@ import React, { useState } from "react";
 const LoginAccount = () => {
   const [loginError, setLoginError] = useState(false);
 
-  const onSubmit = (data) => {
+  const onSubmit = (event) => {
+    const data = new FormData(event.target);
+    event.preventDefault();
     setLoginError(false);
+    console.log();
     const newUser = {
-      email: data.email,
-      password: data.password,
+      email: data.get("email"),
+      password: data.get("password"),
     };
 
     axios
-      .post("http://localhost:3333/user/register", newUser)
+      .post("http://localhost:3333/user/login", newUser)
       .then(function (response) {
-        console.log("worked");
+        console.log("loggedIn and auth set");
+        localStorage.setItem();
       })
       .catch(function (error) {
         const errorMessage = error.response.data;
-        if (errorMessage === "duplicate_mail") {
-          setLoginError("Ein Account mit dieser E-Mail besteht bereits!");
+        if (errorMessage === "error_mail") {
+          setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
         }
-        if (errorMessage === "duplicate_username") {
-          setLoginError("Ein Account mit diesem Nutzernamen besteht bereits!");
+        if (errorMessage === "error_password") {
+          setLoginError("Das Passwort ist falsch!");
         }
       });
   };
@@ -34,7 +38,7 @@ const LoginAccount = () => {
           <div className="title">Login</div>
           <div className="inputs">
             <form onSubmit={onSubmit}>
-              <input type="text" name="username" placeholder="Nutzername" />
+              <input type="text" name="email" placeholder="E-Mail" />
               <input type="password" name="password" placeholder="Passwort" />
               <input type="submit" id="submit_login" value="Login" />
               {loginError && <span>{loginError}</span>}

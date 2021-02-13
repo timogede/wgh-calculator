@@ -48,19 +48,20 @@ router.route("/register").post(async (req, res) => {
 router.route("/login").post(async (req, res) => {
   //Validate before login sherlock
   const { error } = loginValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error)
+    return res.status(400).send("this error:" + error.details[0].message);
 
   //Check if email exists
   const user = await User.findOne({ email: req.body.email });
-  if (!user) return res.status(400).send("Email does not exist");
+  if (!user) return res.status(400).send("error_mail");
 
   //Password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
-  if (!validPass) return res.status(400).send("Invalid password");
+  if (!validPass) return res.status(400).send("error_password");
 
   //Create and assign token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
-    expiresIn: 300,
+    expiresIn: 7200,
   });
   // const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 

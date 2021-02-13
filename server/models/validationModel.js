@@ -15,7 +15,10 @@ export const registerValidation = (data) => {
 
 export const loginValidation = (data) => {
   const loginSchema = Joi.object({
-    email: Joi.string().min(6).required().email(),
+    email: Joi.string()
+      .min(6)
+      .required()
+      .email({ tlds: { allow: false } }),
     password: Joi.string().min(6).required(),
   });
   return loginSchema.validate(data);
