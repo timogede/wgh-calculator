@@ -17,17 +17,18 @@ const LoginAccount = () => {
     axios
       .post("http://localhost:3333/user/login", newUser)
       .then(function (response) {
-        console.log("loggedIn and auth set");
-        localStorage.setItem();
+        console.log("response: " + response.data["auth-token"]);
+        // localStorage.setItem("token" + response.data.token);
       })
       .catch(function (error) {
-        const errorMessage = error.response.data;
-        if (errorMessage === "error_mail") {
-          setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
-        }
-        if (errorMessage === "error_password") {
-          setLoginError("Das Passwort ist falsch!");
-        }
+        console.log("error: " + error.response.data);
+        // const errorMessage = error.response.data;
+        // if (errorMessage === "error_mail") {
+        //   setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
+        // }
+        // if (errorMessage === "error_password") {
+        //   setLoginError("Das Passwort ist falsch!");
+        // }
       });
   };
 
