@@ -16,19 +16,20 @@ const LoginAccount = () => {
 
     axios
       .post("http://localhost:3333/user/login", newUser)
-      .then(function (response) {
-        console.log("response: " + response.data["auth-token"]);
-        // localStorage.setItem("token" + response.data.token);
+      .then((response) => {
+        const authToken = response.data["auth-token"];
+        console.log("set to localStorage: " + authToken);
+        localStorage.setItem("auth-token", authToken);
       })
-      .catch(function (error) {
-        console.log("error: " + error.response.data);
-        // const errorMessage = error.response.data;
-        // if (errorMessage === "error_mail") {
-        //   setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
-        // }
-        // if (errorMessage === "error_password") {
-        //   setLoginError("Das Passwort ist falsch!");
-        // }
+      .catch((error) => {
+        console.log("error: " + error);
+        const errorMessage = error;
+        if (errorMessage === "error_mail") {
+          setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
+        }
+        if (errorMessage === "error_password") {
+          setLoginError("Das Passwort ist falsch!");
+        }
       });
   };
 
