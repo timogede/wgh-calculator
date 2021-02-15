@@ -9,7 +9,6 @@ import LoginAccount from "./Pages/LoginAccount";
 import RegisterAccount from "./Pages/RegisterAccount";
 
 const App = () => {
-  const [loginStatus, setLoginStatus] = useState(false);
   return (
     <Router>
       <React.Fragment>

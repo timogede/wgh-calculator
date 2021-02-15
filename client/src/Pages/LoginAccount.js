@@ -1,8 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { login, logout } from "../actions";
 
 const LoginAccount = () => {
+  const isLogged = useSelector((state) => state.loggedReducer);
   const [loginError, setLoginError] = useState(false);
+  const dispatch = useDispatch();
 
   const onSubmit = (event) => {
     const data = new FormData(event.target);
@@ -20,10 +24,11 @@ const LoginAccount = () => {
         const authToken = response.data["auth-token"];
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
+        dispatch(login());
       })
       .catch((error) => {
-        console.log("error: " + error);
-        const errorMessage = error;
+        console.log("error: " + error.response.data);
+        const errorMessage = error.response.data;
         if (errorMessage === "error_mail") {
           setLoginError("Ein Account mit dieser E-Mail besteht nicht!");
         }
@@ -44,7 +49,9 @@ const LoginAccount = () => {
               <input type="password" name="password" placeholder="Passwort" />
               <input type="submit" id="submit_login" value="Login" />
               {loginError && <span>{loginError}</span>}
+              {isLogged ? <h3>isLogged</h3> : "isnotLogged"}
             </form>
+            <button onClick={() => dispatch(logout())}>Logout</button>
           </div>
         </div>
       </div>
