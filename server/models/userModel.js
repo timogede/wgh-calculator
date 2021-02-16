@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema({
   },
   everything: {
     type: Array,
-    default: {},
   },
 });
 

@@ -1,4 +1,6 @@
 import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTodos } from "../actions/index.js";
 
 const Todo = ({
   setRerender,
@@ -11,14 +13,17 @@ const Todo = ({
   slope,
   courseRating,
   id,
-  todos,
-  setTodos,
+  // todos,
+  // setTodos,
   todo,
   order,
   scoreDifferential,
 }) => {
+  const todos = useSelector((state) => state.todosReducer);
+  const dispatch = useDispatch();
   const deleteHandler = () => {
-    setTodos(todos.filter((lol) => lol.id !== todo.id));
+    // setTodos(todos.filter((lol) => lol.id !== todo.id));
+    dispatch(changeTodos(todos.filter((lol) => lol.id !== todo.id)));
     setRerender(rerender + 1);
   };
 
@@ -77,7 +82,8 @@ const Todo = ({
 
       console.log(outputArray);
       setAmountOfScores(amountOfScores);
-      setTodos(outputArray);
+      // setTodos(outputArray);
+      dispatch(changeTodos(outputArray));
       setRerender(rerender + 1);
 
       //edit_mode toggle on

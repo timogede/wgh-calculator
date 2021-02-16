@@ -1,10 +1,11 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout } from "../actions";
+import { login, logout, changeTodos } from "../actions";
 
 const LoginAccount = () => {
   const isLogged = useSelector((state) => state.loggedReducer);
+  const todos = useSelector((state) => state.todosReducer);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
 
@@ -22,9 +23,12 @@ const LoginAccount = () => {
       .post("http://localhost:3333/user/login", newUser)
       .then((response) => {
         const authToken = response.data["auth-token"];
+        const todosFromCloud = response.data.userdata.scoredata;
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
-        dispatch(login());
+        console.log(JSON.stringify(todosFromCloud));
+        dispatch(changeTodos(todosFromCloud), login());
+        // dispatch(login());
       })
       .catch((error) => {
         console.log("error: " + error.response.data);
@@ -36,6 +40,12 @@ const LoginAccount = () => {
           setLoginError("Das Passwort ist falsch!");
         }
       });
+  };
+
+  const logOutHandler = () => {
+    dispatch(logout());
+    dispatch(changeTodos([]));
+    localStorage.removeItem("auth-token");
   };
 
   return (
@@ -51,7 +61,7 @@ const LoginAccount = () => {
               {loginError && <span>{loginError}</span>}
               {isLogged ? <h3>isLogged</h3> : "isnotLogged"}
             </form>
-            <button onClick={() => dispatch(logout())}>Logout</button>
+            <button onClick={logOutHandler}>Logout</button>
           </div>
         </div>
       </div>

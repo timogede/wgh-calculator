@@ -1,17 +1,21 @@
 import React from "react";
 import Todo from "./Todo.js";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTodos } from "../actions/index.js";
 
 const TodoList = ({
   setRerender,
   rerender,
   setStatus,
   setAmountOfScores,
-  todos,
-  setTodos,
+  // todos,
+  // setTodos,
   sortedTodos,
   fullScores,
   calcScoreDifferential,
 }) => {
+  const todos = useSelector((state) => state.todosReducer);
+  const dispatch = useDispatch();
   const testFunction = () => {
     return "ok";
   };
@@ -63,8 +67,8 @@ const TodoList = ({
                   courseRating={todo.courseRating}
                   key={todo.id}
                   id={todo.id}
-                  todos={todos}
-                  setTodos={setTodos}
+                  // todos={todos}
+                  // setTodos={setTodos}
                   todo={todo}
                   sortedTodos={sortedTodos}
                 />

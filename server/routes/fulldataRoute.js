@@ -31,9 +31,9 @@ router.route("/update").post(auth, (req, res) => {
     },
     (error, data) => {
       if (error) {
-        console.log(error);
+        console.log("the error: " + error);
       } else {
-        console.log(data);
+        console.log("the data: " + data);
       }
     }
   );
@@ -63,6 +63,7 @@ router.route("/fulldata").get(auth, (req, res) => {
   })
     .then((foundFulldata) => res.json(foundFulldata))
     .catch((error) => {
+      console.log(error);
       res.status(400).json({
         error: error,
       });

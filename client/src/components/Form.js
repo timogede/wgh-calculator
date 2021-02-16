@@ -1,5 +1,7 @@
 import React from "react";
 import { HashLink } from "react-router-hash-link";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTodos } from "../actions/index.js";
 
 const Form = ({
   rerender,
@@ -12,9 +14,11 @@ const Form = ({
   setInputSlope,
   setInputCourseRating,
   inputCourseRating,
-  todos,
-  setTodos,
+  // todos,
+  // setTodos,
 }) => {
+  const todos = useSelector((state) => state.todosReducer);
+  const dispatch = useDispatch();
   const inputTextHandler = (e) => {
     setInputText(e.target.value);
   };
@@ -39,17 +43,19 @@ const Form = ({
       xArray.shift();
     }
 
-    setTodos([
-      ...xArray,
-      {
-        scoreDifferential: scoreDifferential,
-        text: inputText,
-        slope: inputSlope,
-        courseRating: inputCourseRating,
-        completed: false,
-        id: "key_" + (Math.random() * 100000).toFixed(0),
-      },
-    ]);
+    dispatch(
+      changeTodos([
+        ...xArray,
+        {
+          scoreDifferential: scoreDifferential,
+          text: inputText,
+          slope: inputSlope,
+          courseRating: inputCourseRating,
+          completed: false,
+          id: "key_" + (Math.random() * 100000).toFixed(0),
+        },
+      ])
+    );
 
     setInputText("");
     setInputSlope("");

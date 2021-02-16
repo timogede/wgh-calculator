@@ -65,7 +65,13 @@ router.route("/login").post(async (req, res) => {
   });
   // const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
-  res.send({ "auth-token": token });
+  res.status(200).json({
+    "auth-token": token,
+    userdata: {
+      username: user.name,
+      scoredata: user.everything,
+    },
+  });
 });
 
 export default router;

@@ -8,12 +8,15 @@ import Faq from "../components/Faq.js";
 import axios from "axios";
 import RegisterAccount from "./RegisterAccount.js";
 import LoginAccount from "./LoginAccount.js";
+import loggedReducer from "../reducers/isLogged.js";
+import { useSelector, useDispatch } from "react-redux";
+import { changeTodos } from "../actions/index.js";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
   const [inputSlope, setInputSlope] = useState("");
   const [inputCourseRating, setInputCourseRating] = useState("");
-  const [todos, setTodos] = useState([]);
+  // const [todos, setTodos] = useState([]);
   const [status, setStatus] = useState("all");
   const [sortedTodos, setSortedTodos] = useState([]);
   const [allScores, setAllScores] = useState("");
@@ -28,6 +31,9 @@ const Home = () => {
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
+  const isLogged = useSelector((state) => state.loggedReducer);
+  const todos = useSelector((state) => state.todosReducer);
+  const dispatch = useDispatch();
   // const [fulldata, setFulldata] = useState([]);
 
   //This has to be changed
@@ -39,7 +45,7 @@ const Home = () => {
       localStorage.setItem("todos", JSON.stringify(todos));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
+      // setTodos(todoLocal);
     }
   };
 
@@ -90,7 +96,7 @@ const Home = () => {
       localStorage.setItem("todos", JSON.stringify(todos));
     } else {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      setTodos(todoLocal);
+      // setTodos(todoLocal);
     }
   };
 
@@ -158,14 +164,21 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const showMe = await axios.get(`${url}/fulldata`);
+      const localStorageToken = localStorage.getItem("auth-token");
+      const showMe = await axios.get(`${url}/fulldata`, {
+        headers: {
+          "auth-token": localStorageToken,
+        },
+      });
 
       console.log("fetchedData: " + JSON.stringify(showMe.data));
       if (showMe.data == null) {
         console.log("i asyncly fetched empty");
-        setTodos([]);
+        // setTodos([]);
+        dispatch(changeTodos([]));
       } else {
-        setTodos(showMe.data.everything);
+        // setTodos(showMe.data.everything);
+        dispatch(changeTodos(showMe.data.everything));
         console.log("i asyncly fetched something");
       }
     };
@@ -174,11 +187,17 @@ const Home = () => {
 
   useEffect(() => {
     const saveToCloud = () => {
+      const localStorageToken = localStorage.getItem("auth-token");
       const newFulldata = {
         everything: todos,
       };
-      axios.post("http://localhost:3333/update", newFulldata);
+      axios.post("http://localhost:3333/update", newFulldata, {
+        headers: {
+          "auth-token": localStorageToken,
+        },
+      });
       console.log("update");
+      console.log(newFulldata);
     };
     if (rerender) {
       saveToCloud();
@@ -188,6 +207,10 @@ const Home = () => {
   useEffect(() => {
     filterHandler();
   }, [status, todos, amountOfScores]);
+
+  useEffect(() => {
+    console.log("use effect is fire");
+  }, [isLogged]);
 
   useEffect(() => {
     setAmountOfScores(Object.keys(todos).length);
@@ -226,8 +249,8 @@ const Home = () => {
           setInputSlope={setInputSlope}
           inputText={inputText}
           setInputText={setInputText}
-          todos={todos}
-          setTodos={setTodos}
+          // todos={todos}
+          // setTodos={setTodos}
         />
         <EmptyState />
         <Faq />
@@ -251,8 +274,8 @@ const Home = () => {
           setInputSlope={setInputSlope}
           inputText={inputText}
           setInputText={setInputText}
-          todos={todos}
-          setTodos={setTodos}
+          // todos={todos}
+          // setTodos={setTodos}
         />
         <TodoList
           setRerender={setRerender}
@@ -261,8 +284,8 @@ const Home = () => {
           setAmountOfScores={setAmountOfScores}
           calcScoreDifferential={calcScoreDifferential}
           fullScores={fullScores}
-          todos={todos}
-          setTodos={setTodos}
+          // todos={todos}
+          // setTodos={setTodos}
           sortedTodos={sortedTodos}
         />
         <Result
