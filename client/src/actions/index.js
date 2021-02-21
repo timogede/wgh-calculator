@@ -17,3 +17,10 @@ export const changeTodos = (data) => {
     data: data,
   };
 };
+
+export const changeTodosAndLogin = (data) => {
+  return {
+    type: "CHANGETODOSANDLOGIN",
+    data: data,
+  };
+};

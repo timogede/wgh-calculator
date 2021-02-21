@@ -28,8 +28,8 @@ const LoginAccount = () => {
         localStorage.setItem("auth-token", authToken);
         console.log(JSON.stringify(todosFromCloud));
         dispatch(changeTodos(todosFromCloud));
-        dispatch(login());
       })
+
       .catch((error) => {
         console.log("error: " + error.response.data);
         const errorMessage = error.response.data;
@@ -39,6 +39,10 @@ const LoginAccount = () => {
         if (errorMessage === "error_password") {
           setLoginError("Das Passwort ist falsch!");
         }
+      })
+      .finally(() => {
+        console.log("teeeest");
+        dispatch(login());
       });
   };
 
