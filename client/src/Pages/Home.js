@@ -40,14 +40,14 @@ const Home = () => {
   // const currentlyLoggedIn = 333;
   const url = "http://localhost:3333";
 
-  const checkLoginStatus = () => {
-    if (localStorage.getItem("auth") === null) {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    } else {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      // setTodos(todoLocal);
-    }
-  };
+  // const checkLoginStatus = () => {
+  //   if (localStorage.getItem("auth") === null) {
+  //     localStorage.setItem("todos", JSON.stringify(todos));
+  //   } else {
+  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //     // setTodos(todoLocal);
+  //   }
+  // };
 
   const scoreCounter = todos.reduce((counter, obj) => {
     if (obj.text) counter += parseInt(obj.text);
@@ -203,6 +203,16 @@ const Home = () => {
       saveToCloud();
     }
   }, [rerender]);
+
+  //save data to localstorage
+  useEffect(() => {
+    const saveToLocal = () => {
+      const toSave = [...todos];
+    };
+    if (!isLogged) {
+      console.log("something change and isLogged is: " + isLogged);
+    }
+  }, [todos]);
 
   useEffect(() => {
     filterHandler();

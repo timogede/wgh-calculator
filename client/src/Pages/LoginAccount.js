@@ -27,8 +27,8 @@ const LoginAccount = () => {
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
         console.log(JSON.stringify(todosFromCloud));
-        dispatch(changeTodos(todosFromCloud), login());
-        // dispatch(login());
+        dispatch(changeTodos(todosFromCloud));
+        dispatch(login());
       })
       .catch((error) => {
         console.log("error: " + error.response.data);
