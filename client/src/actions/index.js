@@ -18,9 +18,16 @@ export const changeTodos = (data) => {
   };
 };
 
-export const changeTodosAndLogin = (data) => {
+export const changeUsername = (data) => {
   return {
-    type: "CHANGETODOSANDLOGIN",
+    type: "CHANGEUSERNAME",
+    data: data,
+  };
+};
+
+export const removeUsername = (data) => {
+  return {
+    type: "REMOVEUSERNAME",
     data: data,
   };
 };

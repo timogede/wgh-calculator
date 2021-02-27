@@ -1,10 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { login, logout, changeTodos } from "../actions";
+import {
+  login,
+  logout,
+  changeTodos,
+  changeUsername,
+  removeUsername,
+} from "../actions";
 
 const LoginAccount = () => {
   const isLogged = useSelector((state) => state.loggedReducer);
+  const isUsername = useSelector((state) => state.usernameReducer);
   const todos = useSelector((state) => state.todosReducer);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();
@@ -24,12 +31,14 @@ const LoginAccount = () => {
       .then((response) => {
         const authToken = response.data["auth-token"];
         const todosFromCloud = response.data.userdata.scoredata;
+        const nameFromCloud = response.data.userdata.username;
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
         console.log(JSON.stringify(todosFromCloud));
         dispatch(changeTodos(todosFromCloud));
+        dispatch(login());
+        dispatch(changeUsername(nameFromCloud));
       })
-
       .catch((error) => {
         console.log("error: " + error.response.data);
         const errorMessage = error.response.data;
@@ -39,16 +48,13 @@ const LoginAccount = () => {
         if (errorMessage === "error_password") {
           setLoginError("Das Passwort ist falsch!");
         }
-      })
-      .finally(() => {
-        console.log("teeeest");
-        dispatch(login());
       });
   };
 
   const logOutHandler = () => {
     dispatch(logout());
     dispatch(changeTodos([]));
+    dispatch(removeUsername());
     localStorage.removeItem("auth-token");
   };
 

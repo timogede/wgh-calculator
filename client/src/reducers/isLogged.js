@@ -9,7 +9,7 @@ const loggedReducer = (state = false, action) => {
 
     default:
       console.log("default triggererd" + action.type);
-      return false;
+      return state;
   }
 };
 

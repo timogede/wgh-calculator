@@ -5,7 +5,7 @@ const todosReducer = (state = [], action) => {
       return action.data;
 
     default:
-      return [];
+      return state;
   }
 };
 

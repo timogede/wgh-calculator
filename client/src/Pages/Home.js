@@ -10,7 +10,13 @@ import RegisterAccount from "./RegisterAccount.js";
 import LoginAccount from "./LoginAccount.js";
 import loggedReducer from "../reducers/isLogged.js";
 import { useSelector, useDispatch } from "react-redux";
-import { changeTodos } from "../actions/index.js";
+import {
+  changeTodos,
+  login,
+  logout,
+  changeUsername,
+  removeUsername,
+} from "../actions/index.js";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
@@ -32,8 +38,10 @@ const Home = () => {
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
   const isLogged = useSelector((state) => state.loggedReducer);
+  const isUsername = useSelector((state) => state.usernameReducer);
   const todos = useSelector((state) => state.todosReducer);
   const dispatch = useDispatch();
+
   // const [fulldata, setFulldata] = useState([]);
 
   //This has to be changed
@@ -71,32 +79,20 @@ const Home = () => {
   }, 0); // 6
 
   const calcScoreDifferential = (sc, sl, cr) => {
-    // let sc = give.text;
-    // let sl = give.slope;
-    // let cr = give.courseRating;
     let standardSlope = 113;
     let scoreDifferential = (((sc - cr) * standardSlope) / sl).toFixed(1);
 
     return scoreDifferential;
   };
 
-  // const saveLocalTodos = () => {
-  //   console.log("I pushed todos to MongoDB");
-  //   const newFulldata = {
-  //     user_id: 333,
-  //     everything: todos,
-  //   };
-
-  //   axios.post("http://localhost:3333/create", newFulldata);
-  //   console.log(newFulldata);
-  // };
+  const saveToLocal = () => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
 
   const getLocalTodos = () => {
-    if (localStorage.getItem("todos") === null) {
-      localStorage.setItem("todos", JSON.stringify(todos));
-    } else {
+    if (localStorage.getItem("todos")) {
       let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      // setTodos(todoLocal);
+      dispatch(changeTodos(todoLocal));
     }
   };
 
@@ -164,24 +160,31 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const localStorageToken = localStorage.getItem("auth-token");
-      const showMe = await axios.get(`${url}/fulldata`, {
-        headers: {
-          "auth-token": localStorageToken,
-        },
-      });
+      try {
+        const localStorageToken = localStorage.getItem("auth-token");
+        const showMe = await axios.get(`${url}/fulldata`, {
+          headers: {
+            "auth-token": localStorageToken,
+          },
+        });
 
-      console.log("fetchedData: " + JSON.stringify(showMe.data));
-      if (showMe.data == null) {
-        console.log("i asyncly fetched empty");
-        // setTodos([]);
-        dispatch(changeTodos([]));
-      } else {
-        // setTodos(showMe.data.everything);
-        dispatch(changeTodos(showMe.data.everything));
-        console.log("i asyncly fetched something");
+        console.log("fetchedData: " + JSON.stringify(showMe.data));
+        if (showMe.data == null) {
+          // setTodos([]);
+          dispatch(changeTodos([]));
+        } else {
+          // setTodos(showMe.data.everything);
+          dispatch(changeTodos(showMe.data.everything));
+          dispatch(changeUsername(showMe.data.name));
+          dispatch(login());
+          console.log(isLogged);
+        }
+      } catch (err) {
+        console.log(err);
+        getLocalTodos();
       }
     };
+
     fetchData();
   }, []);
 
@@ -196,23 +199,14 @@ const Home = () => {
           "auth-token": localStorageToken,
         },
       });
-      console.log("update");
-      console.log(newFulldata);
     };
-    if (rerender) {
+    if (rerender && isLogged) {
       saveToCloud();
     }
-  }, [rerender]);
-
-  //save data to localstorage
-  useEffect(() => {
-    const saveToLocal = () => {
-      const toSave = [...todos];
-    };
-    if (!isLogged) {
-      console.log("something change and isLogged is: " + isLogged);
+    if (rerender && !isLogged) {
+      saveToLocal();
     }
-  }, [todos]);
+  }, [rerender]);
 
   useEffect(() => {
     filterHandler();
@@ -246,6 +240,7 @@ const Home = () => {
       <React.Fragment>
         <RegisterAccount />
         <LoginAccount />
+        {isUsername && <h3>{isUsername}</h3>}
         <MyIntro />
         <Form
           setRerender={setRerender}
@@ -271,6 +266,7 @@ const Home = () => {
       <React.Fragment>
         <RegisterAccount />
         <LoginAccount />
+        {isUsername && <h3>{isUsername}</h3>}
         <MyIntro />
         <Form
           setRerender={setRerender}
