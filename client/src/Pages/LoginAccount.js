@@ -60,8 +60,8 @@ const LoginAccount = () => {
 
   return (
     <React.Fragment>
-      <div className="registerlogin container">
-        <div className="registerlogin__inside container__inside">
+      <div className="login-account container">
+        <div className="login-account__inside container__inside">
           <div className="title">Login</div>
           <div className="inputs">
             <form onSubmit={onSubmit}>

@@ -17,8 +17,8 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
-          <Route path="/login" component={LoginAccount} />
-          <Route path="/anmelden" component={RegisterAccount} />
+          <Route path="/anmelden" component={LoginAccount} />
+          <Route path="/registrieren" component={RegisterAccount} />
         </Switch>
         <MyFooter />
       </React.Fragment>

@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { joiResolver } from "@hookform/resolvers/joi";
 import Joi from "joi";
+import logo from "../images/logo.svg";
 
 const registerSchema = Joi.object({
   username: Joi.string().min(6).required(),
@@ -58,9 +59,14 @@ const RegisterAccount = () => {
 
   return (
     <React.Fragment>
-      <div className="registerlogin container">
-        <div className="registerlogin__inside container__inside">
-          <div className="title">Anmelden</div>
+      <div className="register-account container">
+        <div className="register-account__inside container__inside">
+          <img style={{ filter: "invert(80%)" }} src={logo} />
+          <h2>Melde dich bei handicap.report an!</h2>
+          <p>
+            Erstelle dein handicap.report Profil und erhalte Zugang zu deinen
+            Handicap-Daten auf deinem Smartphone, Tablet oder Computer.
+          </p>
           <div className="inputs">
             <form onSubmit={handleSubmit(onSubmit)}>
               <input
