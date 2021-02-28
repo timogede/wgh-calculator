@@ -20,10 +20,22 @@ const RegisterAccount = () => {
   });
   const onSubmit = (data) => {
     setDuplicateError(false);
+    if (localStorage.getItem("todos")) {
+      let todosToObject = JSON.parse(localStorage.getItem("todos"));
+    } else {
+      let todosToObject = [];
+    }
+
+    const todosToObject = localStorage.getItem("todos")
+      ? JSON.parse(localStorage.getItem("todos"))
+      : [];
+
+    console.log(typeof todosToObject);
     const newUser = {
       name: data.username,
       email: data.email,
       password: data.password,
+      everything: todosToObject,
     };
 
     axios

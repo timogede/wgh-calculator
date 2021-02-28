@@ -13,7 +13,7 @@ import bcrypt from "bcryptjs";
 router.route("/register").post(async (req, res) => {
   //Validate before creating user
   const { error } = registerValidation(req.body);
-  if (error) return res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send("here " + error.details[0].message);
 
   //Check if mail already exists
   const emailExist = await User.findOne({ email: req.body.email });
@@ -32,6 +32,7 @@ router.route("/register").post(async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: hashedPassword,
+    everything: req.body.everything,
   });
   try {
     const savedUser = await user.save();

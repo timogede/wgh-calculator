@@ -9,6 +9,7 @@ export const registerValidation = (data) => {
       .required()
       .email({ tlds: { allow: false } }),
     password: Joi.string().min(6).required(),
+    everything: Joi.array(),
   });
   return registerSchema.validate(data);
 };
