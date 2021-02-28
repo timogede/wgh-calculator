@@ -55,6 +55,16 @@ const MyHeader = ({ language }) => {
                     </HashLink>
                   </li>
                   <li className="menu-item">
+                    <HashLink smooth to="/anmelden">
+                      <i className="fas fa-sign-in-alt"></i>Login
+                    </HashLink>
+                  </li>
+                  <li className="menu-item">
+                    <HashLink smooth to="/registrieren">
+                      <i className="fas fa-user-plus"></i>Registrieren
+                    </HashLink>
+                  </li>
+                  <li className="menu-item">
                     <HashLink smooth to="/impressum">
                       <i className="fas fa-stamp"></i>Impressum
                     </HashLink>

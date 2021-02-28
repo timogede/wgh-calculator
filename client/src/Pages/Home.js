@@ -238,8 +238,6 @@ const Home = () => {
   if (Object.keys(todos).length === 0) {
     return (
       <React.Fragment>
-        <RegisterAccount />
-        <LoginAccount />
         {isUsername && <h3>{isUsername}</h3>}
         <MyIntro />
         <Form
@@ -264,8 +262,6 @@ const Home = () => {
   } else {
     return (
       <React.Fragment>
-        <RegisterAccount />
-        <LoginAccount />
         {isUsername && <h3>{isUsername}</h3>}
         <MyIntro />
         <Form

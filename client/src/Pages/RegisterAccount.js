@@ -12,6 +12,7 @@ const registerSchema = Joi.object({
     .required()
     .email({ tlds: { allow: false } }),
   password: Joi.string().min(6).required(),
+  checkbox: Joi.boolean().invalid(false),
 });
 
 const RegisterAccount = () => {
@@ -60,12 +61,13 @@ const RegisterAccount = () => {
   return (
     <React.Fragment>
       <div className="register-account container">
-        <div className="register-account__inside container__inside">
+        <div className="register-account__inside container__inside container__inside-small">
           <img style={{ filter: "invert(80%)" }} src={logo} />
           <h2>Melde dich bei handicap.report an!</h2>
           <p>
-            Erstelle dein handicap.report Profil und erhalte Zugang zu deinen
-            Handicap-Daten auf deinem Smartphone, Tablet oder Computer.
+            Erstelle dein handicap.report Profil, spreichere deine Runden und
+            erhalte Zugang zu deinen Handicap-Daten auf deinem Smartphone,
+            Tablet oder Computer.
           </p>
           <div className="inputs">
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -75,21 +77,32 @@ const RegisterAccount = () => {
                 ref={register}
                 placeholder="Nutzername"
               />
-              {errors.username && <span>my custom error</span>}
+              {errors.username && (
+                <span>Nutzername zu kurz. Mindestens 6 Zeichen.</span>
+              )}
+              {errors.username && errors.username.message}
+
+              <br />
               <input
                 type="text"
                 name="email"
                 placeholder="E-Mail"
                 ref={register}
               />
-
+              {errors.email && <span>E-Mail nicht gültig.</span>}
+              {errors.email && errors.email.message}
+              <br />
               <input
                 type="password"
                 name="password"
                 placeholder="Passwort"
                 ref={register}
               />
-
+              {errors.password && (
+                <span>Password zu kurz. Mindestens 6 Zeichen.</span>
+              )}
+              {errors.password && errors.password.message}
+              <br />
               <input type="submit" id="submit_account" value="Registrieren" />
               {duplicateError && <span>{duplicateError}</span>}
             </form>

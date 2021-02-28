@@ -13,6 +13,11 @@
   }
 }
 
+.container__inside.container__inside-small {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
 .container__inside-wide {
   display: block;
   position: relative;
@@ -23,14 +28,13 @@
   }
 }
 
-.anchor-element{
+.anchor-element {
   position: relative;
   top: -70px;
   @include viewport-9 {
     top: -85px;
   }
 }
-
 
 // .container{
 //   .container{
