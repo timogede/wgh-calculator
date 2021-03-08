@@ -1,0 +1,22 @@
+.account {
+  text-align: left;
+  h2 {
+    font-size: var(--big);
+    line-height: 1.3;
+    margin-bottom: 10px;
+  }
+  p {
+    font-size: var(--normal);
+    line-height: 1.3;
+    margin-bottom: 40px;
+  }
+  .delete__confirmation {
+    display: none;
+  }
+}
+
+.edit_mode .account {
+  .delete__confirmation {
+    display: block;
+  }
+}

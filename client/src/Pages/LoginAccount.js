@@ -7,7 +7,10 @@ import {
   changeTodos,
   changeUsername,
   removeUsername,
+  changeEmail,
 } from "../actions";
+import logo from "../images/logo.svg";
+import { Redirect } from "react-router-dom";
 
 const LoginAccount = () => {
   const isLogged = useSelector((state) => state.loggedReducer);
@@ -32,12 +35,14 @@ const LoginAccount = () => {
         const authToken = response.data["auth-token"];
         const todosFromCloud = response.data.userdata.scoredata;
         const nameFromCloud = response.data.userdata.username;
+        const emailFromCloud = response.data.userdata.email;
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
         console.log(JSON.stringify(todosFromCloud));
         dispatch(changeTodos(todosFromCloud));
         dispatch(login());
         dispatch(changeUsername(nameFromCloud));
+        dispatch(changeEmail(emailFromCloud));
       })
       .catch((error) => {
         console.log("error: " + error.response.data);
@@ -51,32 +56,29 @@ const LoginAccount = () => {
       });
   };
 
-  const logOutHandler = () => {
-    dispatch(logout());
-    dispatch(changeTodos([]));
-    dispatch(removeUsername());
-    localStorage.removeItem("auth-token");
-  };
-
-  return (
-    <React.Fragment>
-      <div className="login-account container">
-        <div className="login-account__inside container__inside container__inside-small">
-          <div className="title">Login</div>
-          <div className="inputs">
-            <form onSubmit={onSubmit}>
-              <input type="text" name="email" placeholder="E-Mail" />
-              <input type="password" name="password" placeholder="Passwort" />
-              <input type="submit" id="submit_login" value="Login" />
-              {loginError && <span>{loginError}</span>}
-              {isLogged ? <h3>isLogged</h3> : "isnotLogged"}
-            </form>
-            <button onClick={logOutHandler}>Logout</button>
+  if (!isLogged) {
+    return (
+      <React.Fragment>
+        <div className="login-account container">
+          <div className="login-account__inside container__inside container__inside-small">
+            <img style={{ filter: "invert(80%)" }} src={logo} />
+            <h2>Anmelden</h2>
+            <p></p>
+            <div className="inputs">
+              <form onSubmit={onSubmit}>
+                <input type="text" name="email" placeholder="E-Mail" />
+                <input type="password" name="password" placeholder="Passwort" />
+                <input type="submit" id="submit_login" value="Login" />
+                {loginError && <span>{loginError}</span>}
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-    </React.Fragment>
-  );
+      </React.Fragment>
+    );
+  } else {
+    return <Redirect to="/" />;
+  }
 };
 
 export default LoginAccount;

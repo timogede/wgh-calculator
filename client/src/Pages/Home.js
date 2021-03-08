@@ -89,12 +89,12 @@ const Home = () => {
     localStorage.setItem("todos", JSON.stringify(todos));
   };
 
-  const getLocalTodos = () => {
-    if (localStorage.getItem("todos")) {
-      let todoLocal = JSON.parse(localStorage.getItem("todos"));
-      dispatch(changeTodos(todoLocal));
-    }
-  };
+  // const getLocalTodos = () => {
+  //   if (localStorage.getItem("todos")) {
+  //     let todoLocal = JSON.parse(localStorage.getItem("todos"));
+  //     dispatch(changeTodos(todoLocal));
+  //   }
+  // };
 
   const sortFunction = (a, b) => {
     if (a["scoreDifferential"] === b["scoreDifferential"]) {
@@ -158,35 +158,35 @@ const Home = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const localStorageToken = localStorage.getItem("auth-token");
-        const showMe = await axios.get(`${url}/fulldata`, {
-          headers: {
-            "auth-token": localStorageToken,
-          },
-        });
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const localStorageToken = localStorage.getItem("auth-token");
+  //       const showMe = await axios.get(`${url}/fulldata`, {
+  //         headers: {
+  //           "auth-token": localStorageToken,
+  //         },
+  //       });
 
-        console.log("fetchedData: " + JSON.stringify(showMe.data));
-        if (showMe.data == null) {
-          // setTodos([]);
-          dispatch(changeTodos([]));
-        } else {
-          // setTodos(showMe.data.everything);
-          dispatch(changeTodos(showMe.data.everything));
-          dispatch(changeUsername(showMe.data.name));
-          dispatch(login());
-          console.log(isLogged);
-        }
-      } catch (err) {
-        console.log(err);
-        getLocalTodos();
-      }
-    };
+  //       console.log("fetchedData: " + JSON.stringify(showMe.data));
+  //       if (showMe.data == null) {
+  //         // setTodos([]);
+  //         dispatch(changeTodos([]));
+  //       } else {
+  //         // setTodos(showMe.data.everything);
+  //         dispatch(changeTodos(showMe.data.everything));
+  //         dispatch(changeUsername(showMe.data.name));
+  //         dispatch(login());
+  //         console.log(isLogged);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //       getLocalTodos();
+  //     }
+  //   };
 
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const saveToCloud = () => {
@@ -238,7 +238,7 @@ const Home = () => {
   if (Object.keys(todos).length === 0) {
     return (
       <React.Fragment>
-        {isUsername && <h3>{isUsername}</h3>}
+        {isUsername && <h3>Hallo, {isUsername}</h3>}
         <MyIntro />
         <Form
           setRerender={setRerender}

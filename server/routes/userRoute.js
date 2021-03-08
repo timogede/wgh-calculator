@@ -70,6 +70,7 @@ router.route("/login").post(async (req, res) => {
     "auth-token": token,
     userdata: {
       username: user.name,
+      email: user.email,
       scoredata: user.everything,
     },
   });

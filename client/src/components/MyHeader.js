@@ -2,7 +2,9 @@ import React from "react";
 import logo from "../images/logo.svg";
 import { ReactComponent as TeeSvg } from "../images/tee.svg";
 import { HashLink } from "react-router-hash-link";
+import { useSelector, useDispatch } from "react-redux";
 const MyHeader = ({ language }) => {
+  const isLogged = useSelector((state) => state.loggedReducer);
   const toggleFunction = (e) => {
     const myBody = document.getElementsByTagName("body")[0];
     if (myBody.classList.contains("header__navigation__mobile-toggle--open")) {
@@ -54,14 +56,27 @@ const MyHeader = ({ language }) => {
                       <i className="fas fa-hands-helping"></i>Unterstützen
                     </HashLink>
                   </li>
+                  {!isLogged ? (
+                    <>
+                      <li className="menu-item">
+                        <HashLink smooth to="/anmelden">
+                          <i className="fas fa-sign-in-alt"></i>Login
+                        </HashLink>
+                      </li>
+
+                      <li className="menu-item">
+                        <HashLink smooth to="/registrieren">
+                          <i className="fas fa-user-plus"></i>Registrieren
+                        </HashLink>
+                      </li>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
                   <li className="menu-item">
-                    <HashLink smooth to="/anmelden">
-                      <i className="fas fa-sign-in-alt"></i>Login
-                    </HashLink>
-                  </li>
-                  <li className="menu-item">
-                    <HashLink smooth to="/registrieren">
-                      <i className="fas fa-user-plus"></i>Registrieren
+                    <HashLink smooth to="/account">
+                      <i className="fas fa-user"></i>Account
                     </HashLink>
                   </li>
                   <li className="menu-item">

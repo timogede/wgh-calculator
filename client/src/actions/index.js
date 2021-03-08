@@ -31,3 +31,17 @@ export const removeUsername = (data) => {
     data: data,
   };
 };
+
+export const changeEmail = (data) => {
+  return {
+    type: "CHANGEEMAIL",
+    data: data,
+  };
+};
+
+export const removeEmail = (data) => {
+  return {
+    type: "REMOVEEMAIL",
+    data: data,
+  };
+};

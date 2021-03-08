@@ -40,8 +40,12 @@ router.route("/update").post(auth, (req, res) => {
 });
 
 //delete
-router.route("/delete-data").delete((req, res) => {
-  Fulldata.deleteOne({ user_id: 222 })
+router.route("/delete-data").delete(auth, (req, res) => {
+  console.log("going to delete: " + JSON.stringify(req.user));
+  console.log(req.user._id);
+  const userId = req.user._id;
+
+  User.deleteOne({ _id: userId })
     .then(() => {
       res.status(200).json({
         message: "Deleted!",
@@ -56,14 +60,14 @@ router.route("/delete-data").delete((req, res) => {
 
 //fetch with auth
 router.route("/fulldata").get(auth, (req, res) => {
-  console.log("user with this auth token is: " + JSON.stringify(req.user));
+  // console.log("user with this auth token is: " + JSON.stringify(req.user));
 
   User.findOne({ _id: req.user._id }, (error, foundFulldata) => {
-    console.log(foundFulldata);
+    // console.log(foundFulldata);
   })
     .then((foundFulldata) => res.json(foundFulldata))
     .catch((error) => {
-      console.log(error);
+      // console.log(error);
       res.status(400).json({
         error: error,
       });
