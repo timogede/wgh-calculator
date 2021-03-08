@@ -47,28 +47,45 @@ const Account = () => {
       <React.Fragment>
         <div className="account container">
           <div className="account__inside container__inside">
-            <h2>Dein Account</h2>
+            <h1>Dein Account</h1>
             <p>
               Hallo {isUsername},<br />
               hier findest du alle deine Daten, die du bei der Erstellung deines
               Accounts angegeben hast.
+            </p>
+
+            <p>
+              Username:
               <br />
               <b>{isUsername}</b>
+            </p>
+            <p>
+              E-Mail:
               <br />
               <b>{isEmail}</b>
-              <br />
             </p>
-            <button onClick={logOutHandler}>Abmelden</button>
-            <br />
-            <button id="delete__toggler" onClick={deleteToggler}>
-              Account löschen
+            <h2>Abmelden</h2>
+            <button onClick={logOutHandler}>
+              <i className="fas fa-sign-out-alt"></i>Abmelden
             </button>
-            <div className="delete__confirmation">
-              <button onClick={deleteToggler}>
-                <i className="fas fa-times"></i>
+            <br />
+            <div className="dangerzone">
+              <h2>Account löschen</h2>
+              <button id="delete__toggler" onClick={deleteToggler}>
+                <i className="fas fa-trash-alt"></i>Account löschen
               </button>
-              <button onClick={deleteHandler}>Löschung bestätigen</button>
             </div>
+            <div className="delete__confirmation">
+              <h2>Achtung!</h2>
+              <p>Dein Account kann nicht wiederhergestellt werden.</p>
+              <button className="deletehandler" onClick={deleteHandler}>
+                <i className="fas fa-trash-alt"></i>Löschen
+              </button>
+              <button onClick={deleteToggler}>
+                <i className="fas fa-times"></i>Abbrechen
+              </button>
+            </div>
+            <div className="bg"></div>
           </div>
         </div>
       </React.Fragment>

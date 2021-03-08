@@ -1,77 +1,84 @@
-    //breakpoints
-    @mixin viewport-4 {
-      @media (min-width: 480px) {
-        @content;
+//breakpoints
+@mixin viewport-4 {
+  @media (min-width: 480px) {
+    @content;
   }
 }
-    @mixin viewport-7 {
-      @media (min-width: 768px) {
-        @content;
+@mixin viewport-7 {
+  @media (min-width: 768px) {
+    @content;
   }
 }
-    @mixin viewport-9 {
-      @media (min-width: 992px) {
-        @content;
+@mixin viewport-9 {
+  @media (min-width: 992px) {
+    @content;
   }
 }
-    @mixin viewport-12 {
-      @media (min-width: 1200px) {
-        @content;
+@mixin viewport-12 {
+  @media (min-width: 1200px) {
+    @content;
   }
 }
 
 @mixin viewport-0 {
   @media (max-width: 479px) {
     @content;
+  }
 }
+
+//margins
+@mixin margin-bottom {
+  margin-bottom: 50px;
+  @include viewport-7 {
+    margin-bottom: 100px;
+  }
 }
-
-  //margins
-    @mixin margin-bottom {
-      margin-bottom: 50px;
-      @include viewport-7{
-        margin-bottom: 100px;
-      }
-    }
-    //margins
-      @mixin margin-top {
-        margin-top: 50px;
-        @include viewport-7{
-          margin-top: 100px;
-        }
-      }
-
-
-
-
+//margins
+@mixin margin-top {
+  margin-top: 50px;
+  @include viewport-7 {
+    margin-top: 100px;
+  }
+}
 
 :root {
-
   //fonts
-  --font-family: 'Poppins', sans-serif;
+  --font-family: "Poppins", sans-serif;
   --huge: 32px;
   --big: 24px;
   --normal: 18px;
   --small: 14px;
 
-  --font-weight-regular:400;
-  --font-weight-black:900;
+  --font-weight-regular: 400;
+  --font-weight-black: 900;
   //colors
   --brand-primary: #83ebf7;
   // --brand-secondary:#bfd849;
-  --brand-gradient: linear-gradient(20deg, rgba(93,115,132,1) 0%, rgba(90,112,129,1) 10%, rgba(87,108,127,1) 20%, rgba(83,105,124,1) 30%, rgba(80,101,122,1) 40%, rgba(77,97,119,1) 50%, rgba(73,93,117,1) 60%, rgba(70,90,114,1) 70%, rgba(66,86,112,1) 80%, rgba(63,82,109,1) 90%, rgba(60,78,107,1) 100%);
+  --brand-gradient: linear-gradient(
+    20deg,
+    rgba(93, 115, 132, 1) 0%,
+    rgba(90, 112, 129, 1) 10%,
+    rgba(87, 108, 127, 1) 20%,
+    rgba(83, 105, 124, 1) 30%,
+    rgba(80, 101, 122, 1) 40%,
+    rgba(77, 97, 119, 1) 50%,
+    rgba(73, 93, 117, 1) 60%,
+    rgba(70, 90, 114, 1) 70%,
+    rgba(66, 86, 112, 1) 80%,
+    rgba(63, 82, 109, 1) 90%,
+    rgba(60, 78, 107, 1) 100%
+  );
   --white: #fff;
   --blue: #36a7e9;
   --gray: #e3e3e3;
-  --darkgray: #EBECEC;
+  --darkgray: #ebecec;
   --black: #333333;
-  --red: #ef5350;
+  --red: #ff3e49;
   // --fa-primary-color:#6BD12A;
   //margins
   --margin-mobile: 25px;
   --margin-desktop: 50px;
   //styles
-  --shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  --shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   //fontsizes
-
 }

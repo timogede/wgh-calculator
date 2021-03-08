@@ -73,12 +73,17 @@ const MyHeader = ({ language }) => {
                   ) : (
                     <></>
                   )}
-
-                  <li className="menu-item">
-                    <HashLink smooth to="/account">
-                      <i className="fas fa-user"></i>Account
-                    </HashLink>
-                  </li>
+                  {isLogged ? (
+                    <>
+                      <li className="menu-item">
+                        <HashLink smooth to="/account">
+                          <i className="fas fa-user"></i>Account
+                        </HashLink>
+                      </li>
+                    </>
+                  ) : (
+                    <></>
+                  )}
                   <li className="menu-item">
                     <HashLink smooth to="/impressum">
                       <i className="fas fa-stamp"></i>Impressum

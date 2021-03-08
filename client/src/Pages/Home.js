@@ -262,7 +262,7 @@ const Home = () => {
   } else {
     return (
       <React.Fragment>
-        {isUsername && <h3>{isUsername}</h3>}
+        {isUsername && <h3>Hallo, {isUsername}</h3>}
         <MyIntro />
         <Form
           setRerender={setRerender}

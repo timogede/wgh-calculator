@@ -15,7 +15,10 @@
 
 .container__inside.container__inside-small {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 0 15px;
+  @include viewport-4 {
+    margin: 0 auto;
+  }
 }
 
 .container__inside-wide {
