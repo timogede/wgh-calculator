@@ -3,17 +3,7 @@ const router = express.Router();
 import Fulldata from "../models/fulldataModel.js";
 import User from "../models/userModel.js";
 import { auth } from "./verifyToken.js";
-
-// create
-// router.route("/create").post((req, res) => {
-//   const user_id = req.body.user_id;
-//   const everything = req.body.everything;
-//   const newFulldata = new Fulldata({
-//     user_id,
-//     everything,
-//   });
-//   newFulldata.save();
-// });
+import multer from "multer";
 
 // update
 router.route("/update").post(auth, (req, res) => {

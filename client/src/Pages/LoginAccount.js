@@ -38,6 +38,7 @@ const LoginAccount = () => {
         const todosFromCloud = response.data.userdata.scoredata;
         const nameFromCloud = response.data.userdata.username;
         const emailFromCloud = response.data.userdata.email;
+        const profilephotoFromCloud = response.data.userdata.profilephoto;
         console.log("set to localStorage: " + authToken);
         localStorage.setItem("auth-token", authToken);
         console.log(JSON.stringify(todosFromCloud));
@@ -45,6 +46,7 @@ const LoginAccount = () => {
         dispatch(login());
         dispatch(changeUsername(nameFromCloud));
         dispatch(changeEmail(emailFromCloud));
+        dispatch(changeProfilephoto(profilephotoFromCloud));
       })
       .catch((error) => {
         console.log("error: " + error.response.data);

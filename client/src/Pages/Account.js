@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
-import tiger from "../uploads/tigerhead.jpg";
+
 import {
   login,
   logout,
@@ -10,12 +10,14 @@ import {
   changeUsername,
   removeUsername,
   removeEmail,
+  removeProfilephoto,
 } from "../actions";
 
 const Account = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.loggedReducer);
   const isUsername = useSelector((state) => state.usernameReducer);
+  const isProfilephoto = useSelector((state) => state.profilephotoReducer);
   const isEmail = useSelector((state) => state.emailReducer);
   const localStorageToken = localStorage.getItem("auth-token");
 
@@ -37,6 +39,7 @@ const Account = () => {
     dispatch(changeTodos([]));
     dispatch(removeUsername());
     dispatch(removeEmail());
+    dispatch(removeProfilephoto());
     localStorage.removeItem("auth-token");
   };
 
@@ -69,21 +72,19 @@ const Account = () => {
               <br />
               <b>{isEmail}</b>
             </p>
-            <p>Profilphoto:</p>
-            <br />
+            <p>Profilfoto:</p>
             <div className="profilephoto__wrap">
               <div className="profilephoto">
                 <a onClick={editPhotoHandler}>
-                  <img src={tiger} />
+                  <img src={`/uploads/${isProfilephoto}`} alt="Profilephoto" />
                 </a>
               </div>
               <p>
                 <a onClick={editPhotoHandler}>
-                  <i className="fa fa-edit"></i>Profilphoto ändern
+                  <i className="fa fa-edit"></i>Profilfoto ändern
                 </a>
               </p>
             </div>
-
             <h2>Abmelden</h2>
             <button onClick={logOutHandler}>
               <i className="fas fa-sign-out-alt"></i>Abmelden

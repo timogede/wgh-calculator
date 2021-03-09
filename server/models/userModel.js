@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
   everything: {
     type: Array,
   },
+  profilephoto: {
+    type: String,
+    default: "tiger.jpg",
+  },
 });
 
 const User = mongoose.model("User", userSchema);

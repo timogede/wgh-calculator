@@ -33,6 +33,7 @@ router.route("/register").post(async (req, res) => {
     email: req.body.email,
     password: hashedPassword,
     everything: req.body.everything,
+    profilephoto: "tigerhead.jpg",
   });
   try {
     const savedUser = await user.save();
@@ -72,6 +73,7 @@ router.route("/login").post(async (req, res) => {
       username: user.name,
       email: user.email,
       scoredata: user.everything,
+      profilephoto: user.profilephoto,
     },
   });
 });

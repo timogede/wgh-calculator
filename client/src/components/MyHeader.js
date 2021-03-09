@@ -3,7 +3,6 @@ import logo from "../images/logo.svg";
 import { ReactComponent as TeeSvg } from "../images/tee.svg";
 import { HashLink } from "react-router-hash-link";
 import { useSelector, useDispatch } from "react-redux";
-import tiger from "../uploads/tigerhead.jpg";
 const MyHeader = ({ language }) => {
   const isLogged = useSelector((state) => state.loggedReducer);
   const toggleFunction = (e) => {

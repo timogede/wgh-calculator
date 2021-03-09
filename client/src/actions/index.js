@@ -45,3 +45,17 @@ export const removeEmail = (data) => {
     data: data,
   };
 };
+
+export const changeProfilephoto = (data) => {
+  return {
+    type: "CHANGEPROFILEPHOTO",
+    data: data,
+  };
+};
+
+export const removeProfilephoto = (data) => {
+  return {
+    type: "REMOVEPROFILEPHOTO",
+    data: data,
+  };
+};

@@ -17,6 +17,7 @@ import {
   changeUsername,
   changeEmail,
   removeUsername,
+  changeProfilephoto,
 } from "./actions/index.js";
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.loggedReducer);
   const isUsername = useSelector((state) => state.usernameReducer);
+  const isProfilephoto = useSelector((state) => state.profilephotoReducer);
   const todos = useSelector((state) => state.todosReducer);
   useEffect(() => {
     const getLocalTodos = () => {
@@ -50,6 +52,7 @@ const App = () => {
           dispatch(changeTodos(showMe.data.everything));
           dispatch(changeUsername(showMe.data.name));
           dispatch(changeEmail(showMe.data.email));
+          dispatch(changeProfilephoto(showMe.data.profilephoto));
           dispatch(login());
         }
       } catch (err) {
