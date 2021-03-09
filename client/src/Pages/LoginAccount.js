@@ -8,6 +8,7 @@ import {
   changeUsername,
   removeUsername,
   changeEmail,
+  changeProfilephoto,
 } from "../actions";
 import logo from "../images/logo.svg";
 import { Redirect } from "react-router-dom";
@@ -15,6 +16,7 @@ import { Redirect } from "react-router-dom";
 const LoginAccount = () => {
   const isLogged = useSelector((state) => state.loggedReducer);
   const isUsername = useSelector((state) => state.usernameReducer);
+  const isProfilephoto = useSelector((state) => state.profilephotoReducer);
   const todos = useSelector((state) => state.todosReducer);
   const [loginError, setLoginError] = useState(false);
   const dispatch = useDispatch();

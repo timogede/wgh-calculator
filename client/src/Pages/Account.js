@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
+import tiger from "../uploads/tigerhead.jpg";
 import {
   login,
   logout,
@@ -27,6 +28,10 @@ const Account = () => {
     }
   };
 
+  const editPhotoHandler = () => {
+    console.log("123");
+  };
+
   const logOutHandler = () => {
     dispatch(logout());
     dispatch(changeTodos([]));
@@ -41,6 +46,7 @@ const Account = () => {
         "auth-token": localStorageToken,
       },
     });
+    logOutHandler();
   };
   if (isLogged) {
     return (
@@ -50,10 +56,9 @@ const Account = () => {
             <h1>Dein Account</h1>
             <p>
               Hallo {isUsername},<br />
-              hier findest du alle deine Daten, die du bei der Erstellung deines
-              Accounts angegeben hast.
+              hier findest du alle deine Daten, kannst dich abmelden oder deinen
+              Account löschen.
             </p>
-
             <p>
               Username:
               <br />
@@ -64,6 +69,21 @@ const Account = () => {
               <br />
               <b>{isEmail}</b>
             </p>
+            <p>Profilphoto:</p>
+            <br />
+            <div className="profilephoto__wrap">
+              <div className="profilephoto">
+                <a onClick={editPhotoHandler}>
+                  <img src={tiger} />
+                </a>
+              </div>
+              <p>
+                <a onClick={editPhotoHandler}>
+                  <i className="fa fa-edit"></i>Profilphoto ändern
+                </a>
+              </p>
+            </div>
+
             <h2>Abmelden</h2>
             <button onClick={logOutHandler}>
               <i className="fas fa-sign-out-alt"></i>Abmelden

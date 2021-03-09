@@ -3,6 +3,7 @@ import logo from "../images/logo.svg";
 import { ReactComponent as TeeSvg } from "../images/tee.svg";
 import { HashLink } from "react-router-hash-link";
 import { useSelector, useDispatch } from "react-redux";
+import tiger from "../uploads/tigerhead.jpg";
 const MyHeader = ({ language }) => {
   const isLogged = useSelector((state) => state.loggedReducer);
   const toggleFunction = (e) => {
@@ -35,7 +36,9 @@ const MyHeader = ({ language }) => {
               <img src={logo} alt="handicap.report Logo" />
             </HashLink>
           </div>
-
+          <div className="header__profilephoto">
+            <div className="header__profilephoto-border"></div>
+          </div>
           <div className="header__navigation__wrap">
             <div className="header__bg"></div>
             <div className="header__navigation__mobile">
