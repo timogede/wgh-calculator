@@ -5,6 +5,53 @@ import User from "../models/userModel.js";
 import { auth } from "./verifyToken.js";
 import multer from "multer";
 
+//define storage for the images
+const storage = multer.diskStorage({
+  //destination for files
+  destination: function (request, file, callback) {
+    callback(null, "./../client/public/uploads/images");
+  },
+
+  //add back the extension
+  filename: function (request, file, callback) {
+    callback(null, Date.now() + file.originalname);
+  },
+});
+
+//upload parameters for multer
+const upload = multer({
+  storage: storage,
+  limits: {
+    fieldSize: 1024 * 1024 * 3,
+  },
+});
+
+// upload profileimage
+router.route("/profileimage").post(upload.single("image"), (req, res) => {
+  const profileImage = req.body.profileImage;
+  console.log(profileImage);
+  console.log(req.file);
+
+  User.findOneAndUpdate(
+    {
+      _id: "6057c1d32af63448c8ae0b58",
+    },
+    {
+      profileImage: profileImage,
+    },
+    {
+      upsert: true,
+    },
+    (error, data) => {
+      if (error) {
+        console.log("the error: " + error);
+      } else {
+        console.log("the data: " + data);
+      }
+    }
+  );
+});
+
 // update
 router.route("/update").post(auth, (req, res) => {
   const everything = req.body.everything;

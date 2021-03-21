@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -20,6 +20,7 @@ const Account = () => {
   const isProfilephoto = useSelector((state) => state.profilephotoReducer);
   const isEmail = useSelector((state) => state.emailReducer);
   const localStorageToken = localStorage.getItem("auth-token");
+  const form = useRef(null);
 
   const deleteToggler = () => {
     const bodyTag = document.body;
@@ -51,6 +52,26 @@ const Account = () => {
     });
     logOutHandler();
   };
+
+  const submitProfileImage = (e) => {
+    e.preventDefault();
+    const data = new FormData(form.current);
+    console.log("form current dataaaaaaa" + data);
+
+    const requestOptions = {
+      method: "POST",
+      body: JSON.stringify({ profileImage: "React POST Request Example" }),
+    };
+
+    axios.post("/profileimage", requestOptions, {
+      headers: {
+        "auth-token": localStorageToken,
+      },
+    });
+    // .then(res => res.json())
+    // .then(json => setUser(json.user))
+  };
+
   if (isLogged) {
     return (
       <React.Fragment>
@@ -76,14 +97,24 @@ const Account = () => {
             <div className="profilephoto__wrap">
               <div className="profilephoto">
                 <a onClick={editPhotoHandler}>
-                  <img src={`/uploads/${isProfilephoto}`} alt="Profilephoto" />
+                  <img
+                    src={`/uploads/images/${isProfilephoto}`}
+                    alt="Profilephoto"
+                  />
                 </a>
               </div>
-              <p>
-                <a onClick={editPhotoHandler}>
+              <form
+                action="/profileimage"
+                method="post"
+                encType="multipart/form-data"
+              >
+                <label htmlFor="image">
                   <i className="fa fa-edit"></i>Profilfoto ändern
-                </a>
-              </p>
+                </label>
+                <br />
+                <input type="file" name="image" id="image"></input>
+                <button type="submit">Speichern</button>
+              </form>
             </div>
             <h2>Abmelden</h2>
             <button onClick={logOutHandler}>

@@ -31,12 +31,16 @@
       text-decoration: underline;
       cursor: pointer;
     }
+    input {
+      margin-top: 10px;
+    }
   }
   .profilephoto {
     border-radius: 100%;
     width: 150px;
     border: 2px solid var(--black);
     overflow: hidden;
+    margin-bottom: 10px;
     img {
       width: 100%;
       height: auto;

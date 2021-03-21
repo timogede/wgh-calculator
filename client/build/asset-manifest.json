@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/static/css/main.f50f72c9.chunk.css",
+    "main.js": "/static/js/main.2d9f6682.chunk.js",
+    "main.js.map": "/static/js/main.2d9f6682.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.0bca33a5.js",
+    "runtime-main.js.map": "/static/js/runtime-main.0bca33a5.js.map",
+    "static/js/2.93c23ca6.chunk.js": "/static/js/2.93c23ca6.chunk.js",
+    "static/js/2.93c23ca6.chunk.js.map": "/static/js/2.93c23ca6.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.f50f72c9.chunk.css.map": "/static/css/main.f50f72c9.chunk.css.map",
+    "static/js/2.93c23ca6.chunk.js.LICENSE.txt": "/static/js/2.93c23ca6.chunk.js.LICENSE.txt",
+    "static/media/dgv_handicap-regeln_2021.69a408c2.pdf": "/static/media/dgv_handicap-regeln_2021.69a408c2.pdf",
+    "static/media/empty-new.5fd11906.svg": "/static/media/empty-new.5fd11906.svg",
+    "static/media/empty.b648225c.svg": "/static/media/empty.b648225c.svg",
+    "static/media/logo.cae06d4d.svg": "/static/media/logo.cae06d4d.svg",
+    "static/media/tee.9b05934e.svg": "/static/media/tee.9b05934e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.0bca33a5.js",
+    "static/js/2.93c23ca6.chunk.js",
+    "static/css/main.f50f72c9.chunk.css",
+    "static/js/main.2d9f6682.chunk.js"
+  ]
+}
