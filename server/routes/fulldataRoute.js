@@ -5,16 +5,17 @@ import User from "../models/userModel.js";
 import { auth } from "./verifyToken.js";
 import multer from "multer";
 
+// File upload folder
+const DIR = "./../client/public/uploads/images";
+
 //define storage for the images
 const storage = multer.diskStorage({
-  //destination for files
-  destination: function (request, file, callback) {
-    callback(null, "./../client/public/uploads/images");
+  destination: (req, file, cb) => {
+    cb(null, DIR);
   },
-
-  //add back the extension
-  filename: function (request, file, callback) {
-    callback(null, Date.now() + file.originalname);
+  filename: (req, file, cb) => {
+    const fileName = file.originalname.toLowerCase().split(" ").join("-");
+    cb(null, "profileimage-" + Date.now() + fileName);
   },
 });
 
@@ -24,32 +25,40 @@ const upload = multer({
   limits: {
     fieldSize: 1024 * 1024 * 3,
   },
+  fileFilter: (req, file, cb) => {
+    if (
+      file.mimetype == "image/png" ||
+      file.mimetype == "image/jpg" ||
+      file.mimetype == "image/jpeg"
+    ) {
+      cb(null, true);
+    } else {
+      cb(null, false);
+      return cb(new Error("Only .png, .jpg and .jpeg format allowed!"));
+    }
+  },
 });
 
 // upload profileimage
-router.route("/profileimage").post(upload.single("image"), (req, res) => {
-  const profileImage = req.body.profileImage;
-  console.log(profileImage);
-  console.log(req.file);
+router.route("/profileimage").post(upload.single("image"), async (req, res) => {
+  const profileImage = req.file.filename;
+  console.log("req file" + profileImage);
 
   User.findOneAndUpdate(
     {
       _id: "6057c1d32af63448c8ae0b58",
     },
     {
-      profileImage: profileImage,
+      profilephoto: profileImage,
     },
     {
       upsert: true,
-    },
-    (error, data) => {
-      if (error) {
-        console.log("the error: " + error);
-      } else {
-        console.log("the data: " + data);
-      }
     }
-  );
+  )
+    .then(res.send({ imageUrl: profileImage }))
+    .catch((error) => {
+      res.status(400).send(error + "upload didnt work on server");
+    });
 });
 
 // update

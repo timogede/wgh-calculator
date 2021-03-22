@@ -11,6 +11,7 @@ import {
   removeUsername,
   removeEmail,
   removeProfilephoto,
+  changeProfilephoto,
 } from "../actions";
 
 const Account = () => {
@@ -21,6 +22,9 @@ const Account = () => {
   const isEmail = useSelector((state) => state.emailReducer);
   const localStorageToken = localStorage.getItem("auth-token");
   const form = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [disableButton, setDisableButton] = useState(true);
+  const [toggleClass, setToggleClass] = useState("");
 
   const deleteToggler = () => {
     const bodyTag = document.body;
@@ -53,23 +57,31 @@ const Account = () => {
     logOutHandler();
   };
 
-  const submitProfileImage = (e) => {
-    e.preventDefault();
-    const data = new FormData(form.current);
-    console.log("form current dataaaaaaa" + data);
-
-    const requestOptions = {
-      method: "POST",
-      body: JSON.stringify({ profileImage: "React POST Request Example" }),
-    };
-
-    axios.post("/profileimage", requestOptions, {
+  const onFileChange = (event) => {
+    setSelectedFile(event.target.files[0]);
+    setDisableButton(false);
+    setToggleClass("toggle_show");
+  };
+  const onFileUpload = (e) => {
+    const formData = new FormData();
+    formData.append("image", selectedFile);
+    console.log(selectedFile);
+    const config = {
       headers: {
-        "auth-token": localStorageToken,
+        "content-type": "multipart/form-data",
       },
-    });
-    // .then(res => res.json())
-    // .then(json => setUser(json.user))
+    };
+    axios
+      .post("/profileimage", formData, config)
+      .then((res) => {
+        console.log(res.data);
+        dispatch(changeProfilephoto(res.data.imageUrl));
+        setToggleClass("");
+        setSelectedFile(null);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   if (isLogged) {
@@ -103,18 +115,19 @@ const Account = () => {
                   />
                 </a>
               </div>
-              <form
-                action="/profileimage"
-                method="post"
-                encType="multipart/form-data"
+
+              <label htmlFor="image">
+                <i className="fa fa-edit"></i>Profilfoto ändern
+                <input type="file" onChange={onFileChange} name="image" />
+              </label>
+              <br />
+              <button
+                className={toggleClass}
+                onClick={onFileUpload}
+                disabled={disableButton}
               >
-                <label htmlFor="image">
-                  <i className="fa fa-edit"></i>Profilfoto ändern
-                </label>
-                <br />
-                <input type="file" name="image" id="image"></input>
-                <button type="submit">Speichern</button>
-              </form>
+                <i className="fas fa-upload"></i>Speichern
+              </button>
             </div>
             <h2>Abmelden</h2>
             <button onClick={logOutHandler}>
