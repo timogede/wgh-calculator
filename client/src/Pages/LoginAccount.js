@@ -71,7 +71,12 @@ const LoginAccount = () => {
             <div className="inputs">
               <form onSubmit={onSubmit}>
                 <input type="text" name="email" placeholder="E-Mail" />
-                <input type="password" name="password" placeholder="Passwort" />
+                <input
+                  type="password"
+                  autoComplete="current-password"
+                  name="password"
+                  placeholder="Passwort"
+                />
                 <input type="submit" id="submit_login" value="Login" />
                 {loginError && <span>{loginError}</span>}
               </form>

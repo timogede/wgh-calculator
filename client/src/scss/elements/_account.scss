@@ -43,17 +43,21 @@
       }
     }
   }
-  .profilephoto {
+  .profilephoto__div {
     border-radius: 100%;
-    width: 150px;
+    width: 250px;
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border: 2px solid var(--black);
     overflow: hidden;
     margin-bottom: 10px;
-    img {
-      width: 100%;
-      height: auto;
-      max-width: 200px;
-    }
+    // img {
+    //   width: 100%;
+    //   height: auto;
+    //   max-width: 200px;
+    // }
   }
   .delete__confirmation {
     display: none;

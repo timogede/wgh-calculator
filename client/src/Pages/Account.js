@@ -1,6 +1,7 @@
 import axios from "axios";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import ReactCrop from "react-image-crop";
 import { Redirect } from "react-router-dom";
 
 import {
@@ -14,6 +15,27 @@ import {
   changeProfilephoto,
 } from "../actions";
 
+function generateDownload(canvas, crop) {
+  if (!crop || !canvas) {
+    return;
+  }
+
+  canvas.toBlob(
+    (blob) => {
+      const previewUrl = window.URL.createObjectURL(blob);
+
+      const anchor = document.createElement("a");
+      anchor.download = "cropPreview.png";
+      anchor.href = URL.createObjectURL(blob);
+      anchor.click();
+
+      window.URL.revokeObjectURL(previewUrl);
+    },
+    "image/png",
+    1
+  );
+}
+
 const Account = () => {
   const dispatch = useDispatch();
   const isLogged = useSelector((state) => state.loggedReducer);
@@ -25,6 +47,11 @@ const Account = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [disableButton, setDisableButton] = useState(true);
   const [toggleClass, setToggleClass] = useState("");
+  const [upImg, setUpImg] = useState();
+  const imgRef = useRef(null);
+  const previewCanvasRef = useRef(null);
+  const [crop, setCrop] = useState({ unit: "%", width: 30, aspect: 16 / 9 });
+  const [completedCrop, setCompletedCrop] = useState(null);
 
   const deleteToggler = () => {
     const bodyTag = document.body;
@@ -57,11 +84,55 @@ const Account = () => {
     logOutHandler();
   };
 
-  const onFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-    setDisableButton(false);
-    setToggleClass("toggle_show");
+  const onFileChange = (e) => {
+    console.log(e.target.value);
+    if (e.target.files && e.target.files.length > 0) {
+      setSelectedFile(e.target.files[0]);
+      setDisableButton(false);
+      setToggleClass("toggle_show");
+      const reader = new FileReader();
+      reader.addEventListener("load", () => setUpImg(reader.result));
+      reader.readAsDataURL(e.target.files[0]);
+    }
   };
+
+  const onLoad = useCallback((img) => {
+    imgRef.current = img;
+  }, []);
+
+  useEffect(() => {
+    if (!completedCrop || !previewCanvasRef.current || !imgRef.current) {
+      return;
+    }
+
+    const image = imgRef.current;
+    const canvas = previewCanvasRef.current;
+    const crop = completedCrop;
+
+    const scaleX = image.naturalWidth / image.width;
+    const scaleY = image.naturalHeight / image.height;
+    const ctx = canvas.getContext("2d");
+    const pixelRatio = window.devicePixelRatio;
+
+    canvas.width = crop.width * pixelRatio;
+    canvas.height = crop.height * pixelRatio;
+
+    ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+    ctx.imageSmoothingQuality = "high";
+
+    ctx.drawImage(
+      image,
+      crop.x * scaleX,
+      crop.y * scaleY,
+      crop.width * scaleX,
+      crop.height * scaleY,
+      0,
+      0,
+      crop.width,
+      crop.height
+    );
+  }, [completedCrop]);
+
   const onFileUpload = (e) => {
     const formData = new FormData();
     formData.append("image", selectedFile);
@@ -69,6 +140,7 @@ const Account = () => {
     const config = {
       headers: {
         "content-type": "multipart/form-data",
+        "auth-token": localStorageToken,
       },
     };
     axios
@@ -109,18 +181,56 @@ const Account = () => {
             <div className="profilephoto__wrap">
               <div className="profilephoto">
                 <a onClick={editPhotoHandler}>
-                  <img
+                  {/* <img
                     src={`/uploads/images/${isProfilephoto}`}
                     alt="Profilephoto"
-                  />
+                  /> */}
+                  <div
+                    className="profilephoto__div"
+                    style={{
+                      backgroundImage: `url(/uploads/images/${isProfilephoto})`,
+                    }}
+                  ></div>
                 </a>
               </div>
 
               <label htmlFor="image">
                 <i className="fa fa-edit"></i>Profilfoto ändern
+                <br />
                 <input type="file" onChange={onFileChange} name="image" />
               </label>
               <br />
+              {/* <ReactCrop
+                src={upImg}
+                onImageLoaded={onLoad}
+                crop={crop}
+                onChange={(c) => setCrop(c)}
+                onComplete={(c) => setCompletedCrop(c)}
+              />
+              <div>
+                <canvas
+                  ref={previewCanvasRef}
+                  // Rounding is important so the canvas width and height matches/is a multiple for sharpness.
+                  style={{
+                    width: Math.round(completedCrop?.width ?? 0),
+                    height: Math.round(completedCrop?.height ?? 0),
+                  }}
+                />
+              </div>
+              <p>
+                Note that the download below won't work in this sandbox due to
+                the iframe missing 'allow-downloads'. It's just for your
+                reference.
+              </p>
+              <button
+                type="button"
+                disabled={!completedCrop?.width || !completedCrop?.height}
+                onClick={() =>
+                  generateDownload(previewCanvasRef.current, completedCrop)
+                }
+              >
+                Download cropped image
+              </button> */}
               <button
                 className={toggleClass}
                 onClick={onFileUpload}
@@ -156,6 +266,9 @@ const Account = () => {
       </React.Fragment>
     );
   } else {
+    {
+      console.log("not logged -> redirect");
+    }
     return <Redirect to="/anmelden" />;
   }
 };
