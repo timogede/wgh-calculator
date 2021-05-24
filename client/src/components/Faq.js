@@ -1,5 +1,7 @@
 import React from "react";
 import handicapRegelnDownload from "../downloads/dgv_handicap-regeln_2021.pdf";
+import neunLochScoreDownload from "../downloads/9loch_scorekarte.jpg";
+import turnierDetailsDownload from "../downloads/turnierdetails.jpg";
 const Faq = () => {
   const faqToggler = (e) => {
     let clickedElement = e.target;
@@ -118,8 +120,69 @@ const Faq = () => {
           </button>
           <div className="panel">
             <p>
-              Das ist nicht ganz so einfach zu erklären, daher verlinke ich hier
-              einfach auf das offizielle Dokument zur neuen Handicapberechnung.
+              Hierzu wird genau wie bei der Berechnung des SD für 18 Loch ein
+              angepasster Score benötigt und in den handicap.report zusammen mit
+              dem CR und Slope für diesen 9 Loch Platz eingetragen. Für diesen
+              angepassten Score fehlt zunächst ein Ergebnis für die zweiten 9
+              Loch. Dieses ergibt sich aus 9x Netto Par + 1. Sie kriegen für die
+              2. neun Loch also ihre persönliche Netto Par + einem Schlag
+              berechnet (oder einfach das Par + Ihre Vorgabe von 9 Loch + 1).
+              Dieser Score wird mit dem angepassten Score der ersten neun Loch
+              addiert und ergibt somit Ihr Ergebnis, welches Sie nur noch in den
+              handicap.report eintragen müssen.
+            </p>
+            <br />
+            <p>
+              <b>Beispiel:</b>
+              <p>
+                Aus <a href="https://mygolf.de?ref=handicap.report">mygolf </a>
+                haben wir den gespielten Score, CR, Slope und die Vorgaben für
+                jedes Loch.
+              </p>
+              <br />
+              <a href={turnierDetailsDownload}>
+                <img src={turnierDetailsDownload} />
+              </a>
+              <br />
+              <a href={turnierDetailsDownload}>
+                <img src={neunLochScoreDownload} />
+              </a>
+              <br />
+              <b>CR:</b> 71,4
+              <br />
+              <b>Slope:</b> 129
+              <br />
+              <b>Par:</b> 72
+              <br />
+              <b>Gespielter Score:</b> 39
+              <br />
+              <b>angepasster Score:</b> 39 (da kein Loch schlechter als 2 über
+              Netto Par)
+              <br />
+              <b>Vorgaben für 9 Loch:</b> 5 Striche
+              <br />
+              <b>Berechneter Score für die zweiten 9 Formel:</b> 9x Netto Par +
+              1
+              <br />
+              <b>Berechneter Score für die zweiten 9:</b> 5 + 3 + 5 + 3 + 4 + 5
+              + 5 + 6 + 5 + 1 = 42
+              <br />
+              <b>oder einfach:</b> 9 Loch Par + 9 Loch Vorgaben + 1 = 36 + 5 + 1
+              = 42
+              <br />
+              <b>vollständiger Score:</b> angepasster Score erste 9 Loch +
+              berechneter Score zweiten 9 = 39 + 42 = 81
+              <br />
+              <b>Score Differential (SD) für diese 9 Loch Runde:</b> im
+              handicap.report eintragen: a. Score 81, CR 71,4, Slope 129 = SD
+              8.4
+              <br />
+              <b>Info: </b>
+              Falls dieser SD minimal vom SD in mygolf abweicht, liegt dies
+              daran, dass mygolf häufig den zusätzlichen Schlag (+1) für 9
+              Lochrunden laut dem neuen Regelwerk fälschlicherweise nicht
+              anwendet. Ihre Runde wird von mygolf also um einen Schlag
+              verbessert (nett, aber nicht korrekt).
             </p>
           </div>
 
