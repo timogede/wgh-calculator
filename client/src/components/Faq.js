@@ -2,6 +2,8 @@ import React from "react";
 import handicapRegelnDownload from "../downloads/dgv_handicap-regeln_2021.pdf";
 import neunLochScoreDownload from "../downloads/9loch_scorekarte.jpg";
 import turnierDetailsDownload from "../downloads/turnierdetails.jpg";
+import anpassungenDownload from "../downloads/anpassungen.jpg";
+
 const Faq = () => {
   const faqToggler = (e) => {
     let clickedElement = e.target;
@@ -80,6 +82,25 @@ const Faq = () => {
             </p>
             <p>Die Formel für den Slope:</p>
             <p>(Bogey Rating - Course Rating) x 5,381</p>
+          </div>
+          <button
+            id="faq-adjustment"
+            onClick={faqToggler}
+            className="accordion"
+          >
+            Was ist die Handicap-Anpassung?
+          </button>
+          <div className="panel">
+            <p>
+              Das Handicap wird nicht immer aus den besten 8 der letzen 20
+              Ergebnisse berechnet, da häufig nicht so viele Ergebnisse
+              vorliegen. Bei z.B. 3 Ergebnissen besteht das HCP aus dem
+              niedrigsten SD dieser Ergebnisse und davon wird nochmal 2
+              abgezogen.
+              <a href={anpassungenDownload}>
+                <img src={anpassungenDownload} />
+              </a>
+            </p>
           </div>
 
           <button id="support" onClick={faqToggler} className="accordion">

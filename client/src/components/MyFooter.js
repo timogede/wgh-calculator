@@ -29,6 +29,11 @@ const MyFooter = () => {
               </HashLink>
             </li>
             <li>
+              <HashLink smooth to="/changelog" href="changelog">
+                Changelog
+              </HashLink>
+            </li>
+            <li>
               <HashLink smooth to="/datenschutz" href="datenschutz">
                 Datenschutz
               </HashLink>

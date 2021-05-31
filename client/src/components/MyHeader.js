@@ -60,13 +60,13 @@ const MyHeader = ({ language }) => {
                   </li>
                   {!isLogged ? (
                     <>
-                      <li className="menu-item">
+                      <li className="menu-item hide-for-now">
                         <HashLink smooth to="/anmelden">
                           <i className="fas fa-sign-in-alt"></i>Login
                         </HashLink>
                       </li>
 
-                      <li className="menu-item">
+                      <li className="menu-item hide-for-now">
                         <HashLink smooth to="/registrieren">
                           <i className="fas fa-user-plus"></i>Registrieren
                         </HashLink>
@@ -77,7 +77,7 @@ const MyHeader = ({ language }) => {
                   )}
                   {isLogged ? (
                     <>
-                      <li className="menu-item">
+                      <li className="menu-item hide-for-now">
                         <HashLink smooth to="/account">
                           <i className="fas fa-user"></i>Account
                         </HashLink>

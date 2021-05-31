@@ -1,0 +1,27 @@
+.changelog {
+  text-align: left;
+}
+
+.changelog ul {
+  list-style-type: none;
+  position: relative;
+}
+
+.changelog ul li {
+  position: relative;
+  padding-left: 12px;
+}
+
+.changelog ul li::before {
+  content: "-";
+  position: absolute;
+  left: 0;
+}
+
+.changelog ul li:first-child {
+  font-weight: var(--font-weight-black);
+  margin: 20px 0 4px 0;
+  &:before {
+    content: none;
+  }
+}

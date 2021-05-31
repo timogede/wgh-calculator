@@ -5,6 +5,7 @@ import TodoList from "../components/TodoList.js";
 import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
+import Changelog from "./Changelog.js";
 import axios from "axios";
 import RegisterAccount from "./RegisterAccount.js";
 import LoginAccount from "./LoginAccount.js";
@@ -34,6 +35,7 @@ const Home = () => {
   const [averageSlope, setAverageSlope] = useState("");
   const [averageCr, setAverageCr] = useState("");
   const [averageScoreDifferential, setAverageScoreDifferential] = useState("");
+  const [adjustment, setAdjustment] = useState("");
   const [fullScores, setFullScores] = useState([]);
   const [theHandicap, setTheHandicap] = useState("");
   const [rerender, setRerender] = useState(0);
@@ -110,7 +112,71 @@ const Home = () => {
   const sortTodos = (sortthisarray) => {
     const sortedArray = [...sortthisarray];
     sortedArray.sort(sortFunction);
-    const cuttedSortedArray = sortedArray.slice(0, 8);
+    const sortedArraySize = sortedArray.length;
+    if (sortedArraySize == 1 || sortedArraySize == 2 || sortedArraySize == 3) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(2);
+      var slice = 1;
+    }
+    if (sortedArraySize == 4) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(1);
+      var slice = 1;
+    }
+    if (sortedArraySize == 5) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 1;
+    }
+    if (sortedArraySize == 6) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(1);
+      var slice = 2;
+    }
+    if (sortedArraySize == 7 || sortedArraySize == 8) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 2;
+    }
+    if (
+      sortedArraySize == 9 ||
+      sortedArraySize == 10 ||
+      sortedArraySize == 11
+    ) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 3;
+    }
+    if (
+      sortedArraySize == 12 ||
+      sortedArraySize == 13 ||
+      sortedArraySize == 14
+    ) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 4;
+    }
+    if (sortedArraySize == 15 || sortedArraySize == 16) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 5;
+    }
+    if (sortedArraySize == 17 || sortedArraySize == 18) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 6;
+    }
+    if (sortedArraySize == 19) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 7;
+    }
+    if (sortedArraySize > 19) {
+      console.log("sortedArraySize is: " + sortedArraySize);
+      setAdjustment(0);
+      var slice = 8;
+    }
+    const cuttedSortedArray = sortedArray.slice(0, slice);
 
     setSortedTodos(cuttedSortedArray);
     const fullScoresArray = sortthisarray;
@@ -140,7 +206,7 @@ const Home = () => {
         theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
     }
     theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
-
+    theHandicap = theHandicap - adjustment;
     setTheHandicap(theHandicap);
   };
 
@@ -302,6 +368,8 @@ const Home = () => {
           allScores={allScores}
           amountOfScores={amountOfScores}
           setAmountOfScores={setAmountOfScores}
+          adjustment={adjustment}
+          setAdjustment={setAdjustment}
         />
         <Faq />
       </React.Fragment>

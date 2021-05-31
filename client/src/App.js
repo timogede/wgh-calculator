@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./Pages/Home";
 import Impressum from "./Pages/Impressum";
 import Datenschutz from "./Pages/Datenschutz";
+import Changelog from "./Pages/Changelog";
 import LoginAccount from "./Pages/LoginAccount";
 import RegisterAccount from "./Pages/RegisterAccount";
 import Account from "./Pages/Account";
@@ -71,6 +72,7 @@ const App = () => {
           <Route path="/" exact component={Home} />
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
+          <Route path="/changelog" component={Changelog} />
           <Route path="/anmelden" component={LoginAccount} />
           <Route path="/registrieren" component={RegisterAccount} />
           <Route path="/account" component={Account} />
