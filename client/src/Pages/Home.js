@@ -206,7 +206,7 @@ const Home = () => {
         theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
     }
     theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
-    theHandicap = theHandicap - adjustment;
+    theHandicap = (theHandicap - adjustment).toFixed(1);
     setTheHandicap(theHandicap);
   };
 
