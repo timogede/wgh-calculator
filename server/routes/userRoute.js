@@ -7,7 +7,19 @@ import {
 } from "../models/validationModel.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-
+import nodemailer from "nodemailer";
+import sendgridTransport from "nodemailer-sendgrid-transport";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import randomstring from "randomstring";
+dotenv.config();
+const transporter = nodemailer.createTransport(
+  sendgridTransport({
+    auth: {
+      api_key: process.env.SENDGRID_API,
+    },
+  })
+);
 //register
 
 router.route("/register").post(async (req, res) => {
@@ -27,6 +39,9 @@ router.route("/register").post(async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
+  //Hash token
+  const token = randomstring.generate();
+
   //Create new user
   const user = new User({
     name: req.body.name,
@@ -34,15 +49,68 @@ router.route("/register").post(async (req, res) => {
     password: hashedPassword,
     everything: req.body.everything,
     profilephoto: "tigerhead.jpg",
+    token: token,
+    activated: false,
   });
   try {
-    const savedUser = await user.save();
+    let activationLink = `${process.env.BASE_URL}user/verify/${user._id}/${token}`;
+    const savedUser = await user.save().then((user) => {
+      transporter.sendMail({
+        to: user.email,
+        from: "timo@handicap.report",
+        subject: "signup test",
+        html: `<h1>Hello, welcome to handicap.report</h1><br/><p>To activate your account, please click this link: <a href="${activationLink}">E-Mail bestätigen</a></p>${token}`,
+      });
+    });
     res.send({ user: user._id });
   } catch (error) {
     res
       .status(400)
       .send(error + "something didnt work with saving the received user data");
   }
+});
+
+//Verify
+
+router.route("/verify/:userID/:token").get(async (req, res) => {
+  const userID = req.params.userID;
+  const token = req.params.token;
+  var isValid = mongoose.Types.ObjectId.isValid(userID); //true
+
+  //not a object id
+  if (!isValid) {
+    return res.status(200).send("novalid_objectid");
+  }
+  //user not found
+  const user = await User.findOne({ _id: userID });
+  if (!user) return res.status(200).send("missing_userid");
+
+  //token wrong
+  const tokenTrue = await User.findOne({ _id: userID });
+  if (tokenTrue.token !== token) {
+    return res.status(200).send("token is not correct hacker!");
+  }
+  //user already activated
+  const alreadyActivated = await User.findOne({ _id: userID });
+  if (alreadyActivated.activated)
+    return res.status(200).send("user already activated");
+
+  //activate!
+  User.findOneAndUpdate(
+    {
+      _id: userID,
+    },
+    {
+      activated: true,
+    }
+  )
+    .then(() => res.status(200).send("all good!"))
+    .catch((error) => {
+      console.log("???? " + error);
+      res.status(400).json({
+        error: error,
+      });
+    });
 });
 
 //Login

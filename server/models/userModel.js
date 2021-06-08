@@ -29,6 +29,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "tiger.jpg",
   },
+  token: {
+    type: String,
+  },
+  activated: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const User = mongoose.model("User", userSchema);

@@ -7,6 +7,7 @@ import Impressum from "./Pages/Impressum";
 import Datenschutz from "./Pages/Datenschutz";
 import Changelog from "./Pages/Changelog";
 import LoginAccount from "./Pages/LoginAccount";
+import VerifyAccount from "./Pages/VerifyAccount";
 import RegisterAccount from "./Pages/RegisterAccount";
 import Account from "./Pages/Account";
 import axios from "axios";
@@ -76,6 +77,7 @@ const App = () => {
           <Route path="/anmelden" component={LoginAccount} />
           <Route path="/registrieren" component={RegisterAccount} />
           <Route path="/account" component={Account} />
+          <Route path="/user/verify" component={VerifyAccount} />
         </Switch>
         <MyFooter />
       </React.Fragment>
