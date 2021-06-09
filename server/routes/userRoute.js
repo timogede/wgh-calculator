@@ -58,11 +58,11 @@ router.route("/register").post(async (req, res) => {
       transporter.sendMail({
         to: user.email,
         from: "timo@handicap.report",
-        subject: "signup test",
-        html: `<h1>Hello, welcome to handicap.report</h1><br/><p>To activate your account, please click this link: <a href="${activationLink}">E-Mail bestätigen</a></p>${token}`,
+        subject: "E-Mail Bestätigung handicap.report",
+        html: `<h1>Hallo und willkommen bei handicap.report</h1><br/><p>Um deine E-Mail zu bestätigen klicke einfach auf den Link: <a href="${activationLink}">E-Mail bestätigen</a>`,
       });
     });
-    res.send({ user: user._id });
+    res.status(200).send("register_sucess");
   } catch (error) {
     res
       .status(400)

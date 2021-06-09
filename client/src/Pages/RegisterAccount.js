@@ -17,6 +17,7 @@ const registerSchema = Joi.object({
 
 const RegisterAccount = () => {
   const [duplicateError, setDuplicateError] = useState(false);
+  const [registerSucess, setRegisterSucess] = useState(false);
   const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(registerSchema),
   });
@@ -44,6 +45,10 @@ const RegisterAccount = () => {
       .post("http://localhost:3333/user/register", newUser)
       .then(function (response) {
         console.log("worked");
+        const sucessMessage = response.data;
+        if (sucessMessage === "register_sucess") {
+          setRegisterSucess(true);
+        }
       })
       .catch(function (error) {
         const errorMessage = error.response.data;
@@ -106,6 +111,20 @@ const RegisterAccount = () => {
               <input type="submit" id="submit_account" value="Registrieren" />
               {duplicateError && <span>{duplicateError}</span>}
             </form>
+          </div>
+          <div
+            className={
+              registerSucess ? "registersucess sucess" : "registersucess"
+            }
+          >
+            <div>
+              <i className="fas fa-badge-check sucess"></i>
+              <h3>Registrierung erfolgreich</h3>
+              <p>
+                Bitte bestätige noch deine E-Mail um die Registrierung
+                abzuschließen.
+              </p>
+            </div>
           </div>
         </div>
       </div>
