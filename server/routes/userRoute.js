@@ -150,4 +150,8 @@ router.route("/login").post(async (req, res) => {
   });
 });
 
+//forgot password
+
+router.route("/forgot-password").get(async (req, res) => {});
+
 export default router;

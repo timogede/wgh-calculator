@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { HashLink } from "react-router-hash-link";
 import {
   login,
   logout,
@@ -81,7 +82,28 @@ const LoginAccount = () => {
                   placeholder="Passwort"
                 />
                 <input type="submit" id="submit_login" value="Login" />
-                {loginError && <span>{loginError}</span>}
+                <HashLink to="/passwort-zuruecksetzen-mail">
+                  Passwort vergessen?
+                </HashLink>
+                <br />
+                <br />
+                <div className={loginError ? "loginfail sucess" : "loginfail"}>
+                  <i className="fas fa-times"></i>
+                  <h3>{loginError}</h3>
+                  {loginError == "Das Passwort ist falsch!" ? (
+                    <HashLink to="/passwort-zuruecksetzen-mail">
+                      Passwort zurücksetzen
+                    </HashLink>
+                  ) : (
+                    ""
+                  )}
+                  {loginError ==
+                  "Ein Account mit dieser E-Mail besteht nicht!" ? (
+                    <HashLink to="/registrieren">Jetzt registrieren</HashLink>
+                  ) : (
+                    ""
+                  )}
+                </div>
               </form>
             </div>
           </div>

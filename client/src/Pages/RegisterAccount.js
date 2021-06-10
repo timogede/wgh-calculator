@@ -117,14 +117,12 @@ const RegisterAccount = () => {
               registerSucess ? "registersucess sucess" : "registersucess"
             }
           >
-            <div>
-              <i className="fas fa-badge-check sucess"></i>
-              <h3>Registrierung erfolgreich</h3>
-              <p>
-                Bitte bestätige noch deine E-Mail um die Registrierung
-                abzuschließen.
-              </p>
-            </div>
+            <i className="fas fa-badge-check sucess"></i>
+            <h3>Registrierung erfolgreich</h3>
+            <p>
+              Bitte bestätige noch deine E-Mail um die Registrierung
+              abzuschließen.
+            </p>
           </div>
         </div>
       </div>

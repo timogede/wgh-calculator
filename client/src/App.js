@@ -10,6 +10,8 @@ import LoginAccount from "./Pages/LoginAccount";
 import VerifyAccount from "./Pages/VerifyAccount";
 import RegisterAccount from "./Pages/RegisterAccount";
 import Account from "./Pages/Account";
+import ResetPassword from "./Pages/ResetPassword.js";
+import ForgotPassword from "./Pages/ForgotPassword.js";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -77,6 +79,8 @@ const App = () => {
           <Route path="/anmelden" component={LoginAccount} />
           <Route path="/registrieren" component={RegisterAccount} />
           <Route path="/account" component={Account} />
+          <Route path="/passwort-zuruecksetzen" component={ResetPassword} />
+          <Route path="/passwort-vergessen" component={ForgotPassword} />
           <Route path="/user/verify" component={VerifyAccount} />
         </Switch>
         <MyFooter />
