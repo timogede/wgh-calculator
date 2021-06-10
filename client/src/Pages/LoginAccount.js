@@ -57,6 +57,9 @@ const LoginAccount = () => {
         if (errorMessage === "error_password") {
           setLoginError("Das Passwort ist falsch!");
         }
+        if (errorMessage === "mail_not_active") {
+          setLoginError("Bitte bestätige noch deine E-Mail.");
+        }
       });
   };
 

@@ -8,35 +8,36 @@ const VerifyAccount = ({ language }) => {
     const link = window.location.pathname.split("/");
     const userID = link[link.length - 2];
     const token = link[link.length - 1];
-    try {
-      const verify = await axios.get(
-        "http://localhost:3333/user/verify/" + userID + "/" + token
-      );
 
-      const fetchedData = verify.data;
-      if (fetchedData == "all good!") {
-        console.log("test1");
-        setVerifyState("all good!");
-      }
-      if (fetchedData == "novalid_objectid") {
-        console.log("test2");
-        setVerifyState("novalid_objectid");
-      }
-      if (fetchedData == "missing_userid") {
-        console.log("test3");
-        setVerifyState("missing_userid");
-      }
-      if (fetchedData == "token is not correct hacker!") {
-        console.log("test4");
-        setVerifyState("token is not correct hacker!");
-      }
-      if (fetchedData == "user already activated") {
-        console.log("test5");
-        setVerifyState("user already activated");
-      }
-    } finally {
-      console.log("finally");
-    }
+    axios
+      .get("http://localhost:3333/user/verify/" + userID + "/" + token)
+      .then((response) => {
+        console.log(response.data);
+        if (response.data == "all good!") {
+          console.log("test1");
+          setVerifyState("all good!");
+        }
+      })
+      .catch((error) => {
+        console.log("error: " + error.response.data);
+
+        if (error.response.data == "novalid_objectid") {
+          console.log("test2");
+          setVerifyState("novalid_objectid");
+        }
+        if (error.response.data == "missing_userid") {
+          console.log("test3");
+          setVerifyState("missing_userid");
+        }
+        if (error.response.data == "token is not correct hacker!") {
+          console.log("test4");
+          setVerifyState("token is not correct hacker!");
+        }
+        if (error.response.data == "user already activated") {
+          console.log("test5");
+          setVerifyState("user already activated");
+        }
+      });
   };
   getVerify();
 
@@ -63,9 +64,9 @@ const VerifyAccount = ({ language }) => {
           <div className="verify-account__inside container__inside">
             <i className="fas fa-times-octagon failure"></i>
             <h1>Token ist nicht gültig, du Hacker!</h1>
-            <button onClick="/">
-              <i className="fas fa-home"></i>Handicap berechnen
-            </button>
+            <HashLink to="/" className="btn btn-primary">
+              Handicap berechnen
+            </HashLink>
           </div>
         </div>
       </React.Fragment>

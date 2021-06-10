@@ -79,21 +79,21 @@ router.route("/verify/:userID/:token").get(async (req, res) => {
 
   //not a object id
   if (!isValid) {
-    return res.status(200).send("novalid_objectid");
+    return res.status(400).send("novalid_objectid");
   }
   //user not found
   const user = await User.findOne({ _id: userID });
-  if (!user) return res.status(200).send("missing_userid");
+  if (!user) return res.status(400).send("missing_userid");
 
   //token wrong
   const tokenTrue = await User.findOne({ _id: userID });
   if (tokenTrue.token !== token) {
-    return res.status(200).send("token is not correct hacker!");
+    return res.status(400).send("token is not correct hacker!");
   }
   //user already activated
   const alreadyActivated = await User.findOne({ _id: userID });
   if (alreadyActivated.activated)
-    return res.status(200).send("user already activated");
+    return res.status(400).send("user already activated");
 
   //activate!
   User.findOneAndUpdate(
@@ -128,6 +128,10 @@ router.route("/login").post(async (req, res) => {
   //Password is correct
   const validPass = await bcrypt.compare(req.body.password, user.password);
   if (!validPass) return res.status(400).send("error_password");
+
+  //User Mail is not activated
+  const mail = await User.findOne({ email: req.body.email });
+  if (!mail.activated) return res.status(400).send("mail_not_active");
 
   //Create and assign token
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET, {
