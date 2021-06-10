@@ -47,7 +47,7 @@ const VerifyAccount = ({ language }) => {
         <div className="verify-account container" id="">
           <div className="verify-account__inside container__inside">
             <i className="fas fa-check"></i>
-            <i className="fas fa-badge-check sucess"></i>
+            <i className="fas fa-check sucess"></i>
             <h1>E-Mail ist nun aktiviert!</h1>
             <HashLink to="/" className="btn btn-primary">
               Handicap berechnen
@@ -107,7 +107,7 @@ const VerifyAccount = ({ language }) => {
       <React.Fragment>
         <div className="verify-account container" id="">
           <div className="verify-account__inside container__inside">
-            <i className="fas fa-badge-check sucess"></i>
+            <i className="fas fa-check sucess"></i>
             <h1>E-Mail ist bereits bestätigt.</h1>
             <HashLink to="/" className="btn btn-primary">
               Handicap berechnen
