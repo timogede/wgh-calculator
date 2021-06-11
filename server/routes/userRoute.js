@@ -71,12 +71,13 @@ router.route("/register").post(async (req, res) => {
 });
 
 //Verify
-
+var counter = 0;
 router.route("/verify/:userID/:token").get(async (req, res) => {
   const userID = req.params.userID;
   const token = req.params.token;
   var isValid = mongoose.Types.ObjectId.isValid(userID); //true
-
+  console.log("COUNTER: " + counter);
+  counter++;
   //not a object id
   if (!isValid) {
     return res.status(400).send("novalid_objectid");
@@ -152,6 +153,62 @@ router.route("/login").post(async (req, res) => {
 
 //forgot password
 
-router.route("/forgot-password").get(async (req, res) => {});
+router.route("/forgot-password").post(async (req, res) => {
+  const reqMail = req.body.email;
+
+  //mail not found
+  const userNotFoundObject = await User.findOne({ email: reqMail });
+  const userNotFound = JSON.stringify(userNotFoundObject);
+  // console.log(userNotFoundObject);
+  // console.log(userNotFound);
+  if (!userNotFoundObject) return res.status(400).send("mail_not_found");
+
+  //password reset send
+  User.findOne({ email: reqMail })
+    .then(() => {
+      let resetLink = `${process.env.BASE_URL}user/passwort-zuruecksetzen/${userNotFoundObject._id}/${userNotFoundObject.token}`;
+      transporter.sendMail({
+        to: reqMail,
+        from: "timo@handicap.report",
+        subject: "Passwort zurücksetzen",
+        html: `<h1>Du möchtest dein Passwort zurücksetzen?</h1><br/><p>Klicke einfach auf den <a href="${resetLink}">Link</a> um dein Passwort zurückzusetzen.`,
+      });
+      res.status(200).send("forgotmail_sucess");
+    })
+
+    .catch((error) => {
+      console.log("forgot-password-error: " + error);
+      res.status(400).json({
+        error: error,
+      });
+    });
+});
+
+//forgot password
+
+router.route("/reset-password/:userID/:token").get(async (req, res) => {
+  const reqPassword = req.body.password;
+  console.log(reqPassword);
+  const userID = req.params.userID;
+  const token = req.params.token;
+  var isValid = mongoose.Types.ObjectId.isValid(userID); //true
+  //not a object id
+  if (!isValid) {
+    return res.status(400).send("novalid_objectid");
+  }
+  //user not found
+  const user = await User.findOne({ _id: userID });
+  if (!user) return res.status(400).send("missing_userid");
+
+  //token wrong
+  const tokenTrue = await User.findOne({ _id: userID });
+  if (tokenTrue.token !== token) {
+    return res.status(400).send("token is not correct hacker!");
+  }
+  //user already activated
+  const alreadyActivated = await User.findOne({ _id: userID });
+  if (alreadyActivated.activated)
+    return res.status(400).send("user already activated");
+});
 
 export default router;

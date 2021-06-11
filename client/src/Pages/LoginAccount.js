@@ -82,7 +82,7 @@ const LoginAccount = () => {
                   placeholder="Passwort"
                 />
                 <input type="submit" id="submit_login" value="Login" />
-                <HashLink to="/passwort-zuruecksetzen-mail">
+                <HashLink to="/passwort-vergessen">
                   Passwort vergessen?
                 </HashLink>
                 <br />
@@ -91,7 +91,7 @@ const LoginAccount = () => {
                   <i className="fas fa-times"></i>
                   <h3>{loginError}</h3>
                   {loginError == "Das Passwort ist falsch!" ? (
-                    <HashLink to="/passwort-zuruecksetzen-mail">
+                    <HashLink to="/passwort-vergessen">
                       Passwort zurücksetzen
                     </HashLink>
                   ) : (

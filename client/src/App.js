@@ -79,7 +79,10 @@ const App = () => {
           <Route path="/anmelden" component={LoginAccount} />
           <Route path="/registrieren" component={RegisterAccount} />
           <Route path="/account" component={Account} />
-          <Route path="/passwort-zuruecksetzen" component={ResetPassword} />
+          <Route
+            path="/user/passwort-zuruecksetzen"
+            component={ResetPassword}
+          />
           <Route path="/passwort-vergessen" component={ForgotPassword} />
           <Route path="/user/verify" component={VerifyAccount} />
         </Switch>

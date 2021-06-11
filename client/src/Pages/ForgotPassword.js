@@ -8,12 +8,17 @@ import logo from "../images/logo.svg";
 const ForgotPassword = () => {
   const [resetSucess, setResetSucess] = useState("");
   const sendResetReq = (event) => {
-    console.log(event.target.email.value);
-    const submittedMail = event.target.email.value;
+    const data = new FormData(event.target);
+    console.log(data.get("email"));
+    const submittedMail = {
+      email: data.get("email"),
+    };
+
+    event.preventDefault();
     axios
-      .get("http://localhost:3333/user/forgot-password", submittedMail)
+      .post("http://localhost:3333/user/forgot-password", submittedMail)
       .then((response) => {
-        console.log("worked");
+        // console.log("worked");
         const sucessMessage = response.data;
         if (sucessMessage === "forgotmail_sucess") {
           setResetSucess("forgotmail_sucess");
@@ -37,19 +42,23 @@ const ForgotPassword = () => {
             <br />
             <input type="submit" id="submit_reset_req" value="Zurücksetzen" />
           </form>
-          <div className={resetSucess ? "resetfail sucess" : "resetfail"}>
+          <div className={resetSucess ? "resetfail action" : "resetfail"}>
             {resetSucess == "forgotmail_sucess" ? (
               <>
-                <i className="fas fa-check"></i>
-                <h3>
-                  Eine E-Mail zum Zurücksetzen des Passwortes wurde verschickt.
-                </h3>
+                <div className="sucess">
+                  <i className="fas fa-check"></i>
+                  <h3>
+                    Eine E-Mail zum Zurücksetzen des Passwortes wurde
+                    verschickt.
+                  </h3>
+                </div>
               </>
             ) : (
               ""
             )}
             {resetSucess == "mail_not_found" ? (
               <>
+                <div className="sucess"></div>
                 <i className="fas fa-times"></i>
                 <h3>Diese E-Mail ist nicht registriert.</h3>
               </>
