@@ -58,9 +58,10 @@ const ForgotPassword = () => {
             )}
             {resetSucess == "mail_not_found" ? (
               <>
-                <div className="sucess"></div>
-                <i className="fas fa-times"></i>
-                <h3>Diese E-Mail ist nicht registriert.</h3>
+                <div className="fail">
+                  <i className="fas fa-times"></i>
+                  <h3>Diese E-Mail ist nicht registriert.</h3>
+                </div>
               </>
             ) : (
               ""
