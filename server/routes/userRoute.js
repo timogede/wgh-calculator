@@ -53,7 +53,7 @@ router.route("/register").post(async (req, res) => {
     activated: false,
   });
   try {
-    let activationLink = `${process.env.BASE_URL}user/verify/${user._id}/${token}`;
+    let activationLink = `${process.env.BASE_URL}bestaetigen/${user._id}/${token}`;
     const savedUser = await user.save().then((user) => {
       transporter.sendMail({
         to: user.email,

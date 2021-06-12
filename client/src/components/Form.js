@@ -41,11 +41,11 @@ const Form = ({
     const xArray = todos;
     if (todos.length >= 20) {
       xArray.shift();
+      console.log("shiiiiift");
     }
 
     dispatch(
       changeTodos([
-        ...xArray,
         {
           scoreDifferential: scoreDifferential,
           text: inputText,
@@ -54,12 +54,12 @@ const Form = ({
           completed: false,
           id: "key_" + (Math.random() * 100000).toFixed(0),
         },
+        ...xArray,
       ])
     );
 
     setInputText("");
-    setInputSlope("");
-    setInputCourseRating("");
+
     setRerender(rerender + 1);
   };
 
@@ -127,7 +127,7 @@ const Form = ({
                 value={inputCourseRating}
                 type="number"
                 className="todo-input"
-                placeholder="71.9"
+                placeholder="73.6"
                 required
               />
             </div>
@@ -149,7 +149,7 @@ const Form = ({
                 value={inputSlope}
                 type="number"
                 className="todo-input"
-                placeholder="127"
+                placeholder="138"
                 required
               />
             </div>

@@ -84,7 +84,7 @@ const App = () => {
             component={ResetPassword}
           />
           <Route path="/passwort-vergessen" component={ForgotPassword} />
-          <Route path="/user/verify" component={VerifyAccount} />
+          <Route path="/bestaetigen" component={VerifyAccount} />
         </Switch>
         <MyFooter />
       </React.Fragment>
