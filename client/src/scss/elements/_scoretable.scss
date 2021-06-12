@@ -1,18 +1,19 @@
-.scoretable{
+.scoretable {
   margin-bottom: 30px;
 }
 
-.scoretable__table{
+.scoretable__table {
   width: 100%;
-     border-collapse: collapse;
-     font-size: var(--normal);
+  border-collapse: collapse;
+  font-size: var(--normal);
 }
 
-.scoretable__table th, .scoretable__table tr{
+.scoretable__table th,
+.scoretable__table tr {
   text-align: right;
 }
 
-.scoretable__table thead{
+.scoretable__table thead {
   font-size: var(--normal);
   font-weight: var(--font-weight-black);
   border: 0;
@@ -20,22 +21,32 @@
   border-spacing: 0;
 }
 
-.scoretable__table th{
-    padding-bottom: 2px;
+.scoretable__table th {
+  padding-bottom: 2px;
   border: 0;
-    border-spacing: 0;
+  border-spacing: 0;
 }
 
-.scoretable__row{
-    border-bottom: 1px solid var(--black);
+.scoretable__row {
+  border-bottom: 1px solid var(--black);
 }
 
-.scoretable__row td{
+.scoretable__row td {
   padding: 12px 0 10px 0;
   position: relative;
 }
 
-.isgood.scoretable__row .scoretable__headline-scoredifferential:before{
+//mark older scores
+.scoretable__table tbody tr:nth-child(n + 21) {
+  background-color: var(--darkergray);
+
+  button,
+  i {
+    background-color: var(--darkergray);
+  }
+}
+
+.isgood.scoretable__row .scoretable__headline-scoredifferential:before {
   border-bottom: 5px solid var(--brand-primary);
   content: "";
   width: 40px;
@@ -44,68 +55,72 @@
   left: 0;
 }
 
-.scoretable__table button{
+.scoretable__table button {
   background-color: white;
 }
 
-.scoretable__headline-scoredifferential{
+.scoretable__headline-scoredifferential {
   width: 16%;
-  text-align: left!important;
-  font-weight: var(--font-weight-black)!important;
+  text-align: left !important;
+  font-weight: var(--font-weight-black) !important;
 }
 
-.scoretable__headline-edit{
-
+.scoretable__headline-edit {
   width: 9%;
 }
 
-.scoretable__headline-delete{
-
+.scoretable__headline-delete {
   width: 9%;
 }
 
-.scoretable__headline-order{
-
+.scoretable__headline-order {
   width: 10%;
 }
 
-.scoretable__headline-score, .scoretable-text-input{
-
+.scoretable__headline-score,
+.scoretable-text-input {
   width: 20%;
 }
 
-.scoretable__headline-courserating, .scoretable-courserating-input{
-
+.scoretable__headline-courserating,
+.scoretable-courserating-input {
   width: 18%;
 }
 
-.scoretable__headline-slope, .scoretable-slope-input{
-
+.scoretable__headline-slope,
+.scoretable-slope-input {
   width: 18%;
 }
 
-.scoretable-text-input, .scoretable-courserating-input, .scoretable-slope-input{
-    display: none;
-  }
+.scoretable-text-input,
+.scoretable-courserating-input,
+.scoretable-slope-input {
+  display: none;
+}
 
-  td.scoretable__headline-score, td.scoretable__headline-courserating, td.scoretable__headline-slope{
-    padding-right: 4px;
-  }
+td.scoretable__headline-score,
+td.scoretable__headline-courserating,
+td.scoretable__headline-slope {
+  padding-right: 4px;
+}
 
-
-.edit_mode{
-  .scoretable__headline-score, .scoretable__headline-courserating, .scoretable__headline-slope{
+.edit_mode {
+  .scoretable__headline-score,
+  .scoretable__headline-courserating,
+  .scoretable__headline-slope {
     display: none;
   }
 }
 
-.edit_mode{
-  .scoretable-text-input, .scoretable-courserating-input, .scoretable-slope-input{
+.edit_mode {
+  .scoretable-text-input,
+  .scoretable-courserating-input,
+  .scoretable-slope-input {
     display: table-cell;
   }
 }
 
-.edit_mode.scoretable__row input{
+.edit_mode.scoretable__row input {
   width: 100%;
   max-width: 50px;
   text-align: right;
@@ -113,11 +128,11 @@
   padding-right: 3px;
 }
 
-.edit_mode.scoretable__row i.fa-pen:before{
-  content:"\f00c";
+.edit_mode.scoretable__row i.fa-pen:before {
+  content: "\f00c";
 }
 
-.edit_mode.scoretable__row td{
+.edit_mode.scoretable__row td {
   padding: 11px 0 9px 0;
   position: relative;
 }

@@ -40,7 +40,7 @@ const Form = ({
     );
     const xArray = todos;
     if (todos.length >= 20) {
-      xArray.shift();
+      // xArray.shift();
       console.log("shiiiiift");
     }
 
