@@ -186,11 +186,13 @@ router.route("/forgot-password").post(async (req, res) => {
 
 //forgot password
 
-router.route("/reset-password/:userID/:token").get(async (req, res) => {
+router.route("/reset-password/:userID/:token").post(async (req, res) => {
   const reqPassword = req.body.password;
-  console.log(reqPassword);
   const userID = req.params.userID;
   const token = req.params.token;
+  console.log(reqPassword);
+  console.log(userID);
+  console.log(token);
   var isValid = mongoose.Types.ObjectId.isValid(userID); //true
   //not a object id
   if (!isValid) {
@@ -205,10 +207,26 @@ router.route("/reset-password/:userID/:token").get(async (req, res) => {
   if (tokenTrue.token !== token) {
     return res.status(400).send("token is not correct hacker!");
   }
-  //user already activated
-  const alreadyActivated = await User.findOne({ _id: userID });
-  if (alreadyActivated.activated)
-    return res.status(400).send("user already activated");
+  //Hash passwords
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(reqPassword, salt);
+
+  //pw changed
+  User.findOneAndUpdate(
+    {
+      _id: userID,
+    },
+    {
+      password: hashedPassword,
+    }
+  )
+    .then(() => res.status(200).send("password_reset_sucess"))
+    .catch((error) => {
+      console.log("pw_reset_error: " + error);
+      res.status(400).json({
+        error: error,
+      });
+    });
 });
 
 export default router;

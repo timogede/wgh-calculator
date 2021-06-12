@@ -16,15 +16,16 @@ const ResetPassword = () => {
     resolver: joiResolver(resetSchema),
   });
   const onSubmit = (data) => {
-    const link = window.location.pathname.split("/");
-    const userID = link[link.length - 2];
-    const token = link[link.length - 1];
+    console.log(data.password);
     const newPassword = {
       password: data.password,
     };
+    const link = window.location.pathname.split("/");
+    const userID = link[link.length - 2];
+    const token = link[link.length - 1];
 
     axios
-      .get(
+      .post(
         "http://localhost:3333/user/reset-password/" + userID + "/" + token,
         newPassword
       )
@@ -73,7 +74,7 @@ const ResetPassword = () => {
                 <span>Die Passwörter stimmen nicht überein.</span>
               )}
               <br />
-              <input type="submit" id="reset_password" value="Registrieren" />
+              <input type="submit" id="reset_password" value="Zurücksetzen" />
             </form>
           </div>
           <div className={resetSucess ? "resetsucess sucess" : "resetsucess"}>
