@@ -110,7 +110,16 @@ const Home = () => {
   };
 
   const sortTodos = (sortthisarray) => {
-    const sortedArray = [...sortthisarray];
+    const fullScoresArray = [...sortthisarray];
+
+    for (let y = 0; y < fullScoresArray.length; y++) {
+      fullScoresArray[y]["iamgood"] = false;
+      fullScoresArray[y]["myrankis"] = 999;
+      fullScoresArray[y]["myorder"] = y + 1;
+    }
+
+    const fullScoresArrayCutted = [...fullScoresArray].slice(0, 20);
+    const sortedArray = [...fullScoresArrayCutted];
     sortedArray.sort(sortFunction);
     const sortedArraySize = sortedArray.length;
     if (sortedArraySize == 1 || sortedArraySize == 2 || sortedArraySize == 3) {
@@ -179,12 +188,6 @@ const Home = () => {
     const cuttedSortedArray = sortedArray.slice(0, slice);
 
     setSortedTodos(cuttedSortedArray);
-    const fullScoresArray = sortthisarray;
-
-    for (let y = 0; y < fullScoresArray.length; y++) {
-      fullScoresArray[y]["iamgood"] = false;
-      fullScoresArray[y]["myrankis"] = 999;
-    }
 
     for (let x = 0; x < cuttedSortedArray.length; x++) {
       let searchId = cuttedSortedArray[x]["id"];
