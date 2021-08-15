@@ -18,6 +18,7 @@ const registerSchema = Joi.object({
 const RegisterAccount = () => {
   const [duplicateError, setDuplicateError] = useState(false);
   const [registerSucess, setRegisterSucess] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(registerSchema),
   });
@@ -107,6 +108,29 @@ const RegisterAccount = () => {
                 <span>Password zu kurz. Mindestens 6 Zeichen.</span>
               )}
               {errors.password && errors.password.message}
+              <br />
+
+              <label
+                onClick={() => setIsChecked(!isChecked)}
+                className="container--checkbox"
+                htmlFor="checkbox"
+              >
+                <input
+                  type="checkbox"
+                  name="checkbox"
+                  ref={register}
+                  onChange={(event) =>
+                    setIsChecked(event.currentTarget.checked)
+                  }
+                  checked={isChecked}
+                />
+                Ich bin mit der Datenschutzerklärung einverstanden.
+                <span className="checkmark"></span>
+              </label>
+              {errors.checkbox && (
+                <span>Bitte der Datenschutzerklärung zustimmen.</span>
+              )}
+
               <br />
               <input type="submit" id="submit_account" value="Registrieren" />
               {duplicateError && <span>{duplicateError}</span>}

@@ -205,11 +205,18 @@ const Home = () => {
   const calculateHandicap = () => {
     let theHandicap = 0;
     for (let i = 0; i < sortedTodos.length; i++) {
+      console.log("handicap in loop" + theHandicap);
       theHandicap =
         theHandicap + parseFloat(sortedTodos[i]["scoreDifferential"]);
+      console.log("handicap in loop" + theHandicap);
     }
-    theHandicap = (theHandicap / sortedTodos.length).toFixed(1);
+    console.log("handicap before " + theHandicap);
+    theHandicap = (theHandicap / sortedTodos.length).toFixed(2);
+    console.log("handicap after " + theHandicap);
+    theHandicap = Math.round(theHandicap * 10) / 10;
+    console.log("handicap after text " + theHandicap);
     theHandicap = (theHandicap - adjustment).toFixed(1);
+    console.log("handicap last " + theHandicap);
     setTheHandicap(theHandicap);
   };
 

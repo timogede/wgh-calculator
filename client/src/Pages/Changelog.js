@@ -6,6 +6,18 @@ const Changelog = ({ language }) => {
       <div className="changelog__inside container__inside">
         <h1>Changelog</h1>
         <ul>
+          <li>25th June 2021</li>
+          <li>
+            Handicap calculation bug fixed where 10 decimals after the dot
+            appeared
+          </li>
+          <li>List is now ordered in reverse. Newest score on top</li>
+          <li>
+            List doesnt cut scores when you enter more than 20 but of course
+            only uses the last 20 scores for calculation
+          </li>
+        </ul>
+        <ul>
           <li>1st June 2021</li>
           <li>Added changelog</li>
           <li>Handicap adjustment added</li>
