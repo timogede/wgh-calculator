@@ -5,6 +5,7 @@ import TodoList from "../components/TodoList.js";
 import Result from "../components/Result.js";
 import EmptyState from "../components/EmptyState.js";
 import Faq from "../components/Faq.js";
+import Donate from "../components/Donate.js";
 import Changelog from "./Changelog.js";
 import axios from "axios";
 import RegisterAccount from "./RegisterAccount.js";
@@ -332,6 +333,7 @@ const Home = () => {
           // setTodos={setTodos}
         />
         <EmptyState />
+        <Donate />
         <Faq />
       </React.Fragment>
     );
@@ -381,6 +383,7 @@ const Home = () => {
           adjustment={adjustment}
           setAdjustment={setAdjustment}
         />
+        <Donate />
         <Faq />
       </React.Fragment>
     );
