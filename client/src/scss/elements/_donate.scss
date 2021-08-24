@@ -1,6 +1,91 @@
-.donate__radio {
-
+.donate__columns{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  @include viewport-7{
+    flex-direction: row;
+  }
 }
+
+.donate__column{
+  width: 100%;
+  @include viewport-7{
+    width: 50%;
+  }
+}
+
+.donate__column-1{
+  text-align: left;
+  width: 100%;
+  @include viewport-7{
+    width: 60%;
+    padding-right: 80px;
+  }
+}
+
+.donate__column-2{
+  width: 100%;
+  @include viewport-7{
+    width: 40%;
+    
+  }
+}
+
+
+.donate__option-columns{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  @include viewport-7{
+    flex-direction: row;
+  }
+}
+
+.donate__option-column{
+  width: 100%;
+  @include viewport-7{
+    width: 50%;
+  }
+}
+
+
+.donate__text-box{
+  h2{
+      font-size: var(--huge);
+      margin-bottom: 25px;
+  }
+  p{
+    line-height: 1.4;
+    font-size: var(--normal);
+  }
+}
+
+.donate__donate-box{
+  background-color: var(--lightergray);
+  padding: 25px;
+  border: 2px solid var(--darkergray);
+  h2{
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    position: relative;
+    &:after{
+      content:"";
+      background-color: var(--darkergray);
+      height: 2px;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+    }
+  }
+}
+
+
+
+
+
 
 
 .donate__radio {
@@ -28,20 +113,21 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+  height: 26px;
+  width: 26px;
+  background-color: white;
   border-radius: 50%;
+  border: 3px solid var(--darkergray);
 }
 
 /* On mouse-over, add a grey background color */
 .donate__radio:hover input ~ .checkmark {
-  background-color: #ccc;
+  background-color: var(--brand-primary);
 }
 
 /* When the radio button is checked, add a blue background */
 .donate__radio input:checked ~ .checkmark {
-  background-color: var(--brand-primary);
+
 }
 
 /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -58,10 +144,12 @@
 
 /* Style the indicator (dot/circle) */
 .donate__radio .checkmark:after {
- 	top: 9px;
-	left: 9px;
-	width: 8px;
-	height: 8px;
-	border-radius: 50%;
-	background: white;
+  top: 10px;
+  left: 10px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--brand-primary);
 }
