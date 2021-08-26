@@ -19,15 +19,17 @@
   text-align: left;
   width: 100%;
   @include viewport-7{
-    width: 60%;
+    width: 55%;
     padding-right: 80px;
   }
 }
 
 .donate__column-2{
   width: 100%;
+  margin-top: 20px;
   @include viewport-7{
-    width: 40%;
+    width: 45%;
+    margin-top: 0;
     
   }
 }
@@ -55,6 +57,7 @@
   h2{
       font-size: var(--huge);
       margin-bottom: 25px;
+      
   }
   p{
     line-height: 1.4;
@@ -63,13 +66,19 @@
 }
 
 .donate__donate-box{
-  background-color: var(--lightergray);
+  background-color: #fffdfa;
   padding: 25px;
   border: 2px solid var(--darkergray);
   h2{
-    margin-bottom: 20px;
-    padding-bottom: 20px;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
     position: relative;
+    white-space: wrap;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    @include viewport-7{
+      white-space: nowrap;
+    }
     &:after{
       content:"";
       background-color: var(--darkergray);
@@ -82,7 +91,103 @@
   }
 }
 
+.donate__column{
+  p{
+    text-align: left;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
 
+
+.donate__other{
+  text-align: left;
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+
+  input{
+    padding: 10px;
+    font-size: 20px;
+    max-width: 100%;
+    border: 2px solid var(--darkergray);
+  }
+  &.active{
+    opacity: 1;
+    height: auto;
+    overflow: visible;
+    visibility:visible;
+  }
+}
+
+
+.donate__button-wrap{
+ 
+  button{
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    background:#0073b8;
+    color: white;
+    font-size: 20px;
+    padding: 20px;
+    text-transform: uppercase;
+    width: 100%;
+    font-weight: var(--font-weight-black);
+    letter-spacing: 2px;
+    i{
+      margin-right: 5px;
+    }
+}
+}
+
+
+.credit-card-icon {
+  display: block;
+  width: 32px;
+  height: 22px;
+  background: url("/images/payments.png");
+  background-size: 224px 22px;
+}
+.donation-widget__card-icons {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.donation-widget__card-icons .credit-card-icon+.credit-card-icon {
+  margin-left: 6px;
+}
+
+.donation-widget__card-icons .credit-card-icon {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.credit-card-icon.visa {
+  background-position: -100% 0;
+}
+
+.credit-card-icon.mastercard {
+  background-position: -200% 0;
+}
+
+.credit-card-icon.discover {
+  background-position: -300% 0;
+}
+
+.credit-card-icon.american-express {
+  background-position: -500% 0;
+}
+
+.credit-card-icon.paypal {
+  background-position: -600% 0;
+}
 
 
 
@@ -92,13 +197,12 @@
   display: block;
   position: relative;
   padding-left: 35px;
-  margin-bottom: 12px;
+  margin-bottom: 20px;
   cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
+  font-size: 20px;
+  text-align: left;
   user-select: none;
+  padding-top: 2px;
 }
 
 /* Hide the browser's default radio button */
@@ -122,7 +226,7 @@
 
 /* On mouse-over, add a grey background color */
 .donate__radio:hover input ~ .checkmark {
-  background-color: var(--brand-primary);
+  background-color: #bf9a5e;
 }
 
 /* When the radio button is checked, add a blue background */
@@ -151,5 +255,5 @@
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: var(--brand-primary);
+  background: #bf9a5e;
 }
