@@ -16,7 +16,7 @@ const Faq = () => {
 
   return (
     <React.Fragment>
-      <div className="faq container" id="faq">
+      <div className="faq container container--margin-huge" id="faq">
         <div className="faq__inside container__inside">
           <h2>Häufig gestellte Fragen (FAQs):</h2>
           <button onClick={faqToggler} className="accordion">

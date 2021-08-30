@@ -1,15 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 
-const donate = () => {
-  const donateHandler = (e) => {
-    let clickedElement = e.target;
-    if (clickedElement.classList.contains("active")) {
-      clickedElement.classList.remove("active");
-    } else {
-      clickedElement.classList.add("active");
-    }
-  };
-
+const Donate = () => {
+  const [otherAmountValue, setOtherAmountValue] = useState(35);
   const otherAmount = (e) => {
     let clickedElementType = e.target.tagName;
     if (clickedElementType == "INPUT") {
@@ -40,25 +32,44 @@ const donate = () => {
     }
   };
 
-  const urlBuilder = () => {};
+  const otherAmountHandler = (e) => {
+    setOtherAmountValue(e.target.value);
+    console.log(otherAmountValue);
+  };
+
+  const defaultValueHandler = (e) => {
+    setOtherAmountValue(35);
+    console.log(otherAmountValue);
+  };
+
+  const urlBuilder = (e) => {
+    if (document.getElementById("freq_once").classList.contains("active")) {
+      window.open("https://paypal.me/timogede/" + otherAmountValue);
+    } else {
+      window.open(
+        "https://www.paypal.com/donate?hosted_button_id=MT4S2VCTRBJW4"
+      );
+    }
+  };
 
   return (
     <React.Fragment>
-      <div className="donate container container--margin">
+      <div className="donate container container--margin-huge">
         <div className="donate_inside container__inside">
           <div className="donate__columns">
             <div className="donate__column donate__column-1">
               <div className="donate__text-box">
                 <h2>handicap.report unterstützen</h2>
                 <p>
-                  <strong>DID YOU KNOW:</strong> If only 1% of MyGolfSpy readers
-                  donated $25, we would be able to become completely independent
-                  in 12-months. With every donation, you create change. Would
-                  you be willing to help by giving a donation? Every dollar will
-                  help. Make a donation to support our independent and expert
-                  golf equipment research.
+                  <strong>WUSSTEST DU SCHON:</strong> Wenn nur 10% der
+                  handicap.report Nutzer €20 spenden, könnte ich alle geplanten
+                  Funktionen in den nächsten Wochen umsetzen. Zusätzlich wären
+                  alle laufenden Kosten für handicap.report für das nächste Jahr
+                  gedeckt. Jeder einzelne Euro hilft. Jede Spende unterstützt
+                  mich dabei, unabhängig diese Website zu betreiben und dir mit
+                  deinem Handicap zu helfen.
                   <strong>
-                    A PayPal account is not required in order to donate.
+                    Ein PayPal Account ist nicht notwendig für eine Spende.
                   </strong>
                 </p>
               </div>
@@ -78,6 +89,7 @@ const donate = () => {
                         type="radio"
                         name="amount_option"
                         value="5.00"
+                        onChange={otherAmountHandler}
                         defaultChecked
                       />
                       <span class="checkmark"></span>
@@ -89,6 +101,7 @@ const donate = () => {
                         type="radio"
                         name="amount_option"
                         value="10"
+                        onChange={otherAmountHandler}
                       />
                       <span class="checkmark"></span>
                       €10
@@ -99,6 +112,7 @@ const donate = () => {
                         type="radio"
                         name="amount_option"
                         value="20"
+                        onChange={otherAmountHandler}
                       />
                       <span class="checkmark"></span>
                       €20
@@ -109,6 +123,7 @@ const donate = () => {
                         type="radio"
                         name="amount_option"
                         value="50"
+                        onChange={otherAmountHandler}
                       />
                       <span class="checkmark"></span>
                       €50
@@ -118,7 +133,8 @@ const donate = () => {
                         id="radio-other"
                         type="radio"
                         name="amount_option"
-                        value="other"
+                        value={otherAmountValue}
+                        onChange={defaultValueHandler}
                       />
                       <span class="checkmark"></span>
                       anderer Betrag
@@ -129,6 +145,7 @@ const donate = () => {
                         type="number"
                         placeholder="€35"
                         name="amount_option--other-value"
+                        onChange={otherAmountHandler}
                       />
                     </div>
                   </div>
@@ -140,6 +157,7 @@ const donate = () => {
                     <label class="donate__radio">
                       <input
                         id="freq_once"
+                        class="active"
                         type="radio"
                         name="frequenzy_option"
                         value="other"
@@ -161,7 +179,7 @@ const donate = () => {
                   </div>
                 </div>
                 <div className="donate__button-wrap">
-                  <button>
+                  <button onClick={urlBuilder}>
                     <i className="fas fa-lock-alt"></i>Spenden
                   </button>
                 </div>
@@ -181,4 +199,4 @@ const donate = () => {
   );
 };
 
-export default donate;
+export default Donate;

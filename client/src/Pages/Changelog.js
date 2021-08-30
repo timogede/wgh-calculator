@@ -6,6 +6,17 @@ const Changelog = ({ language }) => {
       <div className="changelog__inside container__inside">
         <h1>Changelog</h1>
         <ul>
+          <li>27th August 2021</li>
+          <li>New donate$ box added.</li>
+        </ul>
+        <ul>
+          <li>16th August 2021</li>
+          <li>
+            Handicap rounding problem fixed where it rounded down when it should
+            round up at ".5". Thank you Dieter for pointing the error out.
+          </li>
+        </ul>
+        <ul>
           <li>25th June 2021</li>
           <li>
             Handicap calculation bug fixed where 10 decimals after the dot
