@@ -32,7 +32,7 @@ const MyHeader = ({ language }) => {
         <div className="header__inside container__inside">
           <div className="header__branding" onClick={closeFunction}>
             <HashLink smooth to="/#" scroll={scrollWidthOffset}>
-              <img src={logo} alt="handicap.report Logo" />
+              <img src={logo} alt="handicap berechnen handicap.report Logo" />
             </HashLink>
           </div>
           <div className="header__profilephoto">
@@ -54,20 +54,26 @@ const MyHeader = ({ language }) => {
                     </HashLink>
                   </li>
                   <li className="menu-item">
+                    <HashLink smooth to="/blog/" scroll={scrollWidthOffset}>
+                      <i className="fas fa-newspaper"></i>Blog
+                    </HashLink>
+                  </li>
+                  <li className="menu-item">
                     <HashLink smooth to="/#support" scroll={scrollWidthOffset}>
                       <i className="fas fa-hands-helping"></i>Unterstützen
                     </HashLink>
                   </li>
+
                   {!isLogged ? (
                     <>
                       <li className="menu-item hide-for-now">
-                        <HashLink smooth to="/anmelden">
+                        <HashLink smooth to="/anmelden/">
                           <i className="fas fa-sign-in-alt"></i>Login
                         </HashLink>
                       </li>
 
                       <li className="menu-item hide-for-now">
-                        <HashLink smooth to="/registrieren">
+                        <HashLink smooth to="/registrieren/">
                           <i className="fas fa-user-plus"></i>Registrieren
                         </HashLink>
                       </li>
@@ -78,7 +84,7 @@ const MyHeader = ({ language }) => {
                   {isLogged ? (
                     <>
                       <li className="menu-item hide-for-now">
-                        <HashLink smooth to="/account">
+                        <HashLink smooth to="/account/">
                           <i className="fas fa-user"></i>Account
                         </HashLink>
                       </li>
@@ -87,12 +93,12 @@ const MyHeader = ({ language }) => {
                     <></>
                   )}
                   <li className="menu-item">
-                    <HashLink smooth to="/impressum">
+                    <HashLink smooth to="/impressum/">
                       <i className="fas fa-stamp"></i>Impressum
                     </HashLink>
                   </li>
                   <li className="menu-item">
-                    <HashLink smooth to="/datenschutz">
+                    <HashLink smooth to="/datenschutz/">
                       <i className="fas fa-cookie"></i>Datenschutz
                     </HashLink>
                   </li>

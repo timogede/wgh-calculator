@@ -3,6 +3,11 @@ import MyHeader from "./components/MyHeader.js";
 import MyFooter from "./components/MyFooter.js";
 import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
 import Home from "./Pages/Home";
+import Blog from "./Pages/Blog";
+import Post_1 from "./Posts/Post-1.js";
+import Post_2 from "./Posts/Post-2.js";
+import Post_3 from "./Posts/Post-3.js";
+import Post_4 from "./Posts/Post-4.js";
 import Impressum from "./Pages/Impressum";
 import Datenschutz from "./Pages/Datenschutz";
 import Changelog from "./Pages/Changelog";
@@ -23,6 +28,7 @@ import {
   removeUsername,
   changeProfilephoto,
 } from "./actions/index.js";
+import MetaTags from "react-meta-tags";
 
 const App = () => {
   //This has to be changed
@@ -73,18 +79,32 @@ const App = () => {
         <MyHeader />
         <Switch>
           <Route path="/" exact component={Home} />
-          <Route path="/impressum" component={Impressum} />
-          <Route path="/datenschutz" component={Datenschutz} />
-          <Route path="/changelog" component={Changelog} />
-          <Route path="/anmelden" component={LoginAccount} />
-          <Route path="/registrieren" component={RegisterAccount} />
-          <Route path="/account" component={Account} />
+          <Route path="/blog/" exact component={Blog} />
+          <Route path="/impressum/" component={Impressum} />
+          <Route path="/datenschutz/" component={Datenschutz} />
+          <Route path="/changelog/" component={Changelog} />
+          <Route path="/anmelden/" component={LoginAccount} />
+          <Route path="/registrieren/" component={RegisterAccount} />
+          <Route path="/account/" component={Account} />
           <Route
-            path="/user/passwort-zuruecksetzen"
+            path="/user/passwort-zuruecksetzen/"
             component={ResetPassword}
           />
-          <Route path="/passwort-vergessen" component={ForgotPassword} />
+          <Route path="/passwort-vergessen/" component={ForgotPassword} />
           <Route path="/bestaetigen" component={VerifyAccount} />
+          <Route path="/blog/was-ist-das-golf-handicap/" component={Post_1} />
+          <Route
+            path="/blog/geschichte-des-golf-handicaps/"
+            component={Post_2}
+          />
+          <Route
+            path="/blog/was-ist-course-rating-und-slope/"
+            component={Post_3}
+          />
+          <Route
+            path="/blog/mit-9-loch-runden-das-handicap-verbessern/"
+            component={Post_4}
+          />
         </Switch>
         <MyFooter />
       </React.Fragment>

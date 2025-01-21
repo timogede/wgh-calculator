@@ -10,7 +10,7 @@ const MyFooter = () => {
 
   return (
     <React.Fragment>
-      <div className="myfooter container">
+      <footer className="myfooter container">
         <div className="myfooter__inside container__inside">
           <ul>
             <li>
@@ -57,7 +57,7 @@ const MyFooter = () => {
             </a>
           </p>
         </div>
-      </div>
+      </footer>
     </React.Fragment>
   );
 };

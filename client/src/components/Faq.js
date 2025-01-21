@@ -18,7 +18,17 @@ const Faq = () => {
     <React.Fragment>
       <div className="faq container container--margin-huge" id="faq">
         <div className="faq__inside container__inside">
-          <h2>Häufig gestellte Fragen (FAQs):</h2>
+          <h2>Häufig gestellte Fragen um dein Handicap zu berechnen:</h2>
+          <button onClick={faqToggler} className="accordion">
+            Wie wird das neue WGH Handicap berechnet 2025?
+          </button>
+          <div className="panel">
+            <p>
+              Klick dich einfach durch die weiteren Fragen hier durch und du
+              erfährst Schritt für Schritt alles darüber, wie das neue Handicap
+              berechnen funktioniert.
+            </p>
+          </div>
           <button onClick={faqToggler} className="accordion">
             Was ist der Score Differential?
           </button>

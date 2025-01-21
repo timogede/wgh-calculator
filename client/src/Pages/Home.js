@@ -19,6 +19,7 @@ import {
   changeUsername,
   removeUsername,
 } from "../actions/index.js";
+import MetaTags from "react-meta-tags";
 
 const Home = () => {
   const [inputText, setInputText] = useState("");
@@ -340,6 +341,14 @@ const Home = () => {
   } else {
     return (
       <React.Fragment>
+        <MetaTags>
+          <title>Handicap berechnen mit handicap.report</title>
+          <meta
+            name="description"
+            content="Einfach gespielte Runden eingeben und sofort dein neues Handicap erhalten. handicap.report ist die einzige Seite in 2025, die dir sofort dein neues Handicap anzeigt."
+          />
+          <link rel="canonical" href="https://handicap.report/" />
+        </MetaTags>
         {isUsername && <h3>Hallo, {isUsername}</h3>}
         <MyIntro />
         <Form

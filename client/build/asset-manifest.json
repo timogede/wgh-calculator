@@ -1,28 +1,28 @@
 {
   "files": {
-    "main.css": "/static/css/main.4dc16674.chunk.css",
-    "main.js": "/static/js/main.6640c0b4.chunk.js",
-    "main.js.map": "/static/js/main.6640c0b4.chunk.js.map",
+    "main.css": "/static/css/main.5f0b24a5.chunk.css",
+    "main.js": "/static/js/main.323d69f3.chunk.js",
+    "main.js.map": "/static/js/main.323d69f3.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.61f70cd4.js",
     "runtime-main.js.map": "/static/js/runtime-main.61f70cd4.js.map",
-    "static/js/2.2d2cd9f9.chunk.js": "/static/js/2.2d2cd9f9.chunk.js",
-    "static/js/2.2d2cd9f9.chunk.js.map": "/static/js/2.2d2cd9f9.chunk.js.map",
+    "static/js/2.fdcc7c3f.chunk.js": "/static/js/2.fdcc7c3f.chunk.js",
+    "static/js/2.fdcc7c3f.chunk.js.map": "/static/js/2.fdcc7c3f.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/main.4dc16674.chunk.css.map": "/static/css/main.4dc16674.chunk.css.map",
-    "static/js/2.2d2cd9f9.chunk.js.LICENSE.txt": "/static/js/2.2d2cd9f9.chunk.js.LICENSE.txt",
+    "static/css/main.5f0b24a5.chunk.css.map": "/static/css/main.5f0b24a5.chunk.css.map",
+    "static/js/2.fdcc7c3f.chunk.js.LICENSE.txt": "/static/js/2.fdcc7c3f.chunk.js.LICENSE.txt",
     "static/media/9loch_scorekarte.ce0bb4f9.jpg": "/static/media/9loch_scorekarte.ce0bb4f9.jpg",
     "static/media/anpassungen.ee8f196d.jpg": "/static/media/anpassungen.ee8f196d.jpg",
     "static/media/dgv_handicap-regeln_2021.69a408c2.pdf": "/static/media/dgv_handicap-regeln_2021.69a408c2.pdf",
-    "static/media/empty-new.2616e6c8.svg": "/static/media/empty-new.2616e6c8.svg",
+    "static/media/empty-new.5fd11906.svg": "/static/media/empty-new.5fd11906.svg",
     "static/media/empty.b648225c.svg": "/static/media/empty.b648225c.svg",
-    "static/media/logo.028a1f90.svg": "/static/media/logo.028a1f90.svg",
-    "static/media/tee.2ebeb65d.svg": "/static/media/tee.2ebeb65d.svg",
+    "static/media/logo.cae06d4d.svg": "/static/media/logo.cae06d4d.svg",
+    "static/media/tee.9b05934e.svg": "/static/media/tee.9b05934e.svg",
     "static/media/turnierdetails.aed71281.jpg": "/static/media/turnierdetails.aed71281.jpg"
   },
   "entrypoints": [
     "static/js/runtime-main.61f70cd4.js",
-    "static/js/2.2d2cd9f9.chunk.js",
-    "static/css/main.4dc16674.chunk.css",
-    "static/js/main.6640c0b4.chunk.js"
+    "static/js/2.fdcc7c3f.chunk.js",
+    "static/css/main.5f0b24a5.chunk.css",
+    "static/js/main.323d69f3.chunk.js"
   ]
 }
